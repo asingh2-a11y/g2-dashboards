@@ -3,808 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Campaign Performance & Review Activation — G2 Starter</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>G2 Starter — Subscription Retention</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink:     #12110f;
-  --paper:   #f5f1e8;
-  --paper2:  #ede8dc;
-  --rule:    #d4cdc0;
-  --rule2:   #c0b8a8;
-  --red:     #c0392b;
-  --red-dim: rgba(192,57,43,0.08);
-  --amber:   #b7651a;
-  --amber-dim: rgba(183,101,26,0.08);
-  --green:   #1a6b3a;
-  --green-dim: rgba(26,107,58,0.08);
-  --slate:   #4a5568;
-  --muted:   #7a7060;
-  --muted2:  #a89f90;
-  --p1: #6b7a8d;
-  --p2: #1a6b3a;
-  --p3: #b7651a;
-  --p4: #c0392b;
-  --mono:    'DM Mono', monospace;
-  --serif:   'Playfair Display', serif;
-  --sans:    'DM Sans', sans-serif;
+  --ink:#12110f;--paper:#f5f1e8;--paper2:#ede8dc;--rule:#d4cdc0;--rule2:#c0b8a8;
+  --muted:#7a7060;--muted2:#a89f90;--amber:#b7651a;
+  --p-early:#6b7a8d;--p-prior:#2a6b38;--p-current:#c0392b;
+  --mono:'DM Mono',monospace;--serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;
 }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height:100vh;}
+.page{max-width:920px;margin:0 auto;padding:56px 40px 80px;}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+.masthead{text-align:center;margin-bottom:32px;}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.masthead h1{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:900;color:var(--ink);}
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--sans);
-  min-height: 100vh;
-}
+.card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:20px;}
+.card{padding:16px 18px;}
+.card.early  {background:#e8e4d8;border-top:2px solid var(--p-early);}
+.card.prior  {background:#e2eeda;border-top:2px solid var(--p-prior);}
+.card.pattern{background:#f5e4de;border-top:2px solid var(--p-current);}
+.c-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;}
+.c-val{font-family:var(--serif);font-size:28px;font-weight:900;line-height:1;margin-bottom:4px;}
+.c-sub{font-family:var(--mono);font-size:10px;color:#666;line-height:1.55;}
+.card.early   .c-val{color:var(--p-early);}
+.card.prior   .c-val{color:var(--p-prior);}
+.card.pattern .c-val{color:var(--p-current);}
 
-.page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 56px 40px 80px;
-}
+.narrative{background:var(--paper2);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:18px 20px;margin-bottom:24px;}
+.narrative p{font-size:14px;line-height:1.8;color:#2a2520;margin-bottom:10px;}
+.narrative p:last-child{margin-bottom:0;}
+.narrative strong{font-weight:600;}
 
-/* Masthead */
-.masthead {
-  border-top: 4px double var(--ink);
-  border-bottom: 1px solid var(--rule2);
-  padding: 20px 0 18px;
-  margin-bottom: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
-}
-.masthead-left .kicker {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-.masthead-left h1 {
-  font-family: var(--serif);
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -0.5px;
-}
-.masthead-left h1 em { font-style: italic; color: var(--red); }
-.masthead-right {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  text-align: right;
-  line-height: 2;
-  flex-shrink: 0;
-}
+.table-outer{overflow-x:auto;}
+table{border-collapse:separate;border-spacing:3px;min-width:820px;}
 
-/* Period pills */
-.period-key {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.pill {
-  font-family: var(--mono);
-  font-size: 9px;
-  padding: 2px 7px;
-  border-radius: 2px;
-  letter-spacing: 0.5px;
-}
-.pill-p1 { background: rgba(107,122,141,.1); color: var(--p1); }
-.pill-p2 { background: rgba(26,107,58,.1);   color: var(--p2); }
-.pill-p3 { background: rgba(183,101,26,.1);  color: var(--p3); }
-.pill-p4 { background: rgba(192,57,43,.1);   color: var(--p4); }
-.period-note { font-family: var(--mono); font-size: 9px; color: var(--muted2); }
+.hdr-top th{font-family:var(--mono);font-size:10px;color:var(--muted);padding:2px 4px 8px;font-weight:400;}
+.hdr-top th.m-label{text-align:center;}
+.hdr-nums th{font-family:var(--mono);font-size:10px;color:#aaa;text-align:center;padding:4px 4px 10px;white-space:nowrap;}
+.hdr-nums th:first-child{text-align:left;min-width:88px;padding-left:4px;}
+.hdr-nums th.tot{text-align:right;min-width:40px;}
 
-/* Definitions */
-.defs {
-  background: var(--paper2);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--ink);
-  padding: 18px 20px;
-  margin-bottom: 40px;
-  border-radius: 2px;
-}
-.defs-title {
-  font-family: var(--mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--muted);
-  margin-bottom: 14px;
-}
-.defs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px 24px; }
-.def-term {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--ink);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 3px;
-}
-.def-desc { font-family: var(--mono); font-size: 9px; color: var(--muted); line-height: 1.65; }
+tr.period-row td{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:8px 6px 3px;}
+tr.gap td{height:5px;}
 
-/* Sections */
-.section { margin-bottom: 44px; opacity: 0; animation: fadeIn 0.6s ease forwards; }
-.section:nth-child(3) { animation-delay: .1s; }
-.section:nth-child(4) { animation-delay: .2s; }
-.section:nth-child(5) { animation-delay: .3s; }
-.section:nth-child(6) { animation-delay: .4s; }
-.section:nth-child(7) { animation-delay: .5s; }
-.section:nth-child(8) { animation-delay: .6s; }
-.section:nth-child(9) { animation-delay: .7s; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+td.mc{font-size:13px;font-weight:400;color:var(--ink);padding:0 12px 0 4px;white-space:nowrap;vertical-align:middle;}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+td.nc{font-family:var(--mono);font-size:11px;color:#888;text-align:right;padding:0 10px;vertical-align:middle;}
+td.rc{min-width:54px;height:36px;border-radius:3px;text-align:center;vertical-align:middle;font-family:var(--mono);font-size:11px;font-weight:500;}
+td.rc:hover{filter:brightness(.92);cursor:default;}
+td.em{background:transparent!important;}
 
-.section-head {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule);
-}
-.section-num {
-  font-family: var(--serif);
-  font-size: 36px;
-  font-weight: 900;
-  color: var(--rule2);
-  line-height: 1;
-  flex-shrink: 0;
-  min-width: 28px;
-}
-.section-title {
-  font-family: var(--serif);
-  font-size: clamp(18px, 2.5vw, 24px);
-  font-weight: 700;
-  line-height: 1.2;
-}
-.section-body { font-size: 14px; line-height: 1.8; color: #2a2520; margin-bottom: 16px; }
-.section-body strong { font-weight: 600; }
+.caveat{background:rgba(183,101,26,.07);border:1px solid rgba(183,101,26,.25);border-left:3px solid var(--amber);padding:12px 16px;margin-top:14px;font-family:var(--mono);font-size:10px;color:#7a4a10;line-height:1.75;}
+.caveat strong{font-weight:600;color:#7a4a10;}
 
-/* Causal chain */
-.chain { display: flex; align-items: stretch; gap: 0; margin: 24px 0; flex-wrap: wrap; }
-.chain-step {
-  flex: 1;
-  min-width: 140px;
-  background: var(--paper2);
-  border: 1px solid var(--rule);
-  padding: 16px 14px;
-}
-.chain-step:not(:first-child) { border-left: none; }
-.chain-step .cs-num { font-family: var(--mono); font-size: 9px; color: var(--muted2); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-.chain-step .cs-title { font-family: var(--serif); font-size: 13px; font-weight: 700; line-height: 1.3; margin-bottom: 6px; }
-.chain-step .cs-body { font-family: var(--mono); font-size: 10px; color: var(--muted); line-height: 1.6; }
-.chain-arrow { display: flex; align-items: center; padding: 0 4px; color: var(--red); font-size: 18px; flex-shrink: 0; align-self: center; }
+.legend{display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:10px;}
+.leg-pills{display:flex;gap:16px;flex-wrap:wrap;}
+.leg-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;color:var(--muted);}
+.leg-grad-wrap{display:flex;align-items:center;gap:6px;}
+.leg-grad{display:flex;height:12px;width:160px;border-radius:2px;overflow:hidden;}
+.leg-grad div{flex:1;}
+.leg-txt{font-family:var(--mono);font-size:9px;color:#aaa;}
+.fn{font-family:var(--mono);font-size:9px;color:var(--muted2);margin-top:8px;line-height:1.7;}
 
-/* Stat cards */
-.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; margin: 20px 0; }
-.stat-card { background: var(--paper2); border: 1px solid var(--rule); padding: 16px 18px; border-radius: 2px; }
-.stat-card .s-val { font-family: var(--serif); font-size: 32px; font-weight: 900; line-height: 1; letter-spacing: -1px; margin-bottom: 4px; }
-.stat-card .s-label { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); line-height: 1.4; }
-.stat-card .s-delta { font-family: var(--mono); font-size: 10px; margin-top: 4px; color: var(--muted); }
-.red-val   { color: var(--red); }
-.amber-val { color: var(--amber); }
-.green-val { color: var(--green); }
-
-/* Pull quote */
-.pull-quote { border-left: 3px solid var(--ink); padding: 12px 20px; margin: 20px 0; background: var(--paper2); }
-.pull-quote p { font-family: var(--serif); font-size: 16px; font-style: italic; line-height: 1.6; color: var(--ink); }
-
-/* Data table */
-.data-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 16px 0; }
-.data-table thead th {
-  font-family: var(--mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--muted);
-  padding: 8px 12px;
-  text-align: left;
-  border-bottom: 2px solid var(--rule2);
-  background: var(--paper2);
-}
-.data-table thead th:not(:first-child) { text-align: right; }
-.data-table thead th.p1 { color: var(--p1); }
-.data-table thead th.p2 { color: var(--p2); }
-.data-table thead th.p3 { color: var(--p3); }
-.data-table thead th.p4 { color: var(--p4); }
-.data-table tbody td { padding: 9px 12px; border-bottom: 1px solid var(--rule); font-size: 12px; vertical-align: middle; }
-.data-table tbody td:not(:first-child) { text-align: right; font-family: var(--mono); font-size: 11px; }
-.data-table tbody tr:last-child td { border-bottom: none; }
-.data-table tbody tr:hover { background: var(--paper2); }
-.data-table .hdr-row td {
-  background: var(--paper2);
-  font-family: var(--mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--muted);
-  padding: 6px 12px;
-  border-bottom: 1px solid var(--rule2);
-  font-weight: 600;
-}
-
-/* Period tags */
-.tag { font-family: var(--mono); font-size: 9px; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.5px; }
-.tag-p1 { background: rgba(107,122,141,.1); color: var(--p1); }
-.tag-p2 { background: rgba(26,107,58,.1);   color: var(--p2); }
-.tag-p3 { background: rgba(183,101,26,.1);  color: var(--p3); }
-.tag-p4 { background: rgba(192,57,43,.1);   color: var(--p4); }
-
-/* Mini bar chart */
-.mini-chart { margin: 16px 0; }
-.mini-chart-title { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.bar-row-label { font-family: var(--mono); font-size: 10px; color: var(--muted); width: 110px; flex-shrink: 0; }
-.bar-track { flex: 1; height: 8px; background: var(--rule); border-radius: 1px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 1px; }
-.bar-row-val { font-family: var(--mono); font-size: 11px; font-weight: 500; width: 50px; text-align: right; flex-shrink: 0; }
-
-/* Findings */
-.findings { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 16px 0; }
-.finding { padding: 16px 18px; border: 1px solid var(--rule); background: var(--paper2); border-radius: 2px; }
-.finding .f-icon { font-size: 18px; margin-bottom: 8px; }
-.finding .f-title { font-family: var(--serif); font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-.finding .f-body { font-family: var(--mono); font-size: 10px; color: var(--muted); line-height: 1.65; }
-.finding.f-red   { border-left: 3px solid var(--red); }
-.finding.f-amber { border-left: 3px solid var(--amber); }
-.finding.f-green { border-left: 3px solid var(--green); }
-.finding.f-slate { border-left: 3px solid var(--slate); }
-
-/* Compare cards */
-.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 20px 0; }
-.compare-card { background: var(--paper2); border: 1px solid var(--rule); padding: 16px 18px; border-radius: 2px; }
-.compare-card.c-p1 { border-top: 2px solid var(--p1); }
-.compare-card.c-p4 { border-top: 2px solid var(--p4); }
-.cc-period { font-family: var(--mono); font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-.cc-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-.cc-label { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-.cc-val { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
-.cc-delta { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rule); line-height: 1.6; }
-
-/* Caveat */
-.caveat {
-  background: var(--amber-dim);
-  border: 1px solid rgba(183,101,26,.2);
-  border-radius: 2px;
-  padding: 12px 16px;
-  margin: 16px 0;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--amber);
-  line-height: 1.7;
-}
-.caveat strong { font-weight: 600; color: var(--amber); }
-.caveat.c-slate { background: rgba(74,85,104,.06); border-color: rgba(74,85,104,.15); color: var(--slate); }
-.caveat.c-slate strong { color: var(--slate); }
-.caveat.c-red { background: var(--red-dim); border-color: rgba(192,57,43,.2); color: var(--red); }
-.caveat.c-red strong { color: var(--red); }
-
-/* Footnote */
-.footnote-section {
-  border-top: 1px solid var(--rule);
-  padding-top: 20px;
-  margin-top: 48px;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted2);
-  line-height: 1.8;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-@media(max-width:600px) {
-  .page { padding: 32px 20px 60px; }
-  .masthead { flex-direction: column; align-items: flex-start; }
-  .masthead-right { text-align: left; }
-  .stat-row { grid-template-columns: 1fr 1fr; }
-  .findings { grid-template-columns: 1fr; }
-  .compare-grid { grid-template-columns: 1fr; }
-  .chain { flex-direction: column; }
-  .chain-step:not(:first-child) { border-left: 1px solid var(--rule); border-top: none; }
-  .defs-grid { grid-template-columns: 1fr 1fr; }
-}
+@media(max-width:640px){.page{padding:28px 16px 56px;}.card-row{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- Masthead -->
   <div class="masthead">
-    <div class="masthead-left">
-      <div class="kicker">G2 Starter · Campaign Performance & Review Activation · May 2026</div>
-      <h1>Campaign Performance<br>& <em>Review Activation</em></h1>
-    </div>
-    <div class="masthead-right">
-      Jan 2025 – Apr 2026<br>
-      1,163 Starter profiles<br>
-      4 equal periods · 4 months each<br>
-      Approved reviews · 30-day window
-    </div>
+    <div class="kicker">G2 Starter · Cohort Analysis · Jan 2025 – May 2026</div>
+    <h1>Subscription Retention</h1>
   </div>
 
-  <!-- Period key -->
-  <div class="period-key">
-    <span class="pill pill-p1">P1 Jan–Apr '25 · n=182</span>
-    <span class="pill pill-p2">P2 May–Aug '25 · n=233 · Peak</span>
-    <span class="pill pill-p3">P3 Sep–Dec '25 · n=272 · Transition</span>
-    <span class="pill pill-p4">P4 Jan–Apr '26 · n=476 · Current</span>
-    <span class="period-note">Each period = exactly 4 months · comparable denominators</span>
-  </div>
-
-  <!-- Definitions -->
-  <div class="defs">
-    <div class="defs-title">Key Definitions</div>
-    <div class="defs-grid">
-      <div>
-        <div class="def-term">Campaign Conv %</div>
-        <div class="def-desc">% of campaigns that received at least 1 approved review. G2 Sends = G2 emails customers on vendor's behalf. Vendor Sends = vendor creates a campaign LP on G2 — our visibility ends at LP creation. We track reviews that come through it but cannot confirm whether or how the vendor distributed the link.</div>
-      </div>
-      <div>
-        <div class="def-term">Early Launchers</div>
-        <div class="def-desc">Profiles that created a campaign LP within 30 days of Starter purchase. Highest-intent cohort — they tried immediately.</div>
-      </div>
-      <div>
-        <div class="def-term">Activated (5+ reviews)</div>
-        <div class="def-desc">Profile received 5+ approved reviews within 30 days of purchase. Two cuts reported: Campaign LP only and All Sources (any approved review on the product).</div>
-      </div>
-      <div>
-        <div class="def-term">30-Day Time-Boxed</div>
-        <div class="def-desc">All review metrics are strictly bounded to 30 days from each customer's own Starter purchase date. Per-customer window — not a period-level aggregate.</div>
-      </div>
-      <div>
-        <div class="def-term">Campaign LP Only</div>
-        <div class="def-desc">Reviews that came through a G2 review campaign landing page within 30 days. Strictly G2-campaign-attributable. The primary metric used throughout.</div>
-      </div>
-      <div>
-        <div class="def-term">All Sources</div>
-        <div class="def-desc">Every approved review on the product within 30 days of Starter purchase — organic G2 discovery, campaign LP, in-app, or any other source. Used in Section 4 only.</div>
-      </div>
-      <div>
-        <div class="def-term">P75 Reviews</div>
-        <div class="def-desc">75th percentile of reviews per campaign in a period. When P75 = 0, at least 75% of all campaigns produced zero reviews. Measures whether even average campaigns are working — not just the top performers.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Section 1: Causal Chain -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">1</div>
-      <div class="section-title">The Causal Chain</div>
-    </div>
-    <div class="section-body">
-      Both review campaign channels are declining — each in a different way. Together they produce the same downstream effect: fewer reviews, lower activation.
-    </div>
-    <div class="chain">
-      <div class="chain-step">
-        <div class="cs-num">Channel 1</div>
-        <div class="cs-title">G2 Sends declined steadily</div>
-        <div class="cs-body">Email suppression hit delivery reach. Conversion dropped from 30.6% in P1 to 25.2% in P4. G2 Sends as a share of all campaigns fell from 42% to 16%.</div>
-      </div>
-      <div class="chain-arrow">→</div>
-      <div class="chain-step">
-        <div class="cs-num">Channel 2</div>
-        <div class="cs-title">Vendor Sends volume up, quality collapsed</div>
-        <div class="cs-body">Vendor Sends grew 10× in campaigns — but conversion fell from 46% in P2 to 15.4% in P4. We track reviews through the LP but cannot confirm whether or how vendors distributed the link.</div>
-      </div>
-      <div class="chain-arrow">→</div>
-      <div class="chain-step">
-        <div class="cs-num">Effect</div>
-        <div class="cs-title">Review activation dropped</div>
-        <div class="cs-body">Customers launching in first 30 days activated at 24.3% in P2. Now 8.7%. More campaigns, fewer reviews, fewer activations. Customers are trying harder; both channels are failing them.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Section 2: G2 Sends -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">2</div>
-      <div class="section-title">G2 Sends: Declining Across All Periods</div>
-    </div>
-    <div class="section-body">
-      G2 Sends conversion has declined in every period — from 30.6% in P1 to 25.2% in P4. Email suppression reduced delivery reach, meaning fewer customers were being reached per campaign sent. Its share of total campaigns has also collapsed from 42% to 16% as Vendor Sends grew to fill the volume gap. Both metrics point in the same direction: this channel is losing ground.
-    </div>
-
-    <div class="mini-chart">
-      <div class="mini-chart-title">G2 Sends — Campaign Conv % by Period</div>
-      <div class="bar-row">
-        <div class="bar-row-label">P1 Jan–Apr '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:61%;background:var(--p1);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p1)">30.6%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P2 May–Aug '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:62%;background:var(--p2);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p2)">31.0%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P3 Sep–Dec '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:51%;background:var(--p3);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p3)">25.3%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P4 Jan–Apr '26</div>
-        <div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--p4)"></div></div>
-        <div class="bar-row-val" style="color:var(--p4)">25.2%</div>
-      </div>
-    </div>
-
-    <div class="stat-row">
-      <div class="stat-card">
-        <div class="s-val red-val">−18%</div>
-        <div class="s-label">Conv rate drop<br>P1 → P4</div>
-        <div class="s-delta">30.6% → 25.2%</div>
-      </div>
-      <div class="stat-card">
-        <div class="s-val red-val">16.2%</div>
-        <div class="s-label">Share of campaigns<br>in current period</div>
-        <div class="s-delta">Was 41.6% in P1 — channel shrinking</div>
-      </div>
-      <div class="stat-card">
-        <div class="s-val red-val">P75 = 0</div>
-        <div class="s-label">Top quartile<br>stopped producing</div>
-        <div class="s-delta">75% of G2 Sends campaigns got zero reviews in P4</div>
-      </div>
-    </div>
-
-    <div class="caveat c-slate">
-      <strong>Note on the earlier summary:</strong> The previous 3-period analysis showed G2 Sends at ~54% conv in the Early period. That figure reflected the combined conv rate for all campaigns before channel classification was applied. When G2 Sends is isolated, conversion is 30.6% in P1, consistent with P2, before declining in P3/P4.
-    </div>
-  </div>
-
-  <!-- Section 3: Vendor Sends -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">3</div>
-      <div class="section-title">Vendor Sends: Volume Up, Quality Collapsed</div>
-    </div>
-    <div class="section-body">
-      Vendor Sends was the stronger channel in P2 — 46% conversion, 6.85 avg reviews per campaign. By P4 it had grown to 1,107 campaigns in a single period while conversion fell to 15.4%. P75 reviews hit 0 — three quarters of all Vendor Sends campaigns produced nothing.
-    </div>
-
-    <table class="data-table">
+  <div class="table-outer">
+    <table id="heatmap">
       <thead>
-        <tr>
-          <th>Period</th>
-          <th>Campaigns (LPs)</th>
-          <th>Conv %</th>
-          <th>Avg Rev/Camp</th>
-          <th>P75 Reviews</th>
+        <tr class="hdr-top">
+          <th colspan="2">Subscriptions Per Month</th>
+          <th class="m-label" colspan="17">Months Since Subscription Creation</th>
+        </tr>
+        <tr class="hdr-nums" id="col-hdr">
+          <th>Month</th>
+          <th class="tot">Total</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td><span class="tag tag-p1">P1 Jan–Apr '25</span></td>
-          <td>101</td>
-          <td style="color:var(--p1);font-weight:600">34.7%</td>
-          <td>5.50</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p2">P2 May–Aug '25 · Peak</span></td>
-          <td>215</td>
-          <td style="color:var(--p2);font-weight:600">46.0%</td>
-          <td>6.85</td>
-          <td>3.0+</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p3">P3 Sep–Dec '25</span></td>
-          <td>253</td>
-          <td style="color:var(--p3);font-weight:600">34.8%</td>
-          <td>4.23</td>
-          <td>1.0</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p4">P4 Jan–Apr '26 · Current</span></td>
-          <td>1,107</td>
-          <td style="color:var(--p4);font-weight:600">15.4%</td>
-          <td>1.53</td>
-          <td>0.0</td>
-        </tr>
-      </tbody>
+      <tbody id="tbody"></tbody>
     </table>
-
-    <div class="caveat c-slate">
-      <strong>On Vendor Sends visibility:</strong> A campaign landing page being created on G2 is all we can confirm. We track reviews that come through that LP — but cannot confirm whether or how vendors distributed the link to their customers. We also cannot separate landing pages created by G2 reps via myG2 (observer mode) on a vendor's behalf from those created by vendors directly, as the <code>review_campaigns</code> table has no creator field. The impact on Starter is believed to be minimal — Starter is self-serve and rep-assisted campaign creation is more common in Professional and above.
-    </div>
   </div>
 
-  <!-- Section 4: Combined picture -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">4</div>
-      <div class="section-title">Combined: The Overall Picture</div>
-    </div>
-    <div class="section-body">
-      Across both channels, the pattern is consistent. Campaigns grew 8× from P1 to P4. Output per campaign collapsed. P75 reviews — whether even average campaigns are working — hit zero in P4.
-    </div>
 
-    <div class="stat-row">
-      <div class="stat-card">
-        <div class="s-val red-val">17.0%</div>
-        <div class="s-label">Overall conv % in P4<br>(current period)</div>
-        <div class="s-delta">Was 41.3% in P2 — peak period</div>
-      </div>
-      <div class="stat-card">
-        <div class="s-val red-val">P75 = 0</div>
-        <div class="s-label">75% of campaigns<br>produced zero reviews</div>
-        <div class="s-delta">Was 3.0 in P2</div>
-      </div>
-      <div class="stat-card">
-        <div class="s-val amber-val">64.9%</div>
-        <div class="s-label">30-day launch rate<br>in current period</div>
-        <div class="s-delta">Was 29% in P1 — intent is not the problem</div>
-      </div>
-    </div>
+  <div class="legend">
 
-    <div class="findings">
-      <div class="finding f-red">
-        <div class="f-icon">📉</div>
-        <div class="f-title">Efficiency collapsed</div>
-        <div class="f-body">Avg reviews per campaign dropped from 5.10 in P2 to 1.60 in P4. 8× more campaigns for a fraction of the output per campaign.</div>
-      </div>
-      <div class="finding f-red">
-        <div class="f-icon">⚠️</div>
-        <div class="f-title">Zero-review rate rising</div>
-        <div class="f-body">Of early launchers who got zero reviews from their campaign: P1 51.9% → P2 52.9% → P3 58.8% → P4 76.7%. 3 in 4 campaigns now produce nothing.</div>
-      </div>
-      <div class="finding f-slate">
-        <div class="f-icon">🔎</div>
-        <div class="f-title">Intent is not the problem</div>
-        <div class="f-body">30-day launch rate went from 29% to 65%. Customers are showing up and trying. Both channels are failing them, not the other way around.</div>
-      </div>
-      <div class="finding f-amber">
-        <div class="f-icon">📊</div>
-        <div class="f-title">Seasonality confirmed structural</div>
-        <div class="f-body">Jan–Apr '25 vs Jan–Apr '26 — same season, one year apart. Campaign conv: 32.9% → 17.0%. Early launcher activation: 17.0% → 8.7%. The decline is real, not seasonal.</div>
-      </div>
+    <div class="leg-grad-wrap">
+      <span class="leg-txt">Low retention</span>
+      <div class="leg-grad" id="leg-grad"></div>
+      <span class="leg-txt">High retention</span>
     </div>
   </div>
-
-  <!-- Section 5: Activation -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">5</div>
-      <div class="section-title">Review Activation: The Downstream Effect</div>
-    </div>
-    <div class="section-body">
-      Review activation is getting 5 reviews within the first 30 days of purchasing Starter. Because campaigns are the primary mechanism for getting those reviews — and campaigns stopped converting — activation followed the same trajectory. Below: two views of the same cohort, early launchers only.
-    </div>
-
-    <div class="mini-chart">
-      <div class="mini-chart-title">Activated (5+ reviews in 30 days) — campaign LP only · early launchers only</div>
-      <div class="bar-row">
-        <div class="bar-row-label">P1 Jan–Apr '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:34%;background:var(--p1);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p1)">17.0%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P2 May–Aug '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:49%;background:var(--p2)"></div></div>
-        <div class="bar-row-val" style="color:var(--p2)">24.3%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P3 Sep–Dec '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:45%;background:var(--p3);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p3)">22.4%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P4 Jan–Apr '26</div>
-        <div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--p4)"></div></div>
-        <div class="bar-row-val" style="color:var(--p4)">8.7%</div>
-      </div>
-    </div>
-
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Period</th>
-          <th>Profiles</th>
-          <th>Launched w/in 30d</th>
-          <th>Got Reviews</th>
-          <th>Activated (5+)</th>
-          <th>Avg Reviews</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hdr-row"><td colspan="6">OVERALL — LIFETIME REVIEW OUTCOMES · all campaigns ever · not time-boxed · of early launchers</td></tr>
-        <tr>
-          <td><span class="tag tag-p1">P1</span></td>
-          <td>183</td><td>53 (29%)</td>
-          <td style="color:var(--p1);font-weight:600">60.4%</td>
-          <td style="color:var(--p1);font-weight:600">37.7%</td>
-          <td>15.1</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p2">P2</span></td>
-          <td>233</td><td>70 (30%)</td>
-          <td style="color:var(--p2);font-weight:600">60.0%</td>
-          <td style="color:var(--p2);font-weight:600">45.7%</td>
-          <td>15.7</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p3">P3</span></td>
-          <td>272</td><td>85 (31%)</td>
-          <td style="color:var(--p3)">55.3%</td>
-          <td style="color:var(--p3)">38.8%</td>
-          <td>10.8</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p4">P4</span></td>
-          <td>477</td><td>309 (65%)</td>
-          <td style="color:var(--p4);font-weight:600">33.7%</td>
-          <td style="color:var(--p4);font-weight:600">17.8%</td>
-          <td>3.4 †</td>
-        </tr>
-        <tr class="hdr-row"><td colspan="6">30-DAY SPECIFIC — CAMPAIGN LP REVIEWS ONLY · strictly 30 days from purchase · of early launchers</td></tr>
-        <tr>
-          <td><span class="tag tag-p1">P1</span></td>
-          <td>183</td><td>53 (29%)</td>
-          <td style="color:var(--p1);font-weight:600">49.1%</td>
-          <td style="color:var(--p1);font-weight:600">17.0%</td>
-          <td>2.72</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p2">P2</span></td>
-          <td>233</td><td>70 (30%)</td>
-          <td style="color:var(--p2);font-weight:600">47.1%</td>
-          <td style="color:var(--p2);font-weight:600">24.3%</td>
-          <td>2.90</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p3">P3</span></td>
-          <td>272</td><td>85 (31%)</td>
-          <td style="color:var(--p3)">41.2%</td>
-          <td style="color:var(--p3)">22.4%</td>
-          <td>3.40 ‡</td>
-        </tr>
-        <tr>
-          <td><span class="tag tag-p4">P4</span></td>
-          <td>477</td><td>309 (65%)</td>
-          <td style="color:var(--p4);font-weight:600">23.3%</td>
-          <td style="color:var(--p4);font-weight:600">8.7%</td>
-          <td>1.58</td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="font-family:var(--mono);font-size:9px;color:var(--muted2);margin-top:-8px;line-height:1.7">
-      † P4 lifetime avg (3.4) is lower partly because P4 profiles have had less time on G2 — not all reviews have accumulated yet.<br>
-      ‡ P3 30-day avg inflated by 3 high-review products in Sep '25. Activation % is unaffected.
-    </div>
-
-    <div class="pull-quote">
-      <p>Despite the 30-day launch rate more than doubling, the % getting any reviews dropped from 49% to 23% and activation more than halved. Launching faster has no bearing on getting reviews — what matters is whether the campaign converts.</p>
-    </div>
-  </div>
-
-  <!-- Section 6: Seasonality -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">6</div>
-      <div class="section-title">Seasonality Check — Jan–Apr '25 vs Jan–Apr '26</div>
-    </div>
-    <div class="section-body">
-      Same four-month calendar window, one year apart. Any difference here is structural — not seasonal. Campaign performance collapsed on an apples-to-apples comparison.
-    </div>
-
-    <div class="compare-grid">
-      <div class="compare-card c-p1">
-        <div class="cc-period" style="color:var(--p1)">Jan–Apr '25 (P1) · n=182</div>
-        <div class="cc-row"><span class="cc-label">Campaign conv %</span><span class="cc-val" style="color:var(--p1)">32.9%</span></div>
-        <div class="cc-row"><span class="cc-label">Early launcher activation (camp LP)</span><span class="cc-val" style="color:var(--p1)">17.0%</span></div>
-        <div class="cc-row"><span class="cc-label">All-sources activation</span><span class="cc-val" style="color:var(--p1)">14.3%</span></div>
-        <div class="cc-row"><span class="cc-label">Vendor Sends conv %</span><span class="cc-val" style="color:var(--p1)">34.7%</span></div>
-        <div class="cc-row"><span class="cc-label">P75 reviews per campaign</span><span class="cc-val" style="color:var(--p1)">1.0</span></div>
-      </div>
-      <div class="compare-card c-p4">
-        <div class="cc-period" style="color:var(--p4)">Jan–Apr '26 (P4) · n=476 · same season</div>
-        <div class="cc-row"><span class="cc-label">Campaign conv %</span><span class="cc-val" style="color:var(--p4)">17.0%</span></div>
-        <div class="cc-row"><span class="cc-label">Early launcher activation (camp LP)</span><span class="cc-val" style="color:var(--p4)">8.7%</span></div>
-        <div class="cc-row"><span class="cc-label">All-sources activation</span><span class="cc-val" style="color:var(--green)">18.7%</span></div>
-        <div class="cc-row"><span class="cc-label">Vendor Sends conv %</span><span class="cc-val" style="color:var(--p4)">15.4%</span></div>
-        <div class="cc-row"><span class="cc-label">P75 reviews per campaign</span><span class="cc-val" style="color:var(--p4)">0.0</span></div>
-        <div class="cc-delta">Camp conv: −15.9pp · Early launcher act: −8.6pp · Vendor Sends conv: −19.2pp<br>All-sources act: +4.4pp · Profiles grew 2.6× (182 → 476)</div>
-      </div>
-    </div>
-
-    <div class="pull-quote">
-      <p>Same season, one year apart — campaign conversion halved, early launcher activation halved, P75 reviews hit zero. The volume grew 8×. The quality collapsed. The decline is structural, not seasonal.</p>
-    </div>
-  </div>
-
-  <!-- Section 7: All Sources -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">7</div>
-      <div class="section-title">All-Sources View: The Broader Picture</div>
-    </div>
-    <div class="section-body">
-      Beyond campaign LPs, Starter customers also receive reviews through organic G2 discovery and other channels. This counts all approved reviews within 30 days of Starter purchase — no source filter. The picture is meaningfully better than campaign-only, but the campaign LP metric remains the cleaner, G2-attributable measure.
-    </div>
-
-    <div class="mini-chart">
-      <div class="mini-chart-title">Activated (5+ reviews · all sources · 30 days) — all profiles, not just launchers</div>
-      <div class="bar-row">
-        <div class="bar-row-label">P1 Jan–Apr '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:28%;background:var(--p1);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p1)">14.3%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P2 May–Aug '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--p2)"></div></div>
-        <div class="bar-row-val" style="color:var(--p2)">24.9%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P3 Sep–Dec '25</div>
-        <div class="bar-track"><div class="bar-fill" style="width:41%;background:var(--p3);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p3)">20.6%</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row-label">P4 Jan–Apr '26</div>
-        <div class="bar-track"><div class="bar-fill" style="width:37%;background:var(--p4);opacity:.8"></div></div>
-        <div class="bar-row-val" style="color:var(--p4)">18.7%</div>
-      </div>
-    </div>
-
-    <div class="caveat">
-      <strong>How to read this:</strong> All-sources includes reviews from organic G2 discovery, in-app widgets, and other approved sources — not just campaigns. It includes all Starter customers regardless of prior review history. Campaign LP only is the cleaner, G2-attributable metric. All-sources gives the fuller customer reality and shows that customers are getting reviews through other channels even as the campaign system underperforms.
-    </div>
-  </div>
-
-    <!-- Section 8: Summary -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">8</div>
-      <div class="section-title">Summary & What We Know</div>
-    </div>
-    <div class="section-body">
-      The data tells a connected story across 16 months and 1,163 Starter profiles.
-    </div>
-
-    <div class="findings">
-      <div class="finding f-red">
-        <div class="f-icon">①</div>
-        <div class="f-title">G2 Sends declined steadily</div>
-        <div class="f-body">Email suppression reduced delivery reach. Conversion dropped from 30.6% (P1) to 25.2% (P4). G2 Sends as share of all campaigns fell from 42% to 16% as Vendor Sends grew.</div>
-      </div>
-      <div class="finding f-red">
-        <div class="f-icon">②</div>
-        <div class="f-title">Vendor Sends collapsed on quality</div>
-        <div class="f-body">Grew from 101 campaigns (P1) to 1,107 (P4). But conversion fell from 46% in P2 to 15.4% in P4. P75 hit 0. We can only confirm LP creation — not distribution or why reviews stopped coming back.</div>
-      </div>
-      <div class="finding f-red">
-        <div class="f-icon">③</div>
-        <div class="f-title">Activation dropped as a direct result</div>
-        <div class="f-body">Campaigns are the primary mechanism for getting reviews in the first 30 days. They stopped converting. 30-day campaign LP activation dropped from 24.3% (P2) to 8.7% (P4) for early launchers.</div>
-      </div>
-      <div class="finding f-amber">
-        <div class="f-icon">④</div>
-        <div class="f-title">All-sources picture is better — but doesn't fix the campaign problem</div>
-        <div class="f-body">When counting all approved reviews in 30 days, activation in P4 is 18.7% — 3× higher than campaign-only. Customers are finding other review paths. The campaign system is not the whole story, but it remains the lever G2 controls.</div>
-      </div>
-    </div>
-
-    <div class="caveat c-red">
-      <strong>What we don't have:</strong> We cannot separate G2 rep-created campaign LPs (via myG2 observer mode) from vendor-created ones — the <code>review_campaigns</code> table has no creator field. We also cannot confirm vendor distribution behaviour for Vendor Sends. Both are known data gaps. Impact on Starter is believed to be minimal given its self-serve nature.
-    </div>
-  </div>
-
-  <div class="footnote-section">
-    <span>Data: subscriptions · access_licenses (Starter + Launchpad) · review_campaigns · survey_responses · Jan 2025–Apr 2026</span>
-    <span>3 outlier profiles removed · Approved reviews only · 30-day time-boxed per customer purchase date · May 2026 excluded</span>
+  <div class="fn">
+    Upgrades to Professional counted as retained · Starter + Launchpad · Jan 2025–May 2026 · Updated June 2, 2026
   </div>
 
 </div>
+<script>
+const DATA = [
+  { month:"Jan '25", period:'early',   n:66,
+    ret:[100,80.3,77.3,74.2,69.7,66.7,66.7,63.6,63.6,60.6,59.1,57.6,56.1,56.1,51.5,42.4,39.4] },
+  { month:"Feb '25", period:'early',   n:27,
+    ret:[100,81.5,81.5,66.7,59.3,55.6,51.9,51.9,51.9,51.9,51.9,51.9,51.9,48.1,44.4,44.4,null] },
+  { month:"Mar '25", period:'early',   n:37,
+    ret:[100,94.6,94.6,86.5,75.7,70.3,70.3,70.3,67.6,67.6,67.6,67.6,64.9,62.2,56.8,null,null] },
+  { month:"Apr '25", period:'early',   n:53,
+    ret:[100,71.7,71.7,64.2,62.3,58.5,54.7,54.7,52.8,50.9,49.1,47.2,45.3,45.3,null,null,null] },
+  { month:"May '25", period:'prior',   n:47,
+    ret:[100,85.1,74.5,72.3,70.2,68.1,66.0,61.7,61.7,61.7,61.7,57.4,53.2,null,null,null,null] },
+  { month:"Jun '25", period:'prior',   n:57,
+    ret:[100,91.2,84.2,70.2,63.2,57.9,57.9,52.6,50.9,49.1,49.1,47.4,null,null,null,null,null] },
+  { month:"Jul '25", period:'prior',   n:60,
+    ret:[100,93.3,91.7,83.3,83.3,80.0,76.7,73.3,73.3,70.0,68.3,null,null,null,null,null,null] },
+  { month:"Aug '25", period:'prior',   n:69,
+    ret:[100,97.1,91.3,88.4,85.5,84.1,79.7,76.8,75.4,73.9,null,null,null,null,null,null,null] },
+  { month:"Sep '25", period:'prior',   n:63,
+    ret:[100,92.1,88.9,82.5,82.5,76.2,74.6,74.6,73.0,null,null,null,null,null,null,null,null] },
+  { month:"Oct '25", period:'prior',   n:95,
+    ret:[100,93.7,91.6,89.5,88.4,85.3,85.3,85.3,null,null,null,null,null,null,null,null,null] },
+  { month:"Nov '25", period:'current', n:57,
+    ret:[100,93.0,86.0,84.2,77.2,73.7,70.2,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Dec '25", period:'current', n:57,
+    ret:[100,100.0,93.0,87.7,82.5,80.7,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Jan '26", period:'current', n:191,
+    ret:[100,92.7,88.0,83.8,82.2,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Feb '26", period:'current', n:97,
+    ret:[100,91.8,88.7,84.5,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Mar '26", period:'current', n:98,
+    ret:[100,91.8,87.8,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Apr '26", period:'current', n:93,
+    ret:[100,91.4,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"May '26", period:'current', n:125,
+    ret:[100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+];
+
+const MAX_M = 17;
+const DOTS = {early:'#6b7a8d',prior:'#2a6b38',current:'#c0392b'};
+
+
+const colHdr = document.getElementById('col-hdr');
+for(let m=0;m<MAX_M;m++){const th=document.createElement('th');th.textContent=m;colHdr.appendChild(th);}
+
+function rc(v){
+  if(v===null||v===undefined)return null;
+  if(v>=90)return{bg:'rgba(138,208,126,1)',tx:'#124010'};
+  if(v>=85)return{bg:'rgba(160,218,148,1)',tx:'#144812'};
+  if(v>=80)return{bg:'rgba(184,228,170,1)',tx:'#185014'};
+  if(v>=75)return{bg:'rgba(205,236,190,1)',tx:'#1c5618'};
+  if(v>=70)return{bg:'rgba(222,241,206,1)',tx:'#245a1c'};
+  if(v>=65)return{bg:'rgba(236,244,212,1)',tx:'#385820'};
+  if(v>=60)return{bg:'rgba(248,241,196,1)',tx:'#524800'};
+  if(v>=55)return{bg:'rgba(251,227,168,1)',tx:'#523800'};
+  if(v>=50)return{bg:'rgba(249,208,144,1)',tx:'#522800'};
+  if(v>=45)return{bg:'rgba(244,184,122,1)',tx:'#501800'};
+  if(v>=40)return{bg:'rgba(236,158,106,1)',tx:'#481000'};
+  if(v>=35)return{bg:'rgba(226,132,92,1)',tx:'#3a0800'};
+  return{bg:'rgba(212,106,78,1)',tx:'#300400'};
+}
+
+const tbody=document.getElementById('tbody');
+let lastPeriod=null;
+DATA.forEach(c=>{
+  if(c.period!==lastPeriod){
+    if(lastPeriod){const sp=document.createElement('tr');sp.className='gap';sp.innerHTML=`<td colspan="${MAX_M+2}"></td>`;tbody.appendChild(sp);}
+    lastPeriod=c.period;
+  }
+  const tr=document.createElement('tr');
+  let html=`<td class="mc"><span class="dot" style="background:${DOTS[c.period]}"></span>${c.month}</td><td class="nc">${c.n}</td>`;
+  for(let m=0;m<MAX_M;m++){
+    const v=c.ret[m];
+    if(v===null||v===undefined){html+=`<td class="em"></td>`;}
+    else{const col=rc(v);html+=`<td class="rc" style="background:${col.bg};color:${col.tx}">${v.toFixed(0)}%</td>`;}
+  }
+  tr.innerHTML=html;tbody.appendChild(tr);
+});
+
+const grad=document.getElementById('leg-grad');
+[33,38,43,48,53,58,63,68,73,78,83,88,93,98].forEach(v=>{
+  const col=rc(v);const d=document.createElement('div');d.style.background=col.bg;grad.appendChild(d);
+});
+</script>
 </body>
 </html>

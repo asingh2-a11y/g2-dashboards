@@ -7,58 +7,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink:#12110f;--paper:#f5f1e8;--paper2:#ede8dc;--rule:#d4cdc0;--rule2:#c0b8a8;
+  --ink:#12110f;--paper:#f5f1e8;--paper2:#ede8dc;--rule:#d4cdc0;
   --muted:#7a7060;--muted2:#a89f90;--amber:#b7651a;
   --p-early:#6b7a8d;--p-prior:#2a6b38;--p-current:#c0392b;
   --mono:'DM Mono',monospace;--serif:'Playfair Display',serif;--sans:'DM Sans',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height:100vh;}
-.page{max-width:920px;margin:0 auto;padding:56px 40px 80px;}
-
+.page{max-width:1040px;margin:0 auto;padding:56px 40px 80px;}
 .masthead{text-align:center;margin-bottom:32px;}
 .kicker{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
 .masthead h1{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:900;color:var(--ink);}
-
 .card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:20px;}
 .card{padding:16px 18px;}
-.card.early  {background:#e8e4d8;border-top:2px solid var(--p-early);}
-.card.prior  {background:#e2eeda;border-top:2px solid var(--p-prior);}
+.card.early{background:#e8e4d8;border-top:2px solid var(--p-early);}
+.card.prior{background:#e2eeda;border-top:2px solid var(--p-prior);}
 .card.pattern{background:#f5e4de;border-top:2px solid var(--p-current);}
 .c-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;}
 .c-val{font-family:var(--serif);font-size:28px;font-weight:900;line-height:1;margin-bottom:4px;}
 .c-sub{font-family:var(--mono);font-size:10px;color:#666;line-height:1.55;}
-.card.early   .c-val{color:var(--p-early);}
-.card.prior   .c-val{color:var(--p-prior);}
+.card.early .c-val{color:var(--p-early);}
+.card.prior .c-val{color:var(--p-prior);}
 .card.pattern .c-val{color:var(--p-current);}
-
 .narrative{background:var(--paper2);border:1px solid var(--rule);border-left:3px solid var(--ink);padding:18px 20px;margin-bottom:24px;}
 .narrative p{font-size:14px;line-height:1.8;color:#2a2520;margin-bottom:10px;}
 .narrative p:last-child{margin-bottom:0;}
 .narrative strong{font-weight:600;}
-
 .table-outer{overflow-x:auto;}
-table{border-collapse:separate;border-spacing:3px;min-width:820px;}
-
+table{border-collapse:separate;border-spacing:3px;min-width:920px;}
 .hdr-top th{font-family:var(--mono);font-size:10px;color:var(--muted);padding:2px 4px 8px;font-weight:400;}
 .hdr-top th.m-label{text-align:center;}
 .hdr-nums th{font-family:var(--mono);font-size:10px;color:#aaa;text-align:center;padding:4px 4px 10px;white-space:nowrap;}
 .hdr-nums th:first-child{text-align:left;min-width:88px;padding-left:4px;}
 .hdr-nums th.tot{text-align:right;min-width:40px;}
-
 tr.period-row td{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:8px 6px 3px;}
 tr.gap td{height:5px;}
-
 td.mc{font-size:13px;font-weight:400;color:var(--ink);padding:0 12px 0 4px;white-space:nowrap;vertical-align:middle;}
 .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle;}
 td.nc{font-family:var(--mono);font-size:11px;color:#888;text-align:right;padding:0 10px;vertical-align:middle;}
-td.rc{min-width:54px;height:36px;border-radius:3px;text-align:center;vertical-align:middle;font-family:var(--mono);font-size:11px;font-weight:500;}
+td.rc{min-width:48px;height:36px;border-radius:3px;text-align:center;vertical-align:middle;font-family:var(--mono);font-size:11px;font-weight:500;}
 td.rc:hover{filter:brightness(.92);cursor:default;}
-td.em{background:transparent!important;}
-
-.caveat{background:rgba(183,101,26,.07);border:1px solid rgba(183,101,26,.25);border-left:3px solid var(--amber);padding:12px 16px;margin-top:14px;font-family:var(--mono);font-size:10px;color:#7a4a10;line-height:1.75;}
-.caveat strong{font-weight:600;color:#7a4a10;}
-
+td.em{background:transparent!important;min-width:48px;}
 .legend{display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:10px;}
 .leg-pills{display:flex;gap:16px;flex-wrap:wrap;}
 .leg-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;color:var(--muted);}
@@ -67,7 +56,6 @@ td.em{background:transparent!important;}
 .leg-grad div{flex:1;}
 .leg-txt{font-family:var(--mono);font-size:9px;color:#aaa;}
 .fn{font-family:var(--mono);font-size:9px;color:var(--muted2);margin-top:8px;line-height:1.7;}
-
 @media(max-width:640px){.page{padding:28px 16px 56px;}.card-row{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -75,7 +63,7 @@ td.em{background:transparent!important;}
 <div class="page">
 
   <div class="masthead">
-    <div class="kicker">G2 Starter · Cohort Analysis · Jan 2025 – May 2026</div>
+    <div class="kicker">G2 Starter · Cohort Analysis · Jan 2025 – Jun 2026</div>
     <h1>Subscription Retention</h1>
   </div>
 
@@ -83,21 +71,24 @@ td.em{background:transparent!important;}
     <table id="heatmap">
       <thead>
         <tr class="hdr-top">
-          <th colspan="2">Subscriptions Per Month</th>
-          <th class="m-label" colspan="17">Months Since Subscription Creation</th>
+          <th colspan="2">Starters Per Month</th>
+          <th class="m-label" colspan="18">Months Since First Subscription</th>
         </tr>
         <tr class="hdr-nums" id="col-hdr">
-          <th>Month</th>
-          <th class="tot">Total</th>
+          <th>Cohort</th>
+          <th class="tot">n</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
     </table>
   </div>
 
-
   <div class="legend">
-
+    <div class="leg-pills">
+      <div class="leg-item"><span style="background:var(--p-early);display:inline-block;width:8px;height:8px;border-radius:50%"></span>Early Jan–Apr '25</div>
+      <div class="leg-item"><span style="background:var(--p-prior);display:inline-block;width:8px;height:8px;border-radius:50%"></span>Prior May–Oct '25 — strongest retention</div>
+      <div class="leg-item"><span style="background:var(--p-current);display:inline-block;width:8px;height:8px;border-radius:50%"></span>Current Nov '25–Jun '26 — incomplete</div>
+    </div>
     <div class="leg-grad-wrap">
       <span class="leg-txt">Low retention</span>
       <div class="leg-grad" id="leg-grad"></div>
@@ -105,57 +96,65 @@ td.em{background:transparent!important;}
     </div>
   </div>
   <div class="fn">
-    Upgrades to Professional counted as retained · Starter + Launchpad · Jan 2025–May 2026 · Updated June 2, 2026
+    Starter only · M0 = 100% by definition · Re-subscriptions counted as retained · Updated July 1, 2026<br>
+    Source: Looker global_launchpad / adoption_rate + renewals_and_churn · Tails verified against Looker current active (gap &lt;2pp)
   </div>
 
 </div>
 <script>
 const DATA = [
-  { month:"Jan '25", period:'early',   n:66,
-    ret:[100,80.3,77.3,74.2,69.7,66.7,66.7,63.6,63.6,60.6,59.1,57.6,56.1,56.1,51.5,42.4,39.4] },
-  { month:"Feb '25", period:'early',   n:27,
-    ret:[100,81.5,81.5,66.7,59.3,55.6,51.9,51.9,51.9,51.9,51.9,51.9,51.9,48.1,44.4,44.4,null] },
-  { month:"Mar '25", period:'early',   n:37,
-    ret:[100,94.6,94.6,86.5,75.7,70.3,70.3,70.3,67.6,67.6,67.6,67.6,64.9,62.2,56.8,null,null] },
-  { month:"Apr '25", period:'early',   n:53,
-    ret:[100,71.7,71.7,64.2,62.3,58.5,54.7,54.7,52.8,50.9,49.1,47.2,45.3,45.3,null,null,null] },
-  { month:"May '25", period:'prior',   n:47,
-    ret:[100,85.1,74.5,72.3,70.2,68.1,66.0,61.7,61.7,61.7,61.7,57.4,53.2,null,null,null,null] },
-  { month:"Jun '25", period:'prior',   n:57,
-    ret:[100,91.2,84.2,70.2,63.2,57.9,57.9,52.6,50.9,49.1,49.1,47.4,null,null,null,null,null] },
-  { month:"Jul '25", period:'prior',   n:60,
-    ret:[100,93.3,91.7,83.3,83.3,80.0,76.7,73.3,73.3,70.0,68.3,null,null,null,null,null,null] },
-  { month:"Aug '25", period:'prior',   n:69,
-    ret:[100,97.1,91.3,88.4,85.5,84.1,79.7,76.8,75.4,73.9,null,null,null,null,null,null,null] },
-  { month:"Sep '25", period:'prior',   n:63,
-    ret:[100,92.1,88.9,82.5,82.5,76.2,74.6,74.6,73.0,null,null,null,null,null,null,null,null] },
-  { month:"Oct '25", period:'prior',   n:95,
-    ret:[100,93.7,91.6,89.5,88.4,85.3,85.3,85.3,null,null,null,null,null,null,null,null,null] },
-  { month:"Nov '25", period:'current', n:57,
-    ret:[100,93.0,86.0,84.2,77.2,73.7,70.2,null,null,null,null,null,null,null,null,null,null] },
-  { month:"Dec '25", period:'current', n:57,
-    ret:[100,100.0,93.0,87.7,82.5,80.7,null,null,null,null,null,null,null,null,null,null,null] },
-  { month:"Jan '26", period:'current', n:191,
-    ret:[100,92.7,88.0,83.8,82.2,null,null,null,null,null,null,null,null,null,null,null,null] },
-  { month:"Feb '26", period:'current', n:97,
-    ret:[100,91.8,88.7,84.5,null,null,null,null,null,null,null,null,null,null,null,null,null] },
-  { month:"Mar '26", period:'current', n:98,
-    ret:[100,91.8,87.8,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
-  { month:"Apr '26", period:'current', n:93,
-    ret:[100,91.4,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Jan '25", period:'early', n:33,
+    ret:[100.0,93.9,90.9,84.8,81.8,81.8,78.8,78.8,78.8,78.8,78.8,78.8,54.5,51.5,39.4,39.4,39.4,36.4] },
+  { month:"Feb '25", period:'early', n:33,
+    ret:[100.0,87.9,75.8,69.7,66.7,66.7,66.7,66.7,66.7,66.7,66.7,66.7,51.5,48.5,48.5,45.5,42.4,null] },
+  { month:"Mar '25", period:'early', n:43,
+    ret:[100.0,95.3,88.4,79.1,74.4,72.1,72.1,69.8,69.8,69.8,69.8,65.1,55.8,51.2,46.5,44.2,null,null] },
+  { month:"Apr '25", period:'early', n:44,
+    ret:[100.0,100.0,90.9,88.6,84.1,79.5,79.5,77.3,75.0,72.7,70.5,68.2,61.4,59.1,59.1,null,null,null] },
+  { month:"May '25", period:'prior', n:53,
+    ret:[100.0,88.7,81.1,79.2,77.4,75.5,69.8,69.8,69.8,67.9,64.2,58.5,49.1,49.1,null,null,null,null] },
+  { month:"Jun '25", period:'prior', n:74,
+    ret:[100.0,91.9,87.8,75.7,70.3,67.6,66.2,62.2,62.2,60.8,60.8,58.1,43.2,null,null,null,null,null] },
+  { month:"Jul '25", period:'prior', n:82,
+    ret:[100.0,93.9,92.7,85.4,85.4,82.9,80.5,76.8,74.4,73.2,72.0,69.5,null,null,null,null,null,null] },
+  { month:"Aug '25", period:'prior', n:69,
+    ret:[100.0,95.7,89.9,87.0,84.1,79.7,78.3,75.4,72.5,69.6,68.1,null,null,null,null,null,null,null] },
+  { month:"Sep '25", period:'prior', n:62,
+    ret:[100.0,93.5,90.3,83.9,83.9,77.4,75.8,74.2,72.6,69.4,null,null,null,null,null,null,null,null] },
+  { month:"Oct '25", period:'prior', n:93,
+    ret:[100.0,93.5,90.3,90.3,88.2,86.0,84.9,84.9,84.9,null,null,null,null,null,null,null,null,null] },
+  { month:"Nov '25", period:'current', n:56,
+    ret:[100.0,91.1,83.9,82.1,75.0,73.2,69.6,67.9,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Dec '25", period:'current', n:58,
+    ret:[100.0,94.8,87.9,82.8,77.6,75.9,74.1,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Jan '26", period:'current', n:110,
+    ret:[100.0,94.5,89.1,87.3,85.5,80.9,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Feb '26", period:'current', n:95,
+    ret:[100.0,93.7,90.5,88.4,84.2,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Mar '26", period:'current', n:97,
+    ret:[100.0,92.8,88.7,86.6,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Apr '26", period:'current', n:92,
+    ret:[100.0,90.2,87.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
   { month:"May '26", period:'current', n:125,
-    ret:[100,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,91.2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Jun '26", period:'current', n:129,
+    ret:[100.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
 ];
 
-const MAX_M = 17;
+const MAX_M = 18;
 const DOTS = {early:'#6b7a8d',prior:'#2a6b38',current:'#c0392b'};
-
+const PLABS = {
+  early:  'Early Period — Jan–Apr 2025',
+  prior:  'Prior Period — May–Oct 2025',
+  current:'Current Period — Nov 2025–Jun 2026',
+};
 
 const colHdr = document.getElementById('col-hdr');
 for(let m=0;m<MAX_M;m++){const th=document.createElement('th');th.textContent=m;colHdr.appendChild(th);}
 
-function rc(v){
+function rc(v,m){
   if(v===null||v===undefined)return null;
+  if(m===0)return{bg:'rgba(138,208,126,1)',tx:'#124010'};
   if(v>=90)return{bg:'rgba(138,208,126,1)',tx:'#124010'};
   if(v>=85)return{bg:'rgba(160,218,148,1)',tx:'#144812'};
   if(v>=80)return{bg:'rgba(184,228,170,1)',tx:'#185014'};
@@ -176,21 +175,26 @@ let lastPeriod=null;
 DATA.forEach(c=>{
   if(c.period!==lastPeriod){
     if(lastPeriod){const sp=document.createElement('tr');sp.className='gap';sp.innerHTML=`<td colspan="${MAX_M+2}"></td>`;tbody.appendChild(sp);}
-    lastPeriod=c.period;
+    const pl=document.createElement('tr');pl.className='period-row';
+    pl.innerHTML=`<td colspan="${MAX_M+2}" style="color:${DOTS[c.period]}">${PLABS[c.period]}</td>`;
+    tbody.appendChild(pl);lastPeriod=c.period;
   }
   const tr=document.createElement('tr');
   let html=`<td class="mc"><span class="dot" style="background:${DOTS[c.period]}"></span>${c.month}</td><td class="nc">${c.n}</td>`;
   for(let m=0;m<MAX_M;m++){
     const v=c.ret[m];
     if(v===null||v===undefined){html+=`<td class="em"></td>`;}
-    else{const col=rc(v);html+=`<td class="rc" style="background:${col.bg};color:${col.tx}">${v.toFixed(0)}%</td>`;}
+    else{
+      const col=rc(v,m);
+      html+=`<td class="rc" style="background:${col.bg};color:${col.tx}">${m===0?'100%':v.toFixed(0)+'%'}</td>`;
+    }
   }
   tr.innerHTML=html;tbody.appendChild(tr);
 });
 
 const grad=document.getElementById('leg-grad');
 [33,38,43,48,53,58,63,68,73,78,83,88,93,98].forEach(v=>{
-  const col=rc(v);const d=document.createElement('div');d.style.background=col.bg;grad.appendChild(d);
+  const col=rc(v,1);const d=document.createElement('div');d.style.background=col.bg;grad.appendChild(d);
 });
 </script>
 </body>

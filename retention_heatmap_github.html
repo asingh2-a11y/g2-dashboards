@@ -63,7 +63,7 @@ td.em{background:transparent!important;min-width:48px;}
 <div class="page">
 
   <div class="masthead">
-    <div class="kicker">G2 Starter · Cohort Analysis · Jan 2025 – Jun 2026</div>
+    <div class="kicker">G2 Starter · Cohort Analysis · Jan 2025 – Jul 2026 · Updated Aug 1, 2026</div>
     <h1>Subscription Retention</h1>
   </div>
 
@@ -87,7 +87,7 @@ td.em{background:transparent!important;min-width:48px;}
     <div class="leg-pills">
       <div class="leg-item"><span style="background:var(--p-early);display:inline-block;width:8px;height:8px;border-radius:50%"></span>Early Jan–Apr '25</div>
       <div class="leg-item"><span style="background:var(--p-prior);display:inline-block;width:8px;height:8px;border-radius:50%"></span>Prior May–Oct '25 — strongest retention</div>
-      <div class="leg-item"><span style="background:var(--p-current);display:inline-block;width:8px;height:8px;border-radius:50%"></span>Current Nov '25–Jun '26 — incomplete</div>
+      <div class="leg-item"><span style="background:var(--p-current);display:inline-block;width:8px;height:8px;border-radius:50%"></span>Current Nov '25–Jul '26 — incomplete</div>
     </div>
     <div class="leg-grad-wrap">
       <span class="leg-txt">Low retention</span>
@@ -96,7 +96,7 @@ td.em{background:transparent!important;min-width:48px;}
     </div>
   </div>
   <div class="fn">
-    Starter only · M0 = 100% by definition · Re-subscriptions counted as retained · Updated July 1, 2026<br>
+    Starter only · M0 = 100% by definition · Re-subscriptions counted as retained · Updated Aug 1, 2026<br>
     Source: Looker global_launchpad / adoption_rate + renewals_and_churn · Tails verified against Looker current active (gap &lt;2pp)
   </div>
 
@@ -104,49 +104,51 @@ td.em{background:transparent!important;min-width:48px;}
 <script>
 const DATA = [
   { month:"Jan '25", period:'early', n:33,
-    ret:[100.0,93.9,90.9,84.8,81.8,81.8,78.8,78.8,78.8,78.8,78.8,78.8,54.5,51.5,39.4,39.4,39.4,36.4] },
+    ret:[100.0,93.9,90.9,84.8,81.8,81.8,78.8,78.8,78.8,78.8,78.8,78.8,54.5,51.5,39.4,39.4,39.4,39.4,39.4] },
   { month:"Feb '25", period:'early', n:33,
-    ret:[100.0,87.9,75.8,69.7,66.7,66.7,66.7,66.7,66.7,66.7,66.7,66.7,51.5,48.5,48.5,45.5,42.4,null] },
+    ret:[100.0,87.9,75.8,69.7,66.7,66.7,66.7,66.7,66.7,66.7,66.7,66.7,51.5,48.5,48.5,45.5,45.5,45.5,null] },
   { month:"Mar '25", period:'early', n:43,
-    ret:[100.0,95.3,88.4,79.1,74.4,72.1,72.1,69.8,69.8,69.8,69.8,65.1,55.8,51.2,46.5,44.2,null,null] },
+    ret:[100.0,95.3,88.4,79.1,74.4,72.1,72.1,69.8,69.8,69.8,69.8,65.1,55.8,51.2,46.5,44.2,44.2,null,null] },
   { month:"Apr '25", period:'early', n:44,
-    ret:[100.0,100.0,90.9,88.6,84.1,79.5,79.5,77.3,75.0,72.7,70.5,68.2,61.4,59.1,59.1,null,null,null] },
+    ret:[100.0,100.0,88.6,86.4,81.8,77.3,77.3,75.0,72.7,70.5,68.2,65.9,59.1,56.8,56.8,56.8,null,null,null] },
   { month:"May '25", period:'prior', n:53,
-    ret:[100.0,88.7,81.1,79.2,77.4,75.5,69.8,69.8,69.8,67.9,64.2,58.5,49.1,49.1,null,null,null,null] },
+    ret:[100.0,88.7,81.1,79.2,77.4,75.5,69.8,69.8,69.8,67.9,64.2,58.5,49.1,49.1,47.2,null,null,null,null] },
   { month:"Jun '25", period:'prior', n:74,
-    ret:[100.0,91.9,87.8,75.7,70.3,67.6,66.2,62.2,62.2,60.8,60.8,58.1,43.2,null,null,null,null,null] },
+    ret:[100.0,91.9,87.8,75.7,71.6,68.9,67.6,63.5,63.5,62.2,62.2,59.5,44.6,43.2,null,null,null,null,null] },
   { month:"Jul '25", period:'prior', n:82,
-    ret:[100.0,93.9,92.7,85.4,85.4,82.9,80.5,76.8,74.4,73.2,72.0,69.5,null,null,null,null,null,null] },
+    ret:[100.0,95.1,93.9,87.8,87.8,85.4,82.9,79.3,76.8,75.6,74.4,70.7,56.1,null,null,null,null,null,null] },
   { month:"Aug '25", period:'prior', n:69,
-    ret:[100.0,95.7,89.9,87.0,84.1,79.7,78.3,75.4,72.5,69.6,68.1,null,null,null,null,null,null,null] },
+    ret:[100.0,95.7,89.9,87.0,84.1,79.7,78.3,75.4,73.9,71.0,69.6,69.6,null,null,null,null,null,null,null] },
   { month:"Sep '25", period:'prior', n:62,
-    ret:[100.0,93.5,90.3,83.9,83.9,77.4,75.8,74.2,72.6,69.4,null,null,null,null,null,null,null,null] },
+    ret:[100.0,93.5,90.3,83.9,83.9,77.4,75.8,74.2,72.6,69.4,66.1,null,null,null,null,null,null,null,null] },
   { month:"Oct '25", period:'prior', n:93,
-    ret:[100.0,93.5,90.3,90.3,88.2,86.0,84.9,84.9,84.9,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,93.5,90.3,90.3,88.2,86.0,84.9,84.9,84.9,82.8,null,null,null,null,null,null,null,null,null] },
   { month:"Nov '25", period:'current', n:56,
-    ret:[100.0,91.1,83.9,82.1,75.0,73.2,69.6,67.9,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,91.1,83.9,82.1,75.0,73.2,69.6,67.9,67.9,null,null,null,null,null,null,null,null,null,null] },
   { month:"Dec '25", period:'current', n:58,
-    ret:[100.0,94.8,87.9,82.8,77.6,75.9,74.1,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,96.6,89.7,84.5,81.0,79.3,77.6,72.4,null,null,null,null,null,null,null,null,null,null,null] },
   { month:"Jan '26", period:'current', n:110,
-    ret:[100.0,94.5,89.1,87.3,85.5,80.9,null,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,94.5,89.1,87.3,85.5,80.0,79.1,null,null,null,null,null,null,null,null,null,null,null,null] },
   { month:"Feb '26", period:'current', n:95,
-    ret:[100.0,93.7,90.5,88.4,84.2,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,93.7,90.5,88.4,84.2,82.1,null,null,null,null,null,null,null,null,null,null,null,null,null] },
   { month:"Mar '26", period:'current', n:97,
-    ret:[100.0,92.8,88.7,86.6,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,92.8,88.7,86.6,86.6,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
   { month:"Apr '26", period:'current', n:92,
-    ret:[100.0,90.2,87.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,90.2,87.0,79.3,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
   { month:"May '26", period:'current', n:125,
-    ret:[100.0,91.2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,92.0,86.4,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
   { month:"Jun '26", period:'current', n:129,
-    ret:[100.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+    ret:[100.0,91.5,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
+  { month:"Jul '26", period:'current', n:116,
+    ret:[100.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null] },
 ];
 
-const MAX_M = 18;
+const MAX_M = 19;
 const DOTS = {early:'#6b7a8d',prior:'#2a6b38',current:'#c0392b'};
 const PLABS = {
   early:  'Early Period — Jan–Apr 2025',
   prior:  'Prior Period — May–Oct 2025',
-  current:'Current Period — Nov 2025–Jun 2026',
+  current:'Current Period — Nov 2025–Jul 2026',
 };
 
 const colHdr = document.getElementById('col-hdr');

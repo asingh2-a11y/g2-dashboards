@@ -250,9 +250,9 @@
 
 <script>
   const SNAPSHOT = {
- "as_of": "2026-09-10",
- "as_of_label": "2026-09-10 19:03 IST",
- "as_of_iso": "2026-09-10T19:03:19+05:30",
+ "as_of": "2026-09-11",
+ "as_of_label": "2026-09-11 19:03 IST",
+ "as_of_iso": "2026-09-11T19:03:26+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
@@ -263,7 +263,7 @@
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-09-10 19:03 IST",
+  "as_of_label": "2026-09-11 19:03 IST",
   "onemind_mygc_valid": 302,
   "onemind_sell_g2_external": 96,
   "onemind_internal_g2": 42,
@@ -285,7 +285,7 @@
   "docket_starter_sf_matched": 36,
   "docket_starter_sf_total": 36,
   "docket_clicks_attributed": 6,
-  "docket_clicks_revenue": 1838.73,
+  "docket_clicks_revenue": 1879.92,
   "docket_sellg2_conversations": 120,
   "docket_sellg2_identified": 1,
   "docket_sellg2_anonymous": 119
@@ -301,9 +301,9 @@
    "one_min_conversations": 207
   },
   "stale": true,
-  "stale_reason": "Drive exports exceeded the MCP tool output cap this run (xlsx 497K chars, csv 1.67M chars); all-tabs union unavailable. HARD FLOOR applied - carried forward verified Aug-5 baseline.",
-  "pulled_at": "2026-09-10T19:03:19+05:30",
-  "schema_note": "All-tabs XLSX union unavailable this run: Drive download_file_content exceeded the tool output limit for both xlsx and csv export. No single-tab figure was substituted. HARD FLOOR applied.",
+  "stale_reason": "Drive XLSX export (all tabs) exceeded the MCP tool output cap this run (497,097 chars) and the spilled file is outside the shell sandbox, so the all-tabs union could not be parsed. HARD FLOOR applied - carried forward verified Aug-5 full-data baseline.",
+  "pulled_at": "2026-09-11T19:03:26+05:30",
+  "schema_note": "All-tabs XLSX union unavailable this run (export exceeded tool output limit). No single-tab figure was substituted; published Docket cohorts are the verified Aug-5 full-data baseline per the HARD FLOOR rule.",
   "tab_counts": {}
  },
  "docket_sellg2": {
@@ -1933,9 +1933,9 @@
    "slug": "hummingdeck",
    "alert_date": "2026-09-10",
    "page_url": "https://my.g2.com/hummingdeck/external_clickthroughs/plans",
-   "first_spend": "2026-09-10",
+   "first_spend": "2026-09-09",
    "gap": 0,
-   "total_spend": 26.54,
+   "total_spend": 67.73,
    "source": "new",
    "overlaps_1mind": false
   }

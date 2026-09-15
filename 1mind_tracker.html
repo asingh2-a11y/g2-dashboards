@@ -3,8 +3,16 @@
   "name": "1mind Conversation Tracker",
   "schemaVersion": 1,
   "description": "Combined AI Assistants Tracker — 1mind (Vera/Alex) + Docket. Three tabs: Overall (combined conversations + attributed conversions + revenue influenced), 1mind (cohorts + Starter conversions from reporting CSV), Docket (3 cohorts + live SF email→Contact→ProductProfile attribution with Strong/Possible/Excluded tiers).",
-  "mcpTools": [],
-  "mcpServerNames": []
+  "mcpTools": [
+    "mcp__0683d595-be50-4f4e-ac6c-a8f78ddee955__soqlQuery",
+    "mcp__Metabase__Unofficial___Community___execute",
+    "mcp__a8e98183-0192-42ff-bdc3-4c70426e9bdb__slack_read_channel"
+  ],
+  "mcpServerNames": [
+    "Salesforce MCP Writes",
+    "Metabase",
+    "Slack"
+  ]
 }
 </script>
 <html lang="en">
@@ -251,8 +259,8 @@
 <script>
   const SNAPSHOT = {
  "as_of": "2026-09-15",
- "as_of_label": "2026-09-15 12:27 IST",
- "as_of_iso": "2026-09-15T12:27:22+05:30",
+ "as_of_label": "2026-09-15 19:03 IST",
+ "as_of_iso": "2026-09-15T19:03:25+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
@@ -263,7 +271,7 @@
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-09-15 12:27 IST",
+  "as_of_label": "2026-09-15 19:03 IST",
   "onemind_mygc_valid": 305,
   "onemind_sell_g2_external": 96,
   "onemind_internal_g2": 42,
@@ -276,16 +284,16 @@
   "onemind_starter_assisted": 12,
   "onemind_clicks_attributed": 4,
   "onemind_clicks_revenue": 7275.91,
-  "docket_starter_attributed": 36,
-  "docket_starter_monthly": 26,
+  "docket_starter_attributed": 37,
+  "docket_starter_monthly": 27,
   "docket_starter_annual": 10,
-  "docket_starter_revenue": 123600,
+  "docket_starter_revenue": 127200,
   "docket_starter_strong": 4,
-  "docket_starter_possible": 32,
-  "docket_starter_sf_matched": 36,
-  "docket_starter_sf_total": 36,
+  "docket_starter_possible": 33,
+  "docket_starter_sf_matched": 37,
+  "docket_starter_sf_total": 37,
   "docket_clicks_attributed": 8,
-  "docket_clicks_revenue": 2155.58,
+  "docket_clicks_revenue": 2176.91,
   "docket_sellg2_conversations": 120,
   "docket_sellg2_identified": 1,
   "docket_sellg2_anonymous": 119
@@ -300,9 +308,9 @@
    "one_min_users": 136,
    "one_min_conversations": 207
   },
-  "stale": false,
-  "pulled_at": "2026-09-15T12:27:22+05:30",
-  "schema_note": "All-tabs XLSX union parsed successfully (single dated tab present, 455 rows, 0 dupes removed). Computed cohorts equal the verified Aug-5 baseline; HARD FLOOR not triggered.",
+  "stale": true,
+  "pulled_at": "2026-09-15T19:03:25+05:30",
+  "schema_note": "CARRIED FORWARD from this morning's verified all-tabs XLSX pull (2026-09-15 12:27 IST, 455 rows, HARD FLOOR not triggered). This run's XLSX re-export could not be reconstructed within tool/output-size limits, so the same verified baseline was reused rather than risk an under-counted partial-tab read. Docket data only grows, so this is a safe lower bound.",
   "tab_counts": {
    "tim-custom-2026-06-09 (2)": 455
   }
@@ -555,7 +563,7 @@
    },
    {
     "alert_date": "2026-07-28",
-    "company": "Z\u00fchlke Group",
+    "company": "Zühlke Group",
     "prospect_email": "anonymous",
     "duration_min": 0.18,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
@@ -858,13 +866,6 @@
     "alert_date": "2026-08-11",
     "company": "AIG",
     "prospect_email": "anonymous",
-    "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
     "duration_min": 0.26,
     "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
    },
@@ -915,13 +916,6 @@
     "company": "AIG",
     "prospect_email": "anonymous",
     "duration_min": 0.28,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.15,
     "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
    },
    {
@@ -998,13 +992,6 @@
     "alert_date": "2026-08-14",
     "company": "AIG",
     "prospect_email": "anonymous",
-    "duration_min": 0.25,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
     "duration_min": 1.37,
     "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
    },
@@ -1020,13 +1007,6 @@
     "company": "AIG",
     "prospect_email": "anonymous",
     "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.15,
     "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
    },
    {
@@ -1621,6 +1601,13 @@
  ],
  "docket_starter_table": [
   {
+   "product": "Operant System",
+   "slug": "operant-system",
+   "account": "Operant Systems",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-09-14"
+  },
+  {
    "product": "Agileday",
    "slug": "agileday",
    "account": "Agileday Oy",
@@ -1919,7 +1906,7 @@
    "overlaps_1mind": false
   },
   {
-   "product": "Residex\u00ae",
+   "product": "Residex®",
    "slug": "residex",
    "alert_date": "2026-07-22",
    "page_url": "https://my.g2.com/residex/external_clickthroughs/plans",
@@ -1934,9 +1921,9 @@
    "slug": "voicenotes",
    "alert_date": "2026-09-12",
    "page_url": "https://my.g2.com/voicenotes/external_clickthroughs/plans?utm_medium=buyer-insights-card-ads&utm_source=g2&_gl=1*75qqew*_ga*MTQyNDg1NDg4MC4xNzgyNzMwMTc4*_ga_MFZ5NDXZ5F*czE3ODkyMzMzNzQkbzckZzEkdDE3ODkyMzM1MzAkajYwJGwwJGgw",
-   "first_spend": "2026-09-13",
-   "gap": 1,
-   "total_spend": 120.99,
+   "first_spend": "2026-09-12",
+   "gap": 0,
+   "total_spend": 142.32,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1945,7 +1932,7 @@
    "slug": "hummingdeck",
    "alert_date": "2026-09-10",
    "page_url": "https://my.g2.com/hummingdeck/external_clickthroughs/plans",
-   "first_spend": "2026-09-10",
+   "first_spend": "2026-09-09",
    "gap": 0,
    "total_spend": 108.32,
    "source": "new",

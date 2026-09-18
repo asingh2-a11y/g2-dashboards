@@ -260,9 +260,9 @@
 
 <script>
   const SNAPSHOT = {
- "as_of": "2026-09-17",
- "as_of_label": "2026-09-17 19:03 IST",
- "as_of_iso": "2026-09-17T19:03:50+05:30",
+ "as_of": "2026-09-18",
+ "as_of_label": "2026-09-18 19:14 IST",
+ "as_of_iso": "2026-09-18T19:14:41+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
@@ -273,11 +273,11 @@
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-09-17 19:03 IST",
-  "onemind_mygc_valid": 306,
+  "as_of_label": "2026-09-18 19:14 IST",
+  "onemind_mygc_valid": 308,
   "onemind_sell_g2_external": 96,
   "onemind_internal_g2": 42,
-  "onemind_grand_total": 489,
+  "onemind_grand_total": 491,
   "onemind_starter_attributed": 42,
   "onemind_starter_monthly": 31,
   "onemind_starter_annual": 11,
@@ -285,20 +285,20 @@
   "onemind_starter_influenced": 31,
   "onemind_starter_assisted": 11,
   "onemind_clicks_attributed": 4,
-  "onemind_clicks_revenue": 7330.97,
-  "docket_starter_attributed": 37,
-  "docket_starter_monthly": 27,
+  "onemind_clicks_revenue": 7358.71,
+  "docket_starter_attributed": 38,
+  "docket_starter_monthly": 28,
   "docket_starter_annual": 10,
-  "docket_starter_revenue": 127200,
+  "docket_starter_revenue": 130800,
   "docket_starter_strong": 4,
-  "docket_starter_possible": 33,
-  "docket_starter_sf_matched": 37,
-  "docket_starter_sf_total": 37,
+  "docket_starter_possible": 34,
+  "docket_starter_sf_matched": 38,
+  "docket_starter_sf_total": 38,
   "docket_clicks_attributed": 9,
-  "docket_clicks_revenue": 2265.66,
-  "docket_sellg2_conversations": 120,
+  "docket_clicks_revenue": 2346.93,
+  "docket_sellg2_conversations": 114,
   "docket_sellg2_identified": 1,
-  "docket_sellg2_anonymous": 119
+  "docket_sellg2_anonymous": 113
  },
  "docket": {
   "total_rows": 455,
@@ -311,16 +311,16 @@
    "one_min_conversations": 207
   },
   "stale": true,
-  "pulled_at": "2026-09-17T19:03:50+05:30",
-  "schema_note": "CARRIED FORWARD from the verified 2026-09-15 12:27 IST all-tabs XLSX pull (455 rows, HARD FLOOR not triggered then). This run's XLSX re-export again returned a single-tab / oversized blob exceeding this session's file-read tool ceiling (base64 JSON >1.6M tokens on one line; the download tool saved the payload to a host tmp file that neither the Read tool's chunking nor the shell sandbox could access), so the verified baseline was carried forward again per the mandatory HARD FLOOR rule. Docket data only grows, so this remains a safe lower bound.",
+  "pulled_at": "2026-09-18T19:14:41+05:30",
+  "schema_note": "CARRIED FORWARD from the verified 2026-09-15 12:27 IST all-tabs XLSX pull (455 rows, HARD FLOOR not triggered then). This run tried two independent export paths (XLSX via download_file_content, and natural-language text via read_file_content) -- both returned the workbook flattened into a single oversized line (190K-465K tokens) that exceeded this session's file-read/grep chunking limits, and both showed evidence of only a single tab's worth of rows (one 'Visitor ID' / 'Number of conversations' header occurrence), reproducing the same one-tab bug described in the pipeline spec. The host tmp path holding the raw payload is also unreachable from the bash sandbox (different filesystem). Per the mandatory HARD FLOOR rule, the verified baseline is carried forward again. Docket data only grows over time, so 345 remains a safe lower bound.",
   "tab_counts": {
    "tim-custom-2026-06-09 (2)": 455
   }
  },
  "docket_sellg2": {
-  "conversations": 120,
+  "conversations": 114,
   "identified": 1,
-  "anonymous": 119,
+  "anonymous": 113,
   "internal": 0,
   "unique_companies": 35,
   "since": "2026-06-23 (Slack channel start)",
@@ -1806,6 +1806,13 @@
    "account": "Quantum Workplace",
    "pkg": "Starter Monthly",
    "contract_start": "2025-08-28"
+  },
+  {
+   "product": "Zip Security",
+   "slug": "zip-security",
+   "account": "Zip Security",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-09-16"
   }
  ],
  "onemind_clicks_table": [
@@ -1813,7 +1820,7 @@
    "product": "Showcase Workshop",
    "slug": "showcase-workshop",
    "first_spend": "2024-03-26",
-   "total_spend": 4256.46,
+   "total_spend": 4284.2,
    "source": "baked"
   },
   {
@@ -1879,7 +1886,7 @@
    "page_url": "https://my.g2.com/genieai/external_clickthroughs/plans?utm_source=Iterable&utm_medium=email&utm_campaign=it_auto_mkt_snd_2026_07_23_wfl_984017_cmp_18598615_tpl_24194464_loc_",
    "first_spend": "2026-08-21",
    "gap": 14,
-   "total_spend": 217.7,
+   "total_spend": 242.19,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1901,7 +1908,7 @@
    "page_url": "https://my.g2.com/voicenotes/external_clickthroughs/plans?utm_medium=buyer-insights-card-ads&utm_source=g2",
    "first_spend": "2026-09-12",
    "gap": 0,
-   "total_spend": 163.34,
+   "total_spend": 176.37,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1923,7 +1930,7 @@
    "page_url": "https://my.g2.com/suptask/external_clickthroughs/plans",
    "first_spend": "2026-09-11",
    "gap": 0,
-   "total_spend": 155.37,
+   "total_spend": 179.35,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1934,7 +1941,7 @@
    "page_url": "https://my.g2.com/olifant-digital/external_clickthroughs/plans",
    "first_spend": "2026-09-17",
    "gap": 14,
-   "total_spend": 19.77,
+   "total_spend": 39.54,
    "source": "new",
    "overlaps_1mind": false
   }

@@ -260,32 +260,32 @@
 
 <script>
   const SNAPSHOT = {
- "as_of": "2026-09-18",
- "as_of_label": "2026-09-18 19:14 IST",
- "as_of_iso": "2026-09-18T19:14:41+05:30",
+ "as_of": "2026-09-20",
+ "as_of_label": "2026-09-20 15:14 IST",
+ "as_of_iso": "2026-09-20T15:14:38+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
  "support": {
-  "sell_g2_total_unique": 113,
+  "sell_g2_total_unique": 114,
   "sell_g2_internal_qa": 3,
   "sell_g2_no_engagement": 14,
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-09-18 19:14 IST",
-  "onemind_mygc_valid": 308,
-  "onemind_sell_g2_external": 96,
+  "as_of_label": "2026-09-20 15:14 IST",
+  "onemind_mygc_valid": 310,
+  "onemind_sell_g2_external": 97,
   "onemind_internal_g2": 42,
-  "onemind_grand_total": 491,
+  "onemind_grand_total": 494,
   "onemind_starter_attributed": 42,
   "onemind_starter_monthly": 31,
   "onemind_starter_annual": 11,
   "onemind_starter_revenue": 144600,
-  "onemind_starter_influenced": 31,
-  "onemind_starter_assisted": 11,
+  "onemind_starter_influenced": 32,
+  "onemind_starter_assisted": 10,
   "onemind_clicks_attributed": 4,
-  "onemind_clicks_revenue": 7358.71,
+  "onemind_clicks_revenue": 7413.77,
   "docket_starter_attributed": 38,
   "docket_starter_monthly": 28,
   "docket_starter_annual": 10,
@@ -294,8 +294,8 @@
   "docket_starter_possible": 34,
   "docket_starter_sf_matched": 38,
   "docket_starter_sf_total": 38,
-  "docket_clicks_attributed": 9,
-  "docket_clicks_revenue": 2346.93,
+  "docket_clicks_attributed": 10,
+  "docket_clicks_revenue": 2498.19,
   "docket_sellg2_conversations": 114,
   "docket_sellg2_identified": 1,
   "docket_sellg2_anonymous": 113
@@ -311,10 +311,10 @@
    "one_min_conversations": 207
   },
   "stale": true,
-  "pulled_at": "2026-09-18T19:14:41+05:30",
-  "schema_note": "CARRIED FORWARD from the verified 2026-09-15 12:27 IST all-tabs XLSX pull (455 rows, HARD FLOOR not triggered then). This run tried two independent export paths (XLSX via download_file_content, and natural-language text via read_file_content) -- both returned the workbook flattened into a single oversized line (190K-465K tokens) that exceeded this session's file-read/grep chunking limits, and both showed evidence of only a single tab's worth of rows (one 'Visitor ID' / 'Number of conversations' header occurrence), reproducing the same one-tab bug described in the pipeline spec. The host tmp path holding the raw payload is also unreachable from the bash sandbox (different filesystem). Per the mandatory HARD FLOOR rule, the verified baseline is carried forward again. Docket data only grows over time, so 345 remains a safe lower bound.",
+  "pulled_at": "2026-09-20T15:14:38+05:30",
+  "schema_note": "CARRIED FORWARD from the verified 2026-09-15 12:27 IST all-tabs XLSX pull (455 rows, HARD FLOOR not triggered then). This run (2026-09-20) again tried both export paths (XLSX via download_file_content and natural-language via read_file_content); both again flattened the multi-tab workbook into a single oversized line (~465K-497K chars) with only one 'Visitor ID' header occurrence, reproducing the same one-tab-only bug for a third consecutive run. The saved raw-payload scratch file lives on a filesystem unreachable from the bash sandbox, so it could not be decoded/re-parsed there either. Per the mandatory HARD FLOOR rule, the verified baseline is carried forward again. Docket data only grows over time, so 345 remains a safe lower bound.",
   "tab_counts": {
-   "tim-custom-2026-06-09 (2)": 455
+   "unresolved_this_run_single_line_flatten_bug": 455
   }
  },
  "docket_sellg2": {
@@ -1127,6 +1127,16 @@
  },
  "onemind_starter_table": [
   {
+   "product": "Scispot",
+   "slug": "scispot",
+   "pkg": "Starter Monthly",
+   "earliest_ai": "2026-09-18",
+   "contract_start": "2026-09-18",
+   "gap": 0,
+   "window": "inf",
+   "revenue": 3600
+  },
+  {
    "product": "Finatical Flash Reports",
    "slug": "finatical-flash-reports",
    "pkg": "Starter Monthly",
@@ -1243,16 +1253,6 @@
    "earliest_ai": "2026-05-27",
    "contract_start": "2026-06-30",
    "gap": 34,
-   "window": "ass",
-   "revenue": 3600
-  },
-  {
-   "product": "EasyWebinar",
-   "slug": "easywebinar",
-   "pkg": "Starter Monthly",
-   "earliest_ai": "2026-04-24",
-   "contract_start": "2026-06-17",
-   "gap": 54,
    "window": "ass",
    "revenue": 3600
   },
@@ -1549,6 +1549,20 @@
  ],
  "docket_starter_table": [
   {
+   "product": "Scispot",
+   "slug": "scispot",
+   "account": "Scispot.io",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-09-18"
+  },
+  {
+   "product": "Zip Security",
+   "slug": "zip-security",
+   "account": "Zip Security",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-09-16"
+  },
+  {
    "product": "Operant System",
    "slug": "operant-system",
    "account": "Operant Systems",
@@ -1609,7 +1623,7 @@
    "slug": "samsearch",
    "account": "Samsearch",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-08-12"
+   "contract_start": null
   },
   {
    "product": "Mosaiq",
@@ -1724,13 +1738,6 @@
    "contract_start": "2026-06-18"
   },
   {
-   "product": "EasyWebinar",
-   "slug": "easywebinar",
-   "account": "EasyWebinar",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-06-17"
-  },
-  {
    "product": "Shield",
    "slug": "mailprotector-shield",
    "account": "Mailprotector",
@@ -1806,13 +1813,6 @@
    "account": "Quantum Workplace",
    "pkg": "Starter Monthly",
    "contract_start": "2025-08-28"
-  },
-  {
-   "product": "Zip Security",
-   "slug": "zip-security",
-   "account": "Zip Security",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-09-16"
   }
  ],
  "onemind_clicks_table": [
@@ -1820,7 +1820,7 @@
    "product": "Showcase Workshop",
    "slug": "showcase-workshop",
    "first_spend": "2024-03-26",
-   "total_spend": 4284.2,
+   "total_spend": 4339.26,
    "source": "baked"
   },
   {
@@ -1886,7 +1886,7 @@
    "page_url": "https://my.g2.com/genieai/external_clickthroughs/plans?utm_source=Iterable&utm_medium=email&utm_campaign=it_auto_mkt_snd_2026_07_23_wfl_984017_cmp_18598615_tpl_24194464_loc_",
    "first_spend": "2026-08-21",
    "gap": 14,
-   "total_spend": 242.19,
+   "total_spend": 252.69,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1930,7 +1930,7 @@
    "page_url": "https://my.g2.com/suptask/external_clickthroughs/plans",
    "first_spend": "2026-09-11",
    "gap": 0,
-   "total_spend": 179.35,
+   "total_spend": 256.31,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1942,6 +1942,17 @@
    "first_spend": "2026-09-17",
    "gap": 14,
    "total_spend": 39.54,
+   "source": "new",
+   "overlaps_1mind": false
+  },
+  {
+   "product": "AutoClass AI",
+   "slug": "autoclass-ai",
+   "alert_date": "2026-09-18",
+   "page_url": "https://my.g2.com/autoclass-ai/external_clickthroughs/plans",
+   "first_spend": "2026-09-18",
+   "gap": 0,
+   "total_spend": 63.80,
    "source": "new",
    "overlaps_1mind": false
   }

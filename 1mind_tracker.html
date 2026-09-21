@@ -259,10 +259,10 @@
 </div>
 
 <script>
-  const SNAPSHOT = {
- "as_of": "2026-09-20",
- "as_of_label": "2026-09-20 15:14 IST",
- "as_of_iso": "2026-09-20T15:14:38+05:30",
+  const SNAPSHOT ={
+ "as_of": "2026-09-21",
+ "as_of_label": "2026-09-21 07:53 IST",
+ "as_of_iso": "2026-09-21T07:53:48+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
@@ -273,11 +273,11 @@
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-09-20 15:14 IST",
-  "onemind_mygc_valid": 310,
+  "as_of_label": "2026-09-21 07:53 IST",
+  "onemind_mygc_valid": 311,
   "onemind_sell_g2_external": 97,
   "onemind_internal_g2": 42,
-  "onemind_grand_total": 494,
+  "onemind_grand_total": 495,
   "onemind_starter_attributed": 42,
   "onemind_starter_monthly": 31,
   "onemind_starter_annual": 11,
@@ -286,19 +286,19 @@
   "onemind_starter_assisted": 10,
   "onemind_clicks_attributed": 4,
   "onemind_clicks_revenue": 7413.77,
-  "docket_starter_attributed": 38,
-  "docket_starter_monthly": 28,
+  "docket_starter_attributed": 37,
+  "docket_starter_monthly": 27,
   "docket_starter_annual": 10,
-  "docket_starter_revenue": 130800,
+  "docket_starter_revenue": 127200,
   "docket_starter_strong": 4,
-  "docket_starter_possible": 34,
-  "docket_starter_sf_matched": 38,
-  "docket_starter_sf_total": 38,
+  "docket_starter_possible": 33,
+  "docket_starter_sf_matched": 37,
+  "docket_starter_sf_total": 37,
   "docket_clicks_attributed": 10,
   "docket_clicks_revenue": 2498.19,
-  "docket_sellg2_conversations": 114,
+  "docket_sellg2_conversations": 122,
   "docket_sellg2_identified": 1,
-  "docket_sellg2_anonymous": 113
+  "docket_sellg2_anonymous": 121
  },
  "docket": {
   "total_rows": 455,
@@ -311,18 +311,18 @@
    "one_min_conversations": 207
   },
   "stale": true,
-  "pulled_at": "2026-09-20T15:14:38+05:30",
-  "schema_note": "CARRIED FORWARD from the verified 2026-09-15 12:27 IST all-tabs XLSX pull (455 rows, HARD FLOOR not triggered then). This run (2026-09-20) again tried both export paths (XLSX via download_file_content and natural-language via read_file_content); both again flattened the multi-tab workbook into a single oversized line (~465K-497K chars) with only one 'Visitor ID' header occurrence, reproducing the same one-tab-only bug for a third consecutive run. The saved raw-payload scratch file lives on a filesystem unreachable from the bash sandbox, so it could not be decoded/re-parsed there either. Per the mandatory HARD FLOOR rule, the verified baseline is carried forward again. Docket data only grows over time, so 345 remains a safe lower bound.",
+  "pulled_at": "2026-09-21T07:53:48+05:30",
+  "schema_note": "CARRIED FORWARD from the verified 2026-08-05 all-tabs XLSX pull (455 rows, HARD FLOOR baseline). This run's Drive export (both download_file_content as XLSX and read_file_content as text) again flattened the multi-tab workbook into a single oversized line with no newlines, so per-tab parsing could not run (same recurring bug as prior runs). Per the mandatory HARD FLOOR rule, the verified baseline is carried forward.",
   "tab_counts": {
    "unresolved_this_run_single_line_flatten_bug": 455
   }
  },
  "docket_sellg2": {
-  "conversations": 114,
+  "conversations": 122,
   "identified": 1,
-  "anonymous": 113,
+  "anonymous": 121,
   "internal": 0,
-  "unique_companies": 35,
+  "unique_companies": 36,
   "since": "2026-06-23 (Slack channel start)",
   "table": [
    {
@@ -341,23 +341,23 @@
    },
    {
     "alert_date": "2026-07-05",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.18,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-07-05",
     "company": "Ooredoo Qatar",
     "prospect_email": "anonymous",
     "duration_min": 0.16,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
-    "alert_date": "2026-07-08",
-    "company": "G2",
+    "alert_date": "2026-07-05",
+    "company": null,
     "prospect_email": "anonymous",
     "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
@@ -369,23 +369,23 @@
    },
    {
     "alert_date": "2026-07-08",
-    "company": null,
+    "company": "G2",
     "prospect_email": "anonymous",
-    "duration_min": 0.1,
+    "duration_min": 0.18,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
     "alert_date": "2026-07-09",
-    "company": null,
+    "company": "Outreach",
     "prospect_email": "anonymous",
-    "duration_min": 0.19,
-    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+    "duration_min": 0.94,
+    "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-07-09",
-    "company": null,
+    "company": "Docket",
     "prospect_email": "anonymous",
-    "duration_min": 0.21,
+    "duration_min": 0.37,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
@@ -397,17 +397,17 @@
    },
    {
     "alert_date": "2026-07-09",
-    "company": "Docket",
+    "company": null,
     "prospect_email": "anonymous",
-    "duration_min": 0.37,
+    "duration_min": 0.21,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
     "alert_date": "2026-07-09",
-    "company": "Outreach",
+    "company": null,
     "prospect_email": "anonymous",
-    "duration_min": 0.94,
-    "page_url": "https://sell.g2.com/advertising"
+    "duration_min": 0.19,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
     "alert_date": "2026-07-10",
@@ -427,42 +427,21 @@
     "alert_date": "2026-07-15",
     "company": "DoorDash",
     "prospect_email": "anonymous",
-    "duration_min": 5.09,
+    "duration_min": 0.18,
     "page_url": "https://sell.g2.com/case-studies/how-eventee-uses-g2-starter-to-climb-the-rankings-and-convert-leads"
    },
    {
     "alert_date": "2026-07-15",
     "company": "DoorDash",
     "prospect_email": "anonymous",
-    "duration_min": 0.18,
+    "duration_min": 5.09,
     "page_url": "https://sell.g2.com/case-studies/how-eventee-uses-g2-starter-to-climb-the-rankings-and-convert-leads"
    },
    {
     "alert_date": "2026-07-21",
-    "company": "Docket",
-    "prospect_email": "anonymous",
-    "duration_min": 0.17,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-07-21",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 2.27,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-07-21",
     "company": "Colliers",
     "prospect_email": "anonymous",
-    "duration_min": 2.74,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-07-21",
-    "company": "Colliers",
-    "prospect_email": "anonymous",
-    "duration_min": 3.97,
+    "duration_min": 0.15,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
@@ -476,6 +455,55 @@
     "alert_date": "2026-07-21",
     "company": "Colliers",
     "prospect_email": "anonymous",
+    "duration_min": 3.97,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": "Colliers",
+    "prospect_email": "anonymous",
+    "duration_min": 2.74,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 2.27,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": "Docket",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": "Docket",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": "EKCS India Private Limited",
+    "prospect_email": "anonymous",
     "duration_min": 0.15,
     "page_url": "https://sell.g2.com/advertising"
    },
@@ -487,38 +515,17 @@
     "page_url": "https://sell.g2.com/advertising"
    },
    {
-    "alert_date": "2026-07-23",
-    "company": "EKCS India Private Limited",
+    "alert_date": "2026-07-24",
+    "company": "Salesforce, Inc.",
     "prospect_email": "anonymous",
-    "duration_min": 0.15,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-07-23",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.18,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-07-23",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.18,
+    "duration_min": 0.49,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
-    "alert_date": "2026-07-23",
-    "company": "Docket",
-    "prospect_email": "anonymous",
-    "duration_min": 0.17,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
     "alert_date": "2026-07-24",
-    "company": "Gmail Tap",
-    "prospect_email": "jimohahmed762@gmail.com",
-    "duration_min": 9.44,
+    "company": "Salesforce, Inc.",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
@@ -530,23 +537,9 @@
    },
    {
     "alert_date": "2026-07-24",
-    "company": "Salesforce, Inc.",
-    "prospect_email": "anonymous",
-    "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
-   },
-   {
-    "alert_date": "2026-07-24",
-    "company": "Salesforce, Inc.",
-    "prospect_email": "anonymous",
-    "duration_min": 0.49,
-    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
-   },
-   {
-    "alert_date": "2026-07-25",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 7.4,
+    "company": "Gmail Tap",
+    "prospect_email": "jimohahmed762@gmail.com",
+    "duration_min": 9.44,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
@@ -557,17 +550,17 @@
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
-    "alert_date": "2026-07-28",
-    "company": "UiPath",
+    "alert_date": "2026-07-25",
+    "company": null,
     "prospect_email": "anonymous",
-    "duration_min": 0.18,
-    "page_url": "https://sell.g2.com/advertising"
+    "duration_min": 7.4,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
     "alert_date": "2026-07-28",
-    "company": "Zühlke Group",
+    "company": "Salesforce, Inc.",
     "prospect_email": "anonymous",
-    "duration_min": 0.18,
+    "duration_min": 2.78,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
@@ -579,16 +572,37 @@
    },
    {
     "alert_date": "2026-07-28",
-    "company": "Salesforce, Inc.",
+    "company": "Zuhlke Group",
     "prospect_email": "anonymous",
-    "duration_min": 2.78,
+    "duration_min": 0.18,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-28",
+    "company": "UiPath",
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-30",
+    "company": "PayPal",
+    "prospect_email": "anonymous",
+    "duration_min": 0.56,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-30",
+    "company": "DataClap",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-07-30",
     "company": "Fundacja Imago",
     "prospect_email": "anonymous",
-    "duration_min": 1.69,
+    "duration_min": 0.17,
     "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
    },
    {
@@ -602,22 +616,8 @@
     "alert_date": "2026-07-30",
     "company": "Fundacja Imago",
     "prospect_email": "anonymous",
-    "duration_min": 0.17,
+    "duration_min": 1.69,
     "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
-   },
-   {
-    "alert_date": "2026-07-30",
-    "company": "DataClap",
-    "prospect_email": "anonymous",
-    "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-07-30",
-    "company": "PayPal",
-    "prospect_email": "anonymous",
-    "duration_min": 0.56,
-    "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-07-31",
@@ -628,37 +628,23 @@
    },
    {
     "alert_date": "2026-08-07",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 5.71,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-07",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.17,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-07",
     "company": "International Business Machines Corp",
     "prospect_email": "anonymous",
-    "duration_min": 0.29,
+    "duration_min": 0.4,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.73,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-08-07",
     "company": "Carl Zeiss AG",
     "prospect_email": "anonymous",
-    "duration_min": 0.25,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-07",
-    "company": "Carl Zeiss AG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.3,
+    "duration_min": 0.36,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
@@ -672,98 +658,35 @@
     "alert_date": "2026-08-07",
     "company": "Carl Zeiss AG",
     "prospect_email": "anonymous",
-    "duration_min": 0.36,
+    "duration_min": 0.3,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-08-07",
-    "company": "Docket Ai",
+    "company": "Carl Zeiss AG",
     "prospect_email": "anonymous",
-    "duration_min": 0.73,
+    "duration_min": 0.25,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-08-07",
     "company": "International Business Machines Corp",
     "prospect_email": "anonymous",
-    "duration_min": 0.4,
+    "duration_min": 0.29,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
-    "alert_date": "2026-08-08",
+    "alert_date": "2026-08-07",
     "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 3.33,
-    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 2.26,
-    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": "Docket Ai",
-    "prospect_email": "anonymous",
-    "duration_min": 0.16,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.18,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.23,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 3.38,
-    "page_url": "https://sell.g2.com/advertising?ctx_first_name=DCI-QA-G2-20260808"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 2.33,
-    "page_url": "https://sell.g2.com/advertising?ctx_firstName=Avery&ctx_lastName=Reed&ctx_page_url=https%3A%2F%2Fsell.g2.com%2Fadvertising&ctx_company=Northstar%20SaaS&ctx_productSlug=advertising&ctx_role=Demand%20Generation%20Leader"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.23,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": "Docket Ai",
-    "prospect_email": "anonymous",
-    "duration_min": 0.22,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-08",
-    "company": "AP Moeller Maersk AS",
     "prospect_email": "anonymous",
     "duration_min": 0.17,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
-    "alert_date": "2026-08-08",
-    "company": "AP Moeller Maersk AS",
+    "alert_date": "2026-08-07",
+    "company": null,
     "prospect_email": "anonymous",
-    "duration_min": 0.17,
+    "duration_min": 5.71,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
@@ -788,25 +711,95 @@
     "page_url": "https://sell.g2.com/advertising"
    },
    {
-    "alert_date": "2026-08-10",
-    "company": "Docket Ai",
-    "prospect_email": "anonymous",
-    "duration_min": 0.26,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-10",
-    "company": "International Business Machines Corp",
+    "alert_date": "2026-08-08",
+    "company": "AP Moeller Maersk AS",
     "prospect_email": "anonymous",
     "duration_min": 0.17,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
-    "alert_date": "2026-08-10",
-    "company": "Software Finder LLC",
+    "alert_date": "2026-08-08",
+    "company": "AP Moeller Maersk AS",
     "prospect_email": "anonymous",
-    "duration_min": 0.33,
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.22,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 2.33,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 3.38,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.16,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 2.26,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 3.33,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "The SecOps Group",
+    "prospect_email": "anonymous",
+    "duration_min": 0.19,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "The SecOps Group",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
    },
    {
     "alert_date": "2026-08-10",
@@ -817,17 +810,143 @@
    },
    {
     "alert_date": "2026-08-10",
-    "company": "The SecOps Group",
+    "company": "Software Finder LLC",
     "prospect_email": "anonymous",
-    "duration_min": 0.19,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*7jklav*_ga*MTM1MDQyNjIxOC4xNzc1MjA1ODky*_ga_MFZ5NDXZ5F*czE3ODYzMzk2ODQkbzEyJGcxJHQxNzg2MzQwMTYxJGozNiRsMCRoMA.."
+    "duration_min": 0.33,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
     "alert_date": "2026-08-10",
-    "company": "The SecOps Group",
+    "company": "International Business Machines Corp",
     "prospect_email": "anonymous",
     "duration_min": 0.17,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*7jklav*_ga*MTM1MDQyNjIxOC4xNzc1MjA1ODky*_ga_MFZ5NDXZ5F*czE3ODYzMzk2ODQkbzEyJGcxJHQxNzg2MzQwMTYxJGozNiRsMCRoMA.."
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.26,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.28,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 2.22,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.28,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.24,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "International Business Machines Corp",
+    "prospect_email": "anonymous",
+    "duration_min": 0.25,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.26,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
    },
    {
     "alert_date": "2026-08-11",
@@ -835,97 +954,6 @@
     "prospect_email": "anonymous",
     "duration_min": 0.17,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.15,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.26,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.23,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "International Business Machines Corp",
-    "prospect_email": "anonymous",
-    "duration_min": 0.25,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.15,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.24,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.28,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.15,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 2.22,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-11",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.28,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
    },
    {
     "alert_date": "2026-08-12",
@@ -939,77 +967,91 @@
     "company": "Wolters Kluwer NV",
     "prospect_email": "anonymous",
     "duration_min": 3.39,
-    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 1.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.48,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.26,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.23,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.25,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 1.37,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.33,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
-   },
-   {
-    "alert_date": "2026-08-14",
-    "company": "AIG",
-    "prospect_email": "anonymous",
-    "duration_min": 0.15,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+    "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-08-14",
     "company": "International Business Machines Corp",
     "prospect_email": "anonymous",
     "duration_min": 0.1,
-    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.33,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 1.37,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.25,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.25,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.26,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.48,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 1.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026"
    },
    {
     "alert_date": "2026-08-16",
@@ -1020,9 +1062,9 @@
    },
    {
     "alert_date": "2026-08-18",
-    "company": "Black & White Zebra Industries Inc.",
+    "company": "Payhawk Limited",
     "prospect_email": "anonymous",
-    "duration_min": 2.3,
+    "duration_min": 0.27,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
@@ -1034,9 +1076,9 @@
    },
    {
     "alert_date": "2026-08-18",
-    "company": "Payhawk Limited",
+    "company": "Black & White Zebra Industries Inc.",
     "prospect_email": "anonymous",
-    "duration_min": 0.27,
+    "duration_min": 2.3,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
@@ -1048,17 +1090,17 @@
    },
    {
     "alert_date": "2026-08-21",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.2,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-21",
     "company": "Wolters Kluwer NV",
     "prospect_email": "anonymous",
     "duration_min": 0.18,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-21",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.2,
+    "page_url": "https://sell.g2.com/advertising"
    },
    {
     "alert_date": "2026-08-22",
@@ -1079,14 +1121,14 @@
     "company": null,
     "prospect_email": "anonymous",
     "duration_min": 0.4,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*j8curs*_ga*NzA4ODAwMjk5LjE3NjQ2OTM4ODI.*_ga_MFZ5NDXZ5F*czE3ODc1ODUwODYkbzEzMSRnMSR0MTc4NzU4ODk5NSRqMjgkbDAkaDA."
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
    },
    {
     "alert_date": "2026-08-24",
     "company": null,
     "prospect_email": "anonymous",
     "duration_min": 0.4,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*km58uf*_gcl_au*MzkyNzc4NDc1LjE3ODc1MzYyMDM.*_ga*NDg5MjgxNTM1LjE3ODc1MzYyMDg.*_ga_MFZ5NDXZ5F*czE3ODc1MzYyMjIkbzEkZzEkdDE3ODc1MzcyNjQkajYwJGwwJGgw"
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
    },
    {
     "alert_date": "2026-08-25",
@@ -1104,17 +1146,17 @@
    },
    {
     "alert_date": "2026-08-28",
+    "company": "Paramount Software Uk Limited",
+    "prospect_email": "anonymous",
+    "duration_min": 6.64,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
+   },
+   {
+    "alert_date": "2026-08-28",
     "company": null,
     "prospect_email": "anonymous",
     "duration_min": 0.88,
     "page_url": "https://sell.g2.com/case-studies/how-product-fruits-uses-g2-ads-to-2x-ad-lead-conversion-rate"
-   },
-   {
-    "alert_date": "2026-08-28",
-    "company": "Paramount Software Uk Limited",
-    "prospect_email": "anonymous",
-    "duration_min": 6.64,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?utm_source=marketo&utm_medium=email&utm_campaign=g2-clicks-case-study-aisdr&utm_content=none&utm_term=none&mkt_tok=NzE0LVpVRi02ODMAAAGj4oIInasrJGoJHdJrKXlYF7gKz9Kr4-s19-o3LWVF1Z3v6Euk8Vtfw8i_A2C5jla-3yQZ1emYmkQRY0j0kfy5n5uzeoxMq8c14gogRivOWKurExeUUuOZTg"
    },
    {
     "alert_date": "2026-09-02",
@@ -1122,6 +1164,20 @@
     "prospect_email": "anonymous",
     "duration_min": 3.3,
     "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
+   },
+   {
+    "alert_date": "2026-09-03",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": null,
+    "page_url": "https://sell.g2.com/"
+   },
+   {
+    "alert_date": "2026-09-19",
+    "company": "Systems 2000 Ltd",
+    "prospect_email": "anonymous",
+    "duration_min": 3.8,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    }
   ]
  },
@@ -1619,13 +1675,6 @@
    "contract_start": "2026-08-17"
   },
   {
-   "product": "SamSearch",
-   "slug": "samsearch",
-   "account": "Samsearch",
-   "pkg": "Starter Monthly",
-   "contract_start": null
-  },
-  {
    "product": "Mosaiq",
    "slug": "snapper-services-ltd-mosaiq",
    "account": "Snapper Services",
@@ -1696,17 +1745,17 @@
    "contract_start": "2026-07-02"
   },
   {
-   "product": "Simply Fleet",
-   "slug": "simply-fleet-simply-fleet",
-   "account": "Simply Fleet",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-06-30"
-  },
-  {
    "product": "Emvisage Field Workflow",
    "slug": "emvisage-field-workflow",
    "account": "Emvisage",
    "pkg": "Starter Annual",
+   "contract_start": "2026-06-30"
+  },
+  {
+   "product": "Simply Fleet",
+   "slug": "simply-fleet-simply-fleet",
+   "account": "Simply Fleet",
+   "pkg": "Starter Monthly",
    "contract_start": "2026-06-30"
   },
   {
@@ -1883,7 +1932,7 @@
    "product": "Genie AI",
    "slug": "genieai",
    "alert_date": "2026-08-07",
-   "page_url": "https://my.g2.com/genieai/external_clickthroughs/plans?utm_source=Iterable&utm_medium=email&utm_campaign=it_auto_mkt_snd_2026_07_23_wfl_984017_cmp_18598615_tpl_24194464_loc_",
+   "page_url": "https://my.g2.com/genieai/external_clickthroughs/plans",
    "first_spend": "2026-08-21",
    "gap": 14,
    "total_spend": 252.69,
@@ -1891,7 +1940,7 @@
    "overlaps_1mind": false
   },
   {
-   "product": "Residex®",
+   "product": "Residex\u00ae",
    "slug": "residex",
    "alert_date": "2026-07-22",
    "page_url": "https://my.g2.com/residex/external_clickthroughs/plans",
@@ -1905,7 +1954,7 @@
    "product": "Voicenotes",
    "slug": "voicenotes",
    "alert_date": "2026-09-12",
-   "page_url": "https://my.g2.com/voicenotes/external_clickthroughs/plans?utm_medium=buyer-insights-card-ads&utm_source=g2",
+   "page_url": "https://my.g2.com/voicenotes/external_clickthroughs/plans",
    "first_spend": "2026-09-12",
    "gap": 0,
    "total_spend": 176.37,
@@ -1952,7 +2001,7 @@
    "page_url": "https://my.g2.com/autoclass-ai/external_clickthroughs/plans",
    "first_spend": "2026-09-18",
    "gap": 0,
-   "total_spend": 63.80,
+   "total_spend": 63.8,
    "source": "new",
    "overlaps_1mind": false
   }
@@ -2044,7 +2093,7 @@
     setText("ov-footer", `Snapshot ${SNAPSHOT.as_of || "—"} · Refreshed daily at 8:30 AM CDT via scheduled task.`);
   }
 
-  // ---- Paint 1mind cohorts ------------------------------------------------
+  // ---- Paint 1mind cohorts -------------------------------------------------
   function paintOneMindCohorts() {
     const bl = SNAPSHOT.live_baseline || {};
     const sp = SNAPSHOT.support || {};

@@ -383,10 +383,10 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
 </div>
 
 <script>
-  const SNAPSHOT = {
- "as_of": "2026-09-30",
- "as_of_label": "2026-09-30 19:54 IST",
- "as_of_iso": "2026-09-30T19:54:58+05:30",
+  const SNAPSHOT ={
+ "as_of": "2026-10-01",
+ "as_of_label": "2026-10-01 19:11 IST",
+ "as_of_iso": "2026-10-01T19:11:32+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
@@ -397,7 +397,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-09-30 19:54 IST",
+  "as_of_label": "2026-10-01 19:11 IST",
   "onemind_mygc_valid": 316,
   "onemind_sell_g2_external": 105,
   "onemind_internal_g2": 42,
@@ -409,7 +409,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   "onemind_starter_influenced": 32,
   "onemind_starter_assisted": 11,
   "onemind_clicks_attributed": 4,
-  "onemind_clicks_revenue": 7538.97,
+  "onemind_clicks_revenue": 7553.97,
   "docket_starter_attributed": 36,
   "docket_starter_monthly": 26,
   "docket_starter_annual": 10,
@@ -419,10 +419,10 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   "docket_starter_sf_matched": 36,
   "docket_starter_sf_total": 36,
   "docket_clicks_attributed": 11,
-  "docket_clicks_revenue": 3476.21,
-  "docket_sellg2_conversations": 123,
+  "docket_clicks_revenue": 3565.14,
+  "docket_sellg2_conversations": 124,
   "docket_sellg2_identified": 1,
-  "docket_sellg2_anonymous": 122
+  "docket_sellg2_anonymous": 123
  },
  "docket": {
   "total_rows": 455,
@@ -435,20 +435,27 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "one_min_conversations": 207
   },
   "stale": true,
-  "pulled_at": "2026-09-30T19:54:58+05:30",
-  "schema_note": "HARD FLOOR triggered: the Docket workbook's multi-tab XLSX export could not be reliably retrieved through available tools this run (the base64 payload exceeded every readable-chunk mechanism available). Carried forward the verified Aug-5 baseline (455 rows / 345 conversations) per the HARD FLOOR rule rather than risk a corrupted or partial re-parse.",
+  "pulled_at": "2026-10-01T19:11:32+05:30",
+  "schema_note": "HARD FLOOR triggered again this run: the Docket workbook's multi-tab XLSX export downloaded successfully but the saved payload (~485KB, single unbroken line) exceeded both the Read tool's token cap and byte cap, and the tool-results path was not reachable from the bash sandbox for script-based parsing. Carried forward the verified Aug-5 2026 baseline (455 rows / 345 conversations) per the HARD FLOOR rule.",
   "tab_counts": {
    "carried_forward": true
   }
  },
  "docket_sellg2": {
-  "conversations": 123,
+  "conversations": 124,
   "identified": 1,
-  "anonymous": 122,
+  "anonymous": 123,
   "internal": 0,
-  "unique_companies": 36,
+  "unique_companies": 37,
   "since": "2026-06-23 (Slack channel start)",
   "table": [
+   {
+    "alert_date": "2026-09-30",
+    "company": "Uscreen.tv LLC",
+    "prospect_email": "anonymous",
+    "duration_min": 2.2,
+    "page_url": "https://sell.g2.com/case-studies/how-product-fruits-uses-g2-ads-to-2x-ad-lead-conversion-rate"
+   },
    {
     "alert_date": "2026-09-28",
     "company": "Simigo by Telmobil",
@@ -1007,7 +1014,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Showcase Workshop",
    "slug": "showcase-workshop",
    "first_spend": "2024-03-26",
-   "total_spend": 4464.46,
+   "total_spend": 4479.46,
    "source": "baked"
   },
   {
@@ -1582,7 +1589,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/autoclass-ai/external_clickthroughs",
    "first_spend": "2026-09-18",
    "gap": 0,
-   "total_spend": 500,
+   "total_spend": 522.0,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1604,7 +1611,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/nected/external_clickthroughs",
    "first_spend": "2026-09-21",
    "gap": 0,
-   "total_spend": 169.96,
+   "total_spend": 185.63,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1626,7 +1633,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/suptask/external_clickthroughs",
    "first_spend": "2026-09-11",
    "gap": 0,
-   "total_spend": 488.77,
+   "total_spend": 512.75,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1648,7 +1655,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/genieai/external_clickthroughs",
    "first_spend": "2026-08-21",
    "gap": 14,
-   "total_spend": 392.09,
+   "total_spend": 419.37,
    "source": "new",
    "overlaps_1mind": false
   },

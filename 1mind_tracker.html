@@ -384,9 +384,9 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
 
 <script>
   const SNAPSHOT ={
- "as_of": "2026-10-01",
- "as_of_label": "2026-10-01 19:11 IST",
- "as_of_iso": "2026-10-01T19:11:32+05:30",
+ "as_of": "2026-10-05",
+ "as_of_label": "2026-10-05 19:20 IST",
+ "as_of_iso": "2026-10-05T19:20:50+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
@@ -397,11 +397,11 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-10-01 19:11 IST",
-  "onemind_mygc_valid": 316,
+  "as_of_label": "2026-10-05 19:20 IST",
+  "onemind_mygc_valid": 318,
   "onemind_sell_g2_external": 105,
   "onemind_internal_g2": 42,
-  "onemind_grand_total": 508,
+  "onemind_grand_total": 510,
   "onemind_starter_attributed": 43,
   "onemind_starter_monthly": 32,
   "onemind_starter_annual": 11,
@@ -409,20 +409,20 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   "onemind_starter_influenced": 32,
   "onemind_starter_assisted": 11,
   "onemind_clicks_attributed": 4,
-  "onemind_clicks_revenue": 7553.97,
-  "docket_starter_attributed": 36,
-  "docket_starter_monthly": 26,
-  "docket_starter_annual": 10,
-  "docket_starter_revenue": 123600,
+  "onemind_clicks_revenue": 7599.42,
+  "docket_starter_attributed": 43,
+  "docket_starter_monthly": 32,
+  "docket_starter_annual": 11,
+  "docket_starter_revenue": 148200,
   "docket_starter_strong": 0,
-  "docket_starter_possible": 36,
-  "docket_starter_sf_matched": 36,
-  "docket_starter_sf_total": 36,
+  "docket_starter_possible": 43,
+  "docket_starter_sf_matched": 43,
+  "docket_starter_sf_total": 43,
   "docket_clicks_attributed": 11,
-  "docket_clicks_revenue": 3565.14,
-  "docket_sellg2_conversations": 124,
+  "docket_clicks_revenue": 3864.1,
+  "docket_sellg2_conversations": 126,
   "docket_sellg2_identified": 1,
-  "docket_sellg2_anonymous": 123
+  "docket_sellg2_anonymous": 125
  },
  "docket": {
   "total_rows": 455,
@@ -435,20 +435,34 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "one_min_conversations": 207
   },
   "stale": true,
-  "pulled_at": "2026-10-01T19:11:32+05:30",
-  "schema_note": "HARD FLOOR triggered again this run: the Docket workbook's multi-tab XLSX export downloaded successfully but the saved payload (~485KB, single unbroken line) exceeded both the Read tool's token cap and byte cap, and the tool-results path was not reachable from the bash sandbox for script-based parsing. Carried forward the verified Aug-5 2026 baseline (455 rows / 345 conversations) per the HARD FLOOR rule.",
+  "pulled_at": "2026-10-05T19:20:50+05:30",
+  "schema_note": "HARD FLOOR triggered again this run: the Docket workbook export (multi-tab XLSX) exceeded both the read tool's token cap and byte cap, and the tool-results path was not reachable from the bash sandbox for script-based parsing. Carried forward the verified Aug-5 2026 baseline (455 rows / 345 conversations) per the HARD FLOOR rule.",
   "tab_counts": {
    "carried_forward": true
   }
  },
  "docket_sellg2": {
-  "conversations": 124,
+  "conversations": 126,
   "identified": 1,
-  "anonymous": 123,
+  "anonymous": 125,
   "internal": 0,
-  "unique_companies": 37,
+  "unique_companies": 38,
   "since": "2026-06-23 (Slack channel start)",
   "table": [
+   {
+    "alert_date": "2026-10-05",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 2.28,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-10-02",
+    "company": "Docket Inc.",
+    "prospect_email": "anonymous",
+    "duration_min": 0.28,
+    "page_url": "https://sell.g2.com/advertising"
+   },
    {
     "alert_date": "2026-09-30",
     "company": "Uscreen.tv LLC",
@@ -578,6 +592,16 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   ]
  },
  "onemind_starter_table": [
+  {
+   "product": "True Tilt Personality Profile",
+   "slug": "true-tilt-personality-profile",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01",
+   "earliest_ai": "2026-09-24T20:06:54.000+0000",
+   "gap": 7,
+   "window": "inf",
+   "revenue": 3600
+  },
   {
    "product": "Fastio",
    "slug": "fastio",
@@ -775,16 +799,6 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "contract_start": "2026-06-01",
    "earliest_ai": "2026-05-21T13:56:53.000+0000",
    "gap": 11,
-   "window": "inf",
-   "revenue": 3600
-  },
-  {
-   "product": "Bugzy",
-   "slug": "bugzy",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-05-30",
-   "earliest_ai": "2026-05-22T19:31:34.000+0000",
-   "gap": 8,
    "window": "inf",
    "revenue": 3600
   },
@@ -1014,7 +1028,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Showcase Workshop",
    "slug": "showcase-workshop",
    "first_spend": "2024-03-26",
-   "total_spend": 4479.46,
+   "total_spend": 4524.91,
    "source": "baked"
   },
   {
@@ -1040,6 +1054,81 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   }
  ],
  "docket_starter_table": [
+  {
+   "product": "Turtl",
+   "account": "Turtl",
+   "slug": "turtl",
+   "pkg": "Starter Annual",
+   "contract_start": "2026-10-01",
+   "revenue": 3000,
+   "package": "Starter Annual",
+   "tier": "possible",
+   "duration": 0,
+   "best_email": null,
+   "has_visitor_msg": false,
+   "last_interaction": null,
+   "signal": null
+  },
+  {
+   "product": "Voxel51",
+   "account": "Voxel51",
+   "slug": "voxel51",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01",
+   "revenue": 3600,
+   "package": "Starter Monthly",
+   "tier": "possible",
+   "duration": 0,
+   "best_email": null,
+   "has_visitor_msg": false,
+   "last_interaction": null,
+   "signal": null
+  },
+  {
+   "product": "Estimating Link",
+   "account": "The Construction Link",
+   "slug": "estimating-link",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01",
+   "revenue": 3600,
+   "package": "Starter Monthly",
+   "tier": "possible",
+   "duration": 0,
+   "best_email": null,
+   "has_visitor_msg": false,
+   "last_interaction": null,
+   "signal": null
+  },
+  {
+   "product": "True Tilt Personality Profile",
+   "account": "Tilt 365",
+   "slug": "true-tilt-personality-profile",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01",
+   "revenue": 3600,
+   "package": "Starter Monthly",
+   "tier": "possible",
+   "duration": 0,
+   "best_email": null,
+   "has_visitor_msg": false,
+   "last_interaction": null,
+   "signal": null
+  },
+  {
+   "product": "Cogran",
+   "account": "Cogran Systems",
+   "slug": "cogran",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01",
+   "revenue": 3600,
+   "package": "Starter Monthly",
+   "tier": "possible",
+   "duration": 0,
+   "best_email": null,
+   "has_visitor_msg": false,
+   "last_interaction": null,
+   "signal": null
+  },
   {
    "product": "Floor Plan Builder",
    "account": "Visrez",
@@ -1161,9 +1250,9 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "MediRoutes",
-   "account": "MediRoutes",
-   "slug": "mediroutes-mediroutes",
+   "product": "MaxContact",
+   "account": "MaxContact",
+   "slug": "maxcontact",
    "pkg": "Starter Monthly",
    "contract_start": "2026-08-19",
    "revenue": 3600,
@@ -1176,9 +1265,9 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "MaxContact",
-   "account": "MaxContact",
-   "slug": "maxcontact",
+   "product": "MediRoutes",
+   "account": "MediRoutes",
+   "slug": "mediroutes-mediroutes",
    "pkg": "Starter Monthly",
    "contract_start": "2026-08-19",
    "revenue": 3600,
@@ -1196,6 +1285,21 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "slug": "channelsight",
    "pkg": "Starter Monthly",
    "contract_start": "2026-08-17",
+   "revenue": 3600,
+   "package": "Starter Monthly",
+   "tier": "possible",
+   "duration": 0,
+   "best_email": null,
+   "has_visitor_msg": false,
+   "last_interaction": null,
+   "signal": null
+  },
+  {
+   "product": "SamSearch",
+   "account": "Samsearch",
+   "slug": "samsearch",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-08-12",
    "revenue": 3600,
    "package": "Starter Monthly",
    "tier": "possible",
@@ -1266,9 +1370,9 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "LitHub by DeepDyve",
-   "account": "DeepDyve",
-   "slug": "lithub-by-deepdyve",
+   "product": "LeadsPlease",
+   "account": "LeadsPlease",
+   "slug": "leadsplease",
    "pkg": "Starter Monthly",
    "contract_start": "2026-07-22",
    "revenue": 3600,
@@ -1281,9 +1385,9 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "LeadsPlease",
-   "account": "LeadsPlease",
-   "slug": "leadsplease",
+   "product": "LitHub by DeepDyve",
+   "account": "DeepDyve",
+   "slug": "lithub-by-deepdyve",
    "pkg": "Starter Monthly",
    "contract_start": "2026-07-22",
    "revenue": 3600,
@@ -1356,13 +1460,13 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "Simply Fleet",
-   "account": "Simply Fleet",
-   "slug": "simply-fleet-simply-fleet",
-   "pkg": "Starter Monthly",
+   "product": "CloudFilter",
+   "account": "Mailprotector",
+   "slug": "cloudfilter",
+   "pkg": "Starter Annual",
    "contract_start": "2026-06-30",
-   "revenue": 3600,
-   "package": "Starter Monthly",
+   "revenue": 3000,
+   "package": "Starter Annual",
    "tier": "possible",
    "duration": 0,
    "best_email": null,
@@ -1386,13 +1490,13 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "CloudFilter",
-   "account": "Mailprotector",
-   "slug": "cloudfilter",
-   "pkg": "Starter Annual",
+   "product": "Simply Fleet",
+   "account": "Simply Fleet",
+   "slug": "simply-fleet-simply-fleet",
+   "pkg": "Starter Monthly",
    "contract_start": "2026-06-30",
-   "revenue": 3000,
-   "package": "Starter Annual",
+   "revenue": 3600,
+   "package": "Starter Monthly",
    "tier": "possible",
    "duration": 0,
    "best_email": null,
@@ -1416,9 +1520,9 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "CloudControl",
+   "product": "DevSpace",
    "account": "signageOS",
-   "slug": "signageos-cloudcontrol",
+   "slug": "devspace",
    "pkg": "Starter Annual",
    "contract_start": "2026-06-18",
    "revenue": 3000,
@@ -1431,9 +1535,9 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "signal": null
   },
   {
-   "product": "DevSpace",
+   "product": "CloudControl",
    "account": "signageOS",
-   "slug": "devspace",
+   "slug": "signageos-cloudcontrol",
    "pkg": "Starter Annual",
    "contract_start": "2026-06-18",
    "revenue": 3000,
@@ -1579,6 +1683,21 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "has_visitor_msg": false,
    "last_interaction": null,
    "signal": null
+  },
+  {
+   "product": "Assembly by Quantum Workplace",
+   "account": "Quantum Workplace",
+   "slug": "assembly-by-quantum-workplace",
+   "pkg": "Starter Monthly",
+   "contract_start": "2025-08-28",
+   "revenue": 3600,
+   "package": "Starter Monthly",
+   "tier": "possible",
+   "duration": 0,
+   "best_email": null,
+   "has_visitor_msg": false,
+   "last_interaction": null,
+   "signal": null
   }
  ],
  "docket_clicks_table": [
@@ -1589,7 +1708,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/autoclass-ai/external_clickthroughs",
    "first_spend": "2026-09-18",
    "gap": 0,
-   "total_spend": 522.0,
+   "total_spend": 637.66,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1611,7 +1730,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/nected/external_clickthroughs",
    "first_spend": "2026-09-21",
    "gap": 0,
-   "total_spend": 185.63,
+   "total_spend": 202.4,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1633,7 +1752,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/suptask/external_clickthroughs",
    "first_spend": "2026-09-11",
    "gap": 0,
-   "total_spend": 512.75,
+   "total_spend": 618.67,
    "source": "new",
    "overlaps_1mind": false
   },
@@ -1655,7 +1774,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "page_url": "https://my.g2.com/genieai/external_clickthroughs",
    "first_spend": "2026-08-21",
    "gap": 14,
-   "total_spend": 419.37,
+   "total_spend": 479.98,
    "source": "new",
    "overlaps_1mind": false
   },

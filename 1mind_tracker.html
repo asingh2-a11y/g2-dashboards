@@ -1,215 +1,81 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>1mind Conversation Tracker</title>
+<!doctype html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "1mind Conversation Tracker",
+  "schemaVersion": 1,
+  "description": "Combined AI Assistants Tracker — 1mind (Vera/Alex) + Docket. Three tabs: Overall (combined conversations + attributed conversions + revenue influenced), 1mind (cohorts + Starter conversions from reporting CSV), Docket (3 cohorts + live SF email→Contact→ProductProfile attribution with Strong/Possible/Excluded tiers).",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI Assistants Tracker — 1mind &amp; Docket</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" integrity="sha384-jZvDSsmGB9oGGT/4l9bHXGoAv1OxvG/cFmSo0dZaSqmBgvQTKDBFAMftlXTmMbNW" crossorigin="anonymous">
 <style>
-.gridjs-footer button,.gridjs-head button{background-color:transparent;background-image:none;border:none;cursor:pointer;margin:0;outline:none;padding:0}.gridjs-temp{position:relative}.gridjs-head{margin-bottom:5px;padding:5px 1px;width:100%}.gridjs-head:after{clear:both;content:"";display:block}.gridjs-head:empty{border:none;padding:0}.gridjs-container{color:#000;display:inline-block;overflow:hidden;padding:2px;position:relative;z-index:0}.gridjs-footer{background-color:#fff;border-bottom-width:1px;border-color:#e5e7eb;border-radius:0 0 8px 8px;border-top:1px solid #e5e7eb;box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.26);display:block;padding:12px 24px;position:relative;width:100%;z-index:5}.gridjs-footer:empty{border:none;padding:0}input.gridjs-input{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:#fff;border:1px solid #d2d6dc;border-radius:5px;font-size:14px;line-height:1.45;outline:none;padding:10px 13px}input.gridjs-input:focus{border-color:#9bc2f7;box-shadow:0 0 0 3px rgba(149,189,243,.5)}.gridjs-pagination{color:#3d4044}.gridjs-pagination:after{clear:both;content:"";display:block}.gridjs-pagination .gridjs-summary{float:left;margin-top:5px}.gridjs-pagination .gridjs-pages{float:right}.gridjs-pagination .gridjs-pages button{background-color:#fff;border:1px solid #d2d6dc;border-right:none;outline:none;padding:5px 14px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.gridjs-pagination .gridjs-pages button:focus{box-shadow:0 0 0 2px rgba(149,189,243,.5)}.gridjs-pagination .gridjs-pages button:hover{background-color:#f7f7f7;color:#3c4257;outline:none}.gridjs-pagination .gridjs-pages button:disabled,.gridjs-pagination .gridjs-pages button:hover:disabled,.gridjs-pagination .gridjs-pages button[disabled]{background-color:#fff;color:#6b7280;cursor:default}.gridjs-pagination .gridjs-pages button.gridjs-spread{background-color:#fff;box-shadow:none;cursor:default}.gridjs-pagination .gridjs-pages button.gridjs-currentPage{background-color:#f7f7f7;font-weight:700}.gridjs-pagination .gridjs-pages button:last-child{border-bottom-right-radius:6px;border-right:1px solid #d2d6dc;border-top-right-radius:6px}.gridjs-pagination .gridjs-pages button:first-child{border-bottom-left-radius:6px;border-top-left-radius:6px}button.gridjs-sort{background-color:transparent;background-position-x:center;background-repeat:no-repeat;background-size:contain;border:none;cursor:pointer;float:right;height:24px;margin:0;outline:none;padding:0;width:13px}button.gridjs-sort-neutral{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDEuOTk4IiBoZWlnaHQ9IjQwMS45OTgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQwMS45OTggNDAxLjk5OCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTczLjA5MiAxNjQuNDUyaDI1NS44MTNjNC45NDkgMCA5LjIzMy0xLjgwNyAxMi44NDgtNS40MjQgMy42MTMtMy42MTYgNS40MjctNy44OTggNS40MjctMTIuODQ3cy0xLjgxMy05LjIyOS01LjQyNy0xMi44NUwyMTMuODQ2IDUuNDI0QzIxMC4yMzIgMS44MTIgMjA1Ljk1MSAwIDIwMC45OTkgMHMtOS4yMzMgMS44MTItMTIuODUgNS40MjRMNjAuMjQyIDEzMy4zMzFjLTMuNjE3IDMuNjE3LTUuNDI0IDcuOTAxLTUuNDI0IDEyLjg1IDAgNC45NDggMS44MDcgOS4yMzEgNS40MjQgMTIuODQ3IDMuNjIxIDMuNjE3IDcuOTAyIDUuNDI0IDEyLjg1IDUuNDI0ek0zMjguOTA1IDIzNy41NDlINzMuMDkyYy00Ljk1MiAwLTkuMjMzIDEuODA4LTEyLjg1IDUuNDIxLTMuNjE3IDMuNjE3LTUuNDI0IDcuODk4LTUuNDI0IDEyLjg0N3MxLjgwNyA5LjIzMyA1LjQyNCAxMi44NDhMMTg4LjE0OSAzOTYuNTdjMy42MjEgMy42MTcgNy45MDIgNS40MjggMTIuODUgNS40MjhzOS4yMzMtMS44MTEgMTIuODQ3LTUuNDI4bDEyNy45MDctMTI3LjkwNmMzLjYxMy0zLjYxNCA1LjQyNy03Ljg5OCA1LjQyNy0xMi44NDggMC00Ljk0OC0xLjgxMy05LjIyOS01LjQyNy0xMi44NDctMy42MTQtMy42MTYtNy44OTktNS40Mi0xMi44NDgtNS40MnoiLz48L3N2Zz4=");background-position-y:center;opacity:.3}button.gridjs-sort-asc{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOTIuMzYyIiBoZWlnaHQ9IjI5Mi4zNjEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI5Mi4zNjIgMjkyLjM2MSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTI4Ni45MzUgMTk3LjI4NyAxNTkuMDI4IDY5LjM4MWMtMy42MTMtMy42MTctNy44OTUtNS40MjQtMTIuODQ3LTUuNDI0cy05LjIzMyAxLjgwNy0xMi44NSA1LjQyNEw1LjQyNCAxOTcuMjg3QzEuODA3IDIwMC45MDQgMCAyMDUuMTg2IDAgMjEwLjEzNHMxLjgwNyA5LjIzMyA1LjQyNCAxMi44NDdjMy42MjEgMy42MTcgNy45MDIgNS40MjUgMTIuODUgNS40MjVoMjU1LjgxM2M0Ljk0OSAwIDkuMjMzLTEuODA4IDEyLjg0OC01LjQyNSAzLjYxMy0zLjYxMyA1LjQyNy03Ljg5OCA1LjQyNy0xMi44NDdzLTEuODE0LTkuMjMtNS40MjctMTIuODQ3eiIvPjwvc3ZnPg==");background-position-y:35%;background-size:10px}button.gridjs-sort-desc{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOTIuMzYyIiBoZWlnaHQ9IjI5Mi4zNjIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDI5Mi4zNjIgMjkyLjM2MiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTI4Ni45MzUgNjkuMzc3Yy0zLjYxNC0zLjYxNy03Ljg5OC01LjQyNC0xMi44NDgtNS40MjRIMTguMjc0Yy00Ljk1MiAwLTkuMjMzIDEuODA3LTEyLjg1IDUuNDI0QzEuODA3IDcyLjk5OCAwIDc3LjI3OSAwIDgyLjIyOGMwIDQuOTQ4IDEuODA3IDkuMjI5IDUuNDI0IDEyLjg0N2wxMjcuOTA3IDEyNy45MDdjMy42MjEgMy42MTcgNy45MDIgNS40MjggMTIuODUgNS40MjhzOS4yMzMtMS44MTEgMTIuODQ3LTUuNDI4TDI4Ni45MzUgOTUuMDc0YzMuNjEzLTMuNjE3IDUuNDI3LTcuODk4IDUuNDI3LTEyLjg0NyAwLTQuOTQ4LTEuODE0LTkuMjI5LTUuNDI3LTEyLjg1eiIvPjwvc3ZnPg==");background-position-y:65%;background-size:10px}button.gridjs-sort:focus{outline:none}table.gridjs-table{border-collapse:collapse;display:table;margin:0;max-width:100%;overflow:auto;padding:0;table-layout:fixed;text-align:left}.gridjs-tbody,td.gridjs-td{background-color:#fff}td.gridjs-td{border:1px solid #e5e7eb;box-sizing:content-box;padding:12px 24px}td.gridjs-td:first-child{border-left:none}td.gridjs-td:last-child{border-right:none}td.gridjs-message{text-align:center}th.gridjs-th{background-color:#f9fafb;border:1px solid #e5e7eb;border-top:none;box-sizing:border-box;color:#6b7280;outline:none;padding:14px 24px;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:middle;white-space:nowrap}th.gridjs-th .gridjs-th-content{float:left;overflow:hidden;text-overflow:ellipsis;width:100%}th.gridjs-th-sort{cursor:pointer}th.gridjs-th-sort .gridjs-th-content{width:calc(100% - 15px)}th.gridjs-th-sort:focus,th.gridjs-th-sort:hover{background-color:#e5e7eb}th.gridjs-th-fixed{box-shadow:0 1px 0 0 #e5e7eb;position:sticky}@supports (-moz-appearance:none){th.gridjs-th-fixed{box-shadow:0 0 0 1px #e5e7eb}}th.gridjs-th:first-child{border-left:none}th.gridjs-th:last-child{border-right:none}.gridjs-tr{border:none}.gridjs-tr-selected td{background-color:#ebf5ff}.gridjs-tr:last-child td{border-bottom:0}.gridjs *,.gridjs :after,.gridjs :before{box-sizing:border-box}.gridjs-wrapper{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;border-color:#e5e7eb;border-radius:8px 8px 0 0;border-top-width:1px;box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.26);display:block;overflow:auto;position:relative;width:100%;z-index:1}.gridjs-wrapper:nth-last-of-type(2){border-bottom-width:1px;border-radius:8px}.gridjs-search{float:left}.gridjs-search-input{width:250px}.gridjs-loading-bar{background-color:#fff;opacity:.5;z-index:10}.gridjs-loading-bar,.gridjs-loading-bar:after{bottom:0;left:0;position:absolute;right:0;top:0}.gridjs-loading-bar:after{-webkit-animation:shimmer 2s infinite;animation:shimmer 2s infinite;background-image:linear-gradient(90deg,hsla(0,0%,80%,0),hsla(0,0%,80%,.2) 20%,hsla(0,0%,80%,.5) 60%,hsla(0,0%,80%,0));content:"";transform:translateX(-100%)}@-webkit-keyframes shimmer{to{transform:translateX(100%)}}@keyframes shimmer{to{transform:translateX(100%)}}.gridjs-td .gridjs-checkbox{cursor:pointer;display:block;margin:auto}.gridjs-resizable{bottom:0;position:absolute;right:0;top:0;width:5px}.gridjs-resizable:hover{background-color:#9bc2f7;cursor:ew-resize}
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:20px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:#1a1a1a; background:transparent; line-height:1.5; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  h2 { font-size:14px; margin:28px 0 12px; color:#555; text-transform:uppercase; letter-spacing:0.06em; }
+  h3 { font-size:13px; color:#555; margin:18px 0 6px; text-transform:uppercase; letter-spacing:0.05em; }
+  .sub { color:#666; font-size:13px; margin-bottom:8px; }
+  .sub strong { color:#1a1a1a; }
+  .refresh-bar { background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:10px 14px; margin:12px 0 20px; font-size:13px; color:#374151; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .refresh-bar .pill { background:#dbeafe; color:#1e40af; padding:2px 9px; border-radius:10px; font-size:11px; font-weight:600; letter-spacing:0.03em; text-transform:uppercase; }
+  .refresh-bar strong { color:#111; }
+  .refresh-bar .info { color:#6b7280; font-size:12px; }
+  .tabs { display:flex; gap:6px; border-bottom:1px solid #e6e6e6; margin:16px 0 24px; }
+  .tab { padding:8px 18px; cursor:pointer; font-size:13px; font-weight:500; color:#666; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color 0.15s, border-color 0.15s; }
+  .tab:hover { color:#1a1a1a; }
+  .tab.active { color:#4f46e5; border-bottom-color:#4f46e5; font-weight:600; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; }
+  .card { background:#fff; border:1px solid #e6e6e6; border-radius:10px; padding:14px 16px; }
+  .card .label { font-size:12px; color:#666; margin-bottom:4px; }
+  .card .num { font-size:28px; font-weight:600; color:#111; line-height:1.1; }
+  .card .delta { font-size:11px; color:#888; margin-top:4px; }
+  .hero { background:linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color:#fff; border:none; }
+  .hero .label, .hero .delta { color:rgba(255,255,255,0.85); }
+  .hero .num { color:#fff; font-size:36px; }
+  .hero-docket { background:linear-gradient(135deg, #059669 0%, #0d9488 100%); }
+  .hero-overall { background:linear-gradient(135deg, #db2777 0%, #db2777 60%, #f59e0b 100%); }
+  details { margin-top:20px; border:1px solid #e6e6e6; border-radius:10px; padding:12px 16px; background:#fafafa; }
+  details summary { cursor:pointer; font-weight:600; font-size:13px; }
+  details ul { font-size:13px; color:#444; margin:10px 0 4px 16px; padding:0; }
+  details li { margin:4px 0; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; background:#eef2ff; color:#4338ca; margin-right:6px; }
+  .pill.docket { background:#d1fae5; color:#065f46; }
+  .footer { font-size:12px; color:#888; margin-top:24px; line-height:1.6; }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; background:#f3f4f6; padding:1px 6px; border-radius:4px; color:#1a1a1a; }
+  .hero code, .hero-docket code, .hero-overall code { background:rgba(255,255,255,0.2); color:#fff; }
+  .meta { font-size:11px; color:#888; }
+  .gridjs-wrapper { box-shadow:none !important; }
+  .gridjs-table { font-size:12px !important; }
+  .gridjs-th, .gridjs-td { padding:6px 10px !important; }
+  .tag { display:inline-block; padding:1px 6px; border-radius:4px; font-size:10px; font-weight:600; }
+  .tag.strong { background:#d1fae5; color:#065f46; }
+  .tag.possible { background:#fef3c7; color:#92400e; }
+  .tag.inf { background:#d1fae5; color:#065f46; }
+  .tag.ass { background:#fef3c7; color:#92400e; }
+  .tag.dq { background:#fee2e2; color:#991b1b; }
+  .chart-wrap { background:#fff; border:1px solid #e6e6e6; border-radius:10px; padding:12px; height:220px; margin:10px 0; }
+  .time-filter { display:flex; gap:12px; align-items:center; padding:10px 14px; background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; margin:8px 0 10px; flex-wrap:wrap; font-size:12px; color:#374151; }
+  .time-filter .filter-label { font-weight:600; color:#111; }
+  .time-filter label { display:flex; align-items:center; gap:5px; font-size:11px; color:#6b7280; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; }
+  .time-filter select { font-size:12px; padding:4px 8px; border:1px solid #d1d5db; border-radius:6px; background:#fff; color:#1a1a1a; min-width:110px; cursor:pointer; }
+  .time-filter button { font-size:11px; padding:5px 10px; border:1px solid #d1d5db; border-radius:6px; background:#fff; color:#374151; cursor:pointer; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; }
+  .time-filter button:hover { background:#f3f4f6; border-color:#9ca3af; }
+  .time-filter .filter-summary { margin-left:auto; color:#4f46e5; font-weight:600; font-size:12px; }
+  .section-head { display:flex; justify-content:space-between; align-items:baseline; margin:32px 0 12px; }
+  .section-head h2 { margin:0; }
 </style>
-<style>
-:root {
-  color-scheme: light;
-  --bg: #f5f6fb;
-  --surface: #ffffff;
-  --surface-alt: #f9fafb;
-  --surface-hover: #f3f4f6;
-  --border: #e6e6e6;
-  --border-soft: #e5e7eb;
-  --text: #1a1a1a;
-  --text-muted: #666666;
-  --text-faint: #888888;
-  --heading: #555555;
-  --accent: #4f46e5;
-  --accent-soft: #7c3aed;
-  --accent-2: #059669;
-  --accent-2-soft: #0d9488;
-  --accent-3: #db2777;
-  --accent-amber: #f59e0b;
-  --chart-grid: rgba(17,17,17,0.08);
-  --pill-bg: #dbeafe;
-  --pill-text: #1e40af;
-  --pill-inline-bg: #eef2ff;
-  --pill-inline-text: #4338ca;
-  --pill-docket-bg: #d1fae5;
-  --pill-docket-text: #065f46;
-  --tag-strong-bg: #d1fae5;
-  --tag-strong-text: #065f46;
-  --tag-possible-bg: #fef3c7;
-  --tag-possible-text: #92400e;
-  --tag-dq-bg: #fee2e2;
-  --tag-dq-text: #991b1b;
-  --code-bg: #f3f4f6;
-  --code-text: #1a1a1a;
-  --focus-ring: #4f46e5;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg: #101119;
-    --surface: #1a1c26;
-    --surface-alt: #20222e;
-    --surface-hover: #262838;
-    --border: #2c2f3d;
-    --border-soft: #2c2f3d;
-    --text: #e8e9f0;
-    --text-muted: #a1a4ba;
-    --text-faint: #82859c;
-    --heading: #a1a4ba;
-    --accent: #8b8ff8;
-    --accent-soft: #a78bfa;
-    --accent-2: #34d399;
-    --accent-2-soft: #2dd4bf;
-    --accent-3: #f472b6;
-    --accent-amber: #fbbf24;
-    --chart-grid: rgba(232,233,240,0.1);
-    --pill-bg: rgba(139,143,248,0.18);
-    --pill-text: #b6b9fb;
-    --pill-inline-bg: rgba(139,143,248,0.16);
-    --pill-inline-text: #b6b9fb;
-    --pill-docket-bg: rgba(52,211,153,0.16);
-    --pill-docket-text: #7fe3bd;
-    --tag-strong-bg: rgba(52,211,153,0.18);
-    --tag-strong-text: #7fe3bd;
-    --tag-possible-bg: rgba(251,191,36,0.18);
-    --tag-possible-text: #fcd34d;
-    --tag-dq-bg: rgba(248,113,113,0.18);
-    --tag-dq-text: #fca5a5;
-    --code-bg: #20222e;
-    --code-text: #e8e9f0;
-    --focus-ring: #8b8ff8;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #101119;
-  --surface: #1a1c26;
-  --surface-alt: #20222e;
-  --surface-hover: #262838;
-  --border: #2c2f3d;
-  --border-soft: #2c2f3d;
-  --text: #e8e9f0;
-  --text-muted: #a1a4ba;
-  --text-faint: #82859c;
-  --heading: #a1a4ba;
-  --accent: #8b8ff8;
-  --accent-soft: #a78bfa;
-  --accent-2: #34d399;
-  --accent-2-soft: #2dd4bf;
-  --accent-3: #f472b6;
-  --accent-amber: #fbbf24;
-  --chart-grid: rgba(232,233,240,0.1);
-  --pill-bg: rgba(139,143,248,0.18);
-  --pill-text: #b6b9fb;
-  --pill-inline-bg: rgba(139,143,248,0.16);
-  --pill-inline-text: #b6b9fb;
-  --pill-docket-bg: rgba(52,211,153,0.16);
-  --pill-docket-text: #7fe3bd;
-  --tag-strong-bg: rgba(52,211,153,0.18);
-  --tag-strong-text: #7fe3bd;
-  --tag-possible-bg: rgba(251,191,36,0.18);
-  --tag-possible-text: #fcd34d;
-  --tag-dq-bg: rgba(248,113,113,0.18);
-  --tag-dq-text: #fca5a5;
-  --code-bg: #20222e;
-  --code-text: #e8e9f0;
-  --focus-ring: #8b8ff8;
-}
-* { box-sizing: border-box; }
-body { margin:0; padding:20px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:var(--text); background:var(--bg); line-height:1.5; }
-h1 { font-size:22px; margin:0 0 4px; color:var(--text); text-wrap:balance; }
-h2 { font-size:14px; margin:28px 0 12px; color:var(--heading); text-transform:uppercase; letter-spacing:0.06em; }
-h3 { font-size:13px; color:var(--heading); margin:18px 0 6px; text-transform:uppercase; letter-spacing:0.05em; }
-.sub { color:var(--text-muted); font-size:13px; margin-bottom:8px; }
-.sub strong { color:var(--text); }
-.refresh-bar { background:var(--surface-alt); border:1px solid var(--border-soft); border-radius:8px; padding:10px 14px; margin:12px 0 20px; font-size:13px; color:var(--text-muted); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-.refresh-bar .pill { background:var(--pill-bg); color:var(--pill-text); padding:2px 9px; border-radius:10px; font-size:11px; font-weight:600; letter-spacing:0.03em; text-transform:uppercase; }
-.refresh-bar strong { color:var(--text); }
-.refresh-bar .info { color:var(--text-muted); font-size:12px; }
-.tabs { display:flex; gap:6px; border-bottom:1px solid var(--border); margin:16px 0 24px; overflow-x:auto; }
-.tab { padding:8px 18px; cursor:pointer; font-size:13px; font-weight:500; color:var(--text-muted); border-bottom:2px solid transparent; margin-bottom:-1px; transition:color 0.15s, border-color 0.15s; white-space:nowrap; }
-.tab:hover { color:var(--text); }
-.tab.active { color:var(--accent); border-bottom-color:var(--accent); font-weight:600; }
-.tab:focus-visible { outline:2px solid var(--focus-ring); outline-offset:2px; }
-.tab-panel { display:none; }
-.tab-panel.active { display:block; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; }
-.card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px; }
-.card .label { font-size:12px; color:var(--text-muted); margin-bottom:4px; }
-.card .num { font-size:28px; font-weight:600; color:var(--text); line-height:1.1; font-variant-numeric:tabular-nums; }
-.card .delta { font-size:11px; color:var(--text-faint); margin-top:4px; }
-.hero { background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%); color:#fff; border:none; }
-.hero .label, .hero .delta { color:rgba(255,255,255,0.85); }
-.hero .num { color:#fff; font-size:36px; }
-.hero-docket { background:linear-gradient(135deg, var(--accent-2) 0%, var(--accent-2-soft) 100%); }
-.hero-overall { background:linear-gradient(135deg, var(--accent-3) 0%, var(--accent-3) 60%, var(--accent-amber) 100%); }
-details { margin-top:20px; border:1px solid var(--border); border-radius:10px; padding:12px 16px; background:var(--surface-alt); }
-details summary { cursor:pointer; font-weight:600; font-size:13px; color:var(--text); }
-details ul { font-size:13px; color:var(--text-muted); margin:10px 0 4px 16px; padding:0; }
-details li { margin:4px 0; }
-.pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; background:var(--pill-inline-bg); color:var(--pill-inline-text); margin-right:6px; }
-.pill.docket { background:var(--pill-docket-bg); color:var(--pill-docket-text); }
-.footer { font-size:12px; color:var(--text-faint); margin-top:24px; line-height:1.6; }
-code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; background:var(--code-bg); padding:1px 6px; border-radius:4px; color:var(--code-text); }
-.hero code, .hero-docket code, .hero-overall code { background:rgba(255,255,255,0.2); color:#fff; }
-.meta { font-size:11px; color:var(--text-faint); }
-.gridjs-wrapper { box-shadow:none !important; }
-.gridjs-table { font-size:12px !important; }
-.gridjs-th, .gridjs-td { padding:6px 10px !important; }
-.tag { display:inline-block; padding:1px 6px; border-radius:4px; font-size:10px; font-weight:600; }
-.tag.strong { background:var(--tag-strong-bg); color:var(--tag-strong-text); }
-.tag.possible { background:var(--tag-possible-bg); color:var(--tag-possible-text); }
-.tag.inf { background:var(--tag-strong-bg); color:var(--tag-strong-text); }
-.tag.ass { background:var(--tag-possible-bg); color:var(--tag-possible-text); }
-.tag.dq { background:var(--tag-dq-bg); color:var(--tag-dq-text); }
-.chart-wrap { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px; height:220px; margin:10px 0; }
-.time-filter { display:flex; gap:12px; align-items:center; padding:10px 14px; background:var(--surface-alt); border:1px solid var(--border-soft); border-radius:8px; margin:8px 0 10px; flex-wrap:wrap; font-size:12px; color:var(--text-muted); }
-.time-filter .filter-label { font-weight:600; color:var(--text); }
-.time-filter label { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.04em; font-weight:600; }
-.time-filter select { font-size:12px; padding:4px 8px; border:1px solid var(--border-soft); border-radius:6px; background:var(--surface); color:var(--text); min-width:110px; cursor:pointer; }
-.time-filter button { font-size:11px; padding:5px 10px; border:1px solid var(--border-soft); border-radius:6px; background:var(--surface); color:var(--text-muted); cursor:pointer; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; }
-.time-filter button:hover { background:var(--surface-hover); border-color:var(--text-faint); }
-.time-filter select:focus-visible, .time-filter button:focus-visible { outline:2px solid var(--focus-ring); outline-offset:1px; }
-.time-filter .filter-summary { margin-left:auto; color:var(--accent); font-weight:600; font-size:12px; }
-.section-head { display:flex; justify-content:space-between; align-items:baseline; margin:32px 0 12px; }
-.section-head h2 { margin:0; }
-
-/* gridjs dark-theme overrides (the imported theme above is light-only) */
-:root:not([data-theme="light"]) .gridjs-wrapper,
-:root[data-theme="dark"] .gridjs-wrapper { border-color:var(--border); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .gridjs-container,
-  :root:not([data-theme="light"]) .gridjs-pagination { color:var(--text); }
-  :root:not([data-theme="light"]) .gridjs-footer,
-  :root:not([data-theme="light"]) .gridjs-tbody,
-  :root:not([data-theme="light"]) td.gridjs-td,
-  :root:not([data-theme="light"]) .gridjs-loading-bar,
-  :root:not([data-theme="light"]) .gridjs-pagination .gridjs-pages button,
-  :root:not([data-theme="light"]) .gridjs-pagination .gridjs-pages button.gridjs-spread,
-  :root:not([data-theme="light"]) input.gridjs-input { background-color:var(--surface); color:var(--text); border-color:var(--border); }
-  :root:not([data-theme="light"]) th.gridjs-th { background-color:var(--surface-alt); color:var(--text-muted); border-color:var(--border); }
-  :root:not([data-theme="light"]) td.gridjs-td { border-color:var(--border); }
-  :root:not([data-theme="light"]) th.gridjs-th-sort:focus,
-  :root:not([data-theme="light"]) th.gridjs-th-sort:hover,
-  :root:not([data-theme="light"]) .gridjs-pagination .gridjs-pages button:hover,
-  :root:not([data-theme="light"]) .gridjs-pagination .gridjs-pages button.gridjs-currentPage { background-color:var(--surface-hover); }
-  :root:not([data-theme="light"]) .gridjs-pagination .gridjs-pages button:disabled { background-color:var(--surface); color:var(--text-faint); }
-}
-:root[data-theme="dark"] .gridjs-container,
-:root[data-theme="dark"] .gridjs-pagination { color:var(--text); }
-:root[data-theme="dark"] .gridjs-footer,
-:root[data-theme="dark"] .gridjs-tbody,
-:root[data-theme="dark"] td.gridjs-td,
-:root[data-theme="dark"] .gridjs-loading-bar,
-:root[data-theme="dark"] .gridjs-pagination .gridjs-pages button,
-:root[data-theme="dark"] .gridjs-pagination .gridjs-pages button.gridjs-spread,
-:root[data-theme="dark"] input.gridjs-input { background-color:var(--surface); color:var(--text); border-color:var(--border); }
-:root[data-theme="dark"] th.gridjs-th { background-color:var(--surface-alt); color:var(--text-muted); border-color:var(--border); }
-:root[data-theme="dark"] td.gridjs-td { border-color:var(--border); }
-:root[data-theme="dark"] th.gridjs-th-sort:focus,
-:root[data-theme="dark"] th.gridjs-th-sort:hover,
-:root[data-theme="dark"] .gridjs-pagination .gridjs-pages button:hover,
-:root[data-theme="dark"] .gridjs-pagination .gridjs-pages button.gridjs-currentPage { background-color:var(--surface-hover); }
-:root[data-theme="dark"] .gridjs-pagination .gridjs-pages button:disabled { background-color:var(--surface); color:var(--text-faint); }
-</style>
+</head>
+<body>
 
 <h1>AI Assistants Tracker</h1>
 <p class="sub">1mind (Vera/Alex) + Docket — conversations, attributed conversions, revenue influenced.</p>
@@ -218,7 +84,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   <span class="pill">Frozen snapshot</span>
   <span>Refreshed <strong id="refresh-time">—</strong></span>
   <span class="info">·</span>
-  <span class="info">Numbers are baked in at publish time — identical for everyone viewing this artifact, no live MCP calls per viewer. Ask Claude to re-pull the source data and republish this page for an updated snapshot.</span>
+  <span class="info">Auto-refreshes daily at 8:30 AM CDT. Numbers identical for everyone viewing this artifact — no live MCP calls per viewer.</span>
 </div>
 
 <div class="tabs" role="tablist">
@@ -383,10 +249,10 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
 </div>
 
 <script>
-  const SNAPSHOT ={
- "as_of": "2026-10-05",
- "as_of_label": "2026-10-05 19:20 IST",
- "as_of_iso": "2026-10-05T19:20:50+05:30",
+  const SNAPSHOT = {
+ "as_of": "2026-10-07",
+ "as_of_label": "2026-10-07 19:11 IST",
+ "as_of_iso": "2026-10-07T19:11:30+05:30",
  "cohorts": {
   "internal_1mind_preview": 0
  },
@@ -397,11 +263,11 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   "sell_g2_identified_contacts": 5
  },
  "live_baseline": {
-  "as_of_label": "2026-10-05 19:20 IST",
-  "onemind_mygc_valid": 318,
+  "as_of_label": "2026-10-07 19:11 IST",
+  "onemind_mygc_valid": 319,
   "onemind_sell_g2_external": 105,
   "onemind_internal_g2": 42,
-  "onemind_grand_total": 510,
+  "onemind_grand_total": 511,
   "onemind_starter_attributed": 43,
   "onemind_starter_monthly": 32,
   "onemind_starter_annual": 11,
@@ -409,20 +275,20 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   "onemind_starter_influenced": 32,
   "onemind_starter_assisted": 11,
   "onemind_clicks_attributed": 4,
-  "onemind_clicks_revenue": 7599.42,
-  "docket_starter_attributed": 43,
-  "docket_starter_monthly": 32,
-  "docket_starter_annual": 11,
-  "docket_starter_revenue": 148200,
-  "docket_starter_strong": 0,
+  "onemind_clicks_revenue": 7625.02,
+  "docket_starter_attributed": 47,
+  "docket_starter_monthly": 35,
+  "docket_starter_annual": 12,
+  "docket_starter_revenue": 162000,
+  "docket_starter_strong": 4,
   "docket_starter_possible": 43,
-  "docket_starter_sf_matched": 43,
-  "docket_starter_sf_total": 43,
-  "docket_clicks_attributed": 11,
-  "docket_clicks_revenue": 3864.1,
-  "docket_sellg2_conversations": 126,
+  "docket_starter_sf_matched": 47,
+  "docket_starter_sf_total": 47,
+  "docket_clicks_attributed": 6,
+  "docket_clicks_revenue": 2225.87,
+  "docket_sellg2_conversations": 120,
   "docket_sellg2_identified": 1,
-  "docket_sellg2_anonymous": 125
+  "docket_sellg2_anonymous": 119
  },
  "docket": {
   "total_rows": 455,
@@ -435,138 +301,753 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "one_min_conversations": 207
   },
   "stale": true,
-  "pulled_at": "2026-10-05T19:20:50+05:30",
-  "schema_note": "HARD FLOOR triggered again this run: the Docket workbook export (multi-tab XLSX) exceeded both the read tool's token cap and byte cap, and the tool-results path was not reachable from the bash sandbox for script-based parsing. Carried forward the verified Aug-5 2026 baseline (455 rows / 345 conversations) per the HARD FLOOR rule.",
-  "tab_counts": {
-   "carried_forward": true
-  }
+  "stale_reason": "Drive XLSX export (497K chars) exceeded the MCP tool output cap again this run; all-tabs union unavailable. HARD FLOOR applied - carried forward verified Aug-5 baseline.",
+  "pulled_at": "2026-10-07T19:11:30+05:30",
+  "schema_note": "All-tabs XLSX union unavailable this run. No single-tab figure substituted. HARD FLOOR applied.",
+  "tab_counts": {}
  },
  "docket_sellg2": {
-  "conversations": 126,
+  "conversations": 120,
   "identified": 1,
-  "anonymous": 125,
+  "anonymous": 119,
   "internal": 0,
-  "unique_companies": 38,
+  "unique_companies": 35,
   "since": "2026-06-23 (Slack channel start)",
   "table": [
    {
-    "alert_date": "2026-10-05",
+    "alert_date": "2026-07-02",
     "company": null,
     "prospect_email": "anonymous",
-    "duration_min": 2.28,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-10-02",
-    "company": "Docket Inc.",
-    "prospect_email": "anonymous",
-    "duration_min": 0.28,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-09-30",
-    "company": "Uscreen.tv LLC",
-    "prospect_email": "anonymous",
-    "duration_min": 2.2,
-    "page_url": "https://sell.g2.com/case-studies/how-product-fruits-uses-g2-ads-to-2x-ad-lead-conversion-rate"
-   },
-   {
-    "alert_date": "2026-09-28",
-    "company": "Simigo by Telmobil",
-    "prospect_email": "anonymous",
-    "duration_min": 4,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-09-19",
-    "company": "Systems 2000 Ltd",
-    "prospect_email": "anonymous",
-    "duration_min": 3.8,
+    "duration_min": 0.19,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
-    "alert_date": "2026-09-02",
-    "company": "StratEdge Global",
-    "prospect_email": "anonymous",
-    "duration_min": 3.3,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-"
-   },
-   {
-    "alert_date": "2026-08-28",
+    "alert_date": "2026-07-04",
     "company": null,
     "prospect_email": "anonymous",
-    "duration_min": 0.88,
-    "page_url": "https://sell.g2.com/case-studies/how-product-fruits-uses-g2-ads-to-2x-ad-lead"
-   },
-   {
-    "alert_date": "2026-08-28",
-    "company": "Paramount Software Uk Limited",
-    "prospect_email": "anonymous",
-    "duration_min": 6.64,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-"
-   },
-   {
-    "alert_date": "2026-08-26",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.45,
-    "page_url": "https://sell.g2.com/quick-start-guides/drive-growth/learn-about-g2-ads"
-   },
-   {
-    "alert_date": "2026-08-25",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.77,
+    "duration_min": 0.19,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
-    "alert_date": "2026-08-24",
+    "alert_date": "2026-07-05",
     "company": null,
     "prospect_email": "anonymous",
-    "duration_min": 0.4,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-"
-   },
-   {
-    "alert_date": "2026-08-24",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.4,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-"
-   },
-   {
-    "alert_date": "2026-08-23",
-    "company": "bluepineapple",
-    "prospect_email": "anonymous",
-    "duration_min": 0.7,
+    "duration_min": 0.18,
     "page_url": "https://sell.g2.com/advertising"
    },
    {
-    "alert_date": "2026-08-22",
-    "company": null,
+    "alert_date": "2026-07-05",
+    "company": "Ooredoo Qatar",
     "prospect_email": "anonymous",
-    "duration_min": 0.41,
-    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-"
+    "duration_min": 0.16,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
-    "alert_date": "2026-08-21",
-    "company": null,
-    "prospect_email": "anonymous",
-    "duration_min": 0.2,
-    "page_url": "https://sell.g2.com/advertising"
-   },
-   {
-    "alert_date": "2026-08-21",
-    "company": "Wolters Kluwer NV",
+    "alert_date": "2026-07-08",
+    "company": "G2",
     "prospect_email": "anonymous",
     "duration_min": 0.18,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
    },
    {
-    "alert_date": "2026-08-20",
-    "company": "ACI Student Chapter - CUET",
+    "alert_date": "2026-07-08",
+    "company": "Wood County School District",
     "prospect_email": "anonymous",
-    "duration_min": 0.2,
+    "duration_min": 0.18,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-09",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.19,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-09",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.21,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-09",
+    "company": "Jetec Corporation",
+    "prospect_email": "anonymous",
+    "duration_min": 0.41,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-09",
+    "company": "Docket",
+    "prospect_email": "anonymous",
+    "duration_min": 0.37,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-09",
+    "company": "Outreach",
+    "prospect_email": "anonymous",
+    "duration_min": 0.94,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-10",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.19,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-11",
+    "company": "Cencora Inc",
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-15",
+    "company": "DoorDash",
+    "prospect_email": "anonymous",
+    "duration_min": 5.09,
+    "page_url": "https://sell.g2.com/case-studies/how-eventee-uses-g2-starter-to-climb-the-rankings-and-convert-leads"
+   },
+   {
+    "alert_date": "2026-07-15",
+    "company": "DoorDash",
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/case-studies/how-eventee-uses-g2-starter-to-climb-the-rankings-and-convert-leads"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": "Docket",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 2.27,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": "Colliers",
+    "prospect_email": "anonymous",
+    "duration_min": 2.74,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": "Colliers",
+    "prospect_email": "anonymous",
+    "duration_min": 3.97,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": "Colliers",
+    "prospect_email": "anonymous",
+    "duration_min": 12.62,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-21",
+    "company": "Colliers",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": "EKCS India Private Limited",
+    "prospect_email": "anonymous",
+    "duration_min": 1.72,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": "EKCS India Private Limited",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-23",
+    "company": "Docket",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-24",
+    "company": "Gmail Tap",
+    "prospect_email": "jimohahmed762@gmail.com",
+    "duration_min": 9.44,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-24",
+    "company": "THBS Inc.",
+    "prospect_email": "anonymous",
+    "duration_min": 0.8,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-24",
+    "company": "Salesforce, Inc.",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-24",
+    "company": "Salesforce, Inc.",
+    "prospect_email": "anonymous",
+    "duration_min": 0.49,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-25",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 7.4,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-25",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.24,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-28",
+    "company": "UiPath",
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-28",
+    "company": "Z\u00fchlke Group",
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-28",
+    "company": "CoreVision B.V.",
+    "prospect_email": "anonymous",
+    "duration_min": 3.93,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-28",
+    "company": "Salesforce, Inc.",
+    "prospect_email": "anonymous",
+    "duration_min": 2.78,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-07-30",
+    "company": "Fundacja Imago",
+    "prospect_email": "anonymous",
+    "duration_min": 1.69,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
+   },
+   {
+    "alert_date": "2026-07-30",
+    "company": "Fundacja Imago",
+    "prospect_email": "anonymous",
+    "duration_min": 8.67,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
+   },
+   {
+    "alert_date": "2026-07-30",
+    "company": "Fundacja Imago",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
+   },
+   {
+    "alert_date": "2026-07-30",
+    "company": "DataClap",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-30",
+    "company": "PayPal",
+    "prospect_email": "anonymous",
+    "duration_min": 0.56,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-07-31",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 5.71,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "International Business Machines Corp",
+    "prospect_email": "anonymous",
+    "duration_min": 0.29,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "Carl Zeiss AG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.25,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "Carl Zeiss AG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.3,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "Carl Zeiss AG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.37,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "Carl Zeiss AG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.36,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.73,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-07",
+    "company": "International Business Machines Corp",
+    "prospect_email": "anonymous",
+    "duration_min": 0.4,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 3.33,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 2.26,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.16,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 3.38,
+    "page_url": "https://sell.g2.com/advertising?ctx_first_name=DCI-QA-G2-20260808"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 2.33,
+    "page_url": "https://sell.g2.com/advertising?ctx_firstName=Avery&ctx_lastName=Reed&ctx_page_url=https%3A%2F%2Fsell.g2.com%2Fadvertising&ctx_company=Northstar%20SaaS&ctx_productSlug=advertising&ctx_role=Demand%20Generation%20Leader"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.22,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": "AP Moeller Maersk AS",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": "AP Moeller Maersk AS",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": "Orbitsol",
+    "prospect_email": "anonymous",
+    "duration_min": 1.68,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-08",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "Docket Ai",
+    "prospect_email": "anonymous",
+    "duration_min": 0.26,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "International Business Machines Corp",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "Software Finder LLC",
+    "prospect_email": "anonymous",
+    "duration_min": 0.33,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "Software Finder LLC",
+    "prospect_email": "anonymous",
+    "duration_min": 3.48,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "The SecOps Group",
+    "prospect_email": "anonymous",
+    "duration_min": 0.19,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*7jklav*_ga*MTM1MDQyNjIxOC4xNzc1MjA1ODky*_ga_MFZ5NDXZ5F*czE3ODYzMzk2ODQkbzEyJGcxJHQxNzg2MzQwMTYxJGozNiRsMCRoMA.."
+   },
+   {
+    "alert_date": "2026-08-10",
+    "company": "The SecOps Group",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*7jklav*_ga*MTM1MDQyNjIxOC4xNzc1MjA1ODky*_ga_MFZ5NDXZ5F*czE3ODYzMzk2ODQkbzEyJGcxJHQxNzg2MzQwMTYxJGozNiRsMCRoMA.."
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "Quantiphi, Inc.",
+    "prospect_email": "anonymous",
+    "duration_min": 0.17,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.26,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "International Business Machines Corp",
+    "prospect_email": "anonymous",
+    "duration_min": 0.25,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.24,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.28,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 2.22,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-11",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.28,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-12",
+    "company": "Zenskar",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-13",
+    "company": "Wolters Kluwer NV",
+    "prospect_email": "anonymous",
+    "duration_min": 3.39,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 1.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.48,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.26,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.23,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.25,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.25,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 1.37,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.33,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "AIG",
+    "prospect_email": "anonymous",
+    "duration_min": 0.15,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-14",
+    "company": "International Business Machines Corp",
+    "prospect_email": "anonymous",
+    "duration_min": 0.1,
+    "page_url": "https://sell.g2.com/sell-g2-header-and-footer-2026?hs_preview=HoVaruvi-210067677749"
+   },
+   {
+    "alert_date": "2026-08-16",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.19,
+    "page_url": "https://sell.g2.com/case-studies/how-eventee-uses-g2-starter-to-climb-the-rankings-and-convert-leads"
    },
    {
     "alert_date": "2026-08-18",
@@ -583,11 +1064,95 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
     "page_url": "https://sell.g2.com/advertising"
    },
    {
-    "alert_date": "2026-07-24",
-    "company": "Gmail Tap",
-    "prospect_email": "jimohahmed762@gmail.com",
-    "duration_min": 9.44,
+    "alert_date": "2026-08-18",
+    "company": "Payhawk Limited",
+    "prospect_email": "anonymous",
+    "duration_min": 0.27,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-20",
+    "company": "ACI Student Chapter - CUET",
+    "prospect_email": "anonymous",
+    "duration_min": 0.2,
     "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-21",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.2,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-21",
+    "company": "Wolters Kluwer NV",
+    "prospect_email": "anonymous",
+    "duration_min": 0.18,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-22",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.41,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-23",
+    "company": "bluepineapple",
+    "prospect_email": "anonymous",
+    "duration_min": 0.7,
+    "page_url": "https://sell.g2.com/advertising"
+   },
+   {
+    "alert_date": "2026-08-24",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.4,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*j8curs*_ga*NzA4ODAwMjk5LjE3NjQ2OTM4ODI.*_ga_MFZ5NDXZ5F*czE3ODc1ODUwODYkbzEzMSRnMSR0MTc4NzU4ODk5NSRqMjgkbDAkaDA."
+   },
+   {
+    "alert_date": "2026-08-24",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.4,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?_gl=1*km58uf*_gcl_au*MzkyNzc4NDc1LjE3ODc1MzYyMDM.*_ga*NDg5MjgxNTM1LjE3ODc1MzYyMDg.*_ga_MFZ5NDXZ5F*czE3ODc1MzYyMjIkbzEkZzEkdDE3ODc1MzcyNjQkajYwJGwwJGgw"
+   },
+   {
+    "alert_date": "2026-08-25",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.77,
+    "page_url": "https://sell.g2.com/g2-for-emerging-brands"
+   },
+   {
+    "alert_date": "2026-08-26",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.45,
+    "page_url": "https://sell.g2.com/quick-start-guides/drive-growth/learn-about-g2-ads"
+   },
+   {
+    "alert_date": "2026-08-28",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 0.88,
+    "page_url": "https://sell.g2.com/case-studies/how-product-fruits-uses-g2-ads-to-2x-ad-lead-conversion-rate"
+   },
+   {
+    "alert_date": "2026-08-28",
+    "company": "Paramount Software Uk Limited",
+    "prospect_email": "anonymous",
+    "duration_min": 6.64,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source?utm_source=marketo&utm_medium=email&utm_campaign=g2-clicks-case-study-aisdr&utm_content=none&utm_term=none&mkt_tok=NzE0LVpVRi02ODMAAAGj4oIInasrJGoJHdJrKXlYF7gKz9Kr4-s19-o3LWVF1Z3v6Euk8Vtfw8i_A2C5jla-3yQZ1emYmkQRY0j0kfy5n5uzeoxMq8c14gogRivOWKurExeUUuOZTg"
+   },
+   {
+    "alert_date": "2026-09-02",
+    "company": null,
+    "prospect_email": "anonymous",
+    "duration_min": 3.3,
+    "page_url": "https://sell.g2.com/case-studies/how-aisdr-uses-g2-ads-to-turn-g2-into-top-5-traffic-source"
    }
   ]
  },
@@ -596,8 +1161,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "True Tilt Personality Profile",
    "slug": "true-tilt-personality-profile",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-09-24",
    "contract_start": "2026-10-01",
-   "earliest_ai": "2026-09-24T20:06:54.000+0000",
    "gap": 7,
    "window": "inf",
    "revenue": 3600
@@ -606,8 +1171,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Fastio",
    "slug": "fastio",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-07",
    "contract_start": "2026-09-28",
-   "earliest_ai": "2026-04-07T15:54:58.000+0000",
    "gap": 174,
    "window": "ass",
    "revenue": 3600
@@ -616,8 +1181,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Scispot",
    "slug": "scispot",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-09-18",
    "contract_start": "2026-09-18",
-   "earliest_ai": "2026-09-18T14:09:16.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -626,8 +1191,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Finatical Flash Reports",
    "slug": "finatical-flash-reports",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-08-11",
    "contract_start": "2026-08-25",
-   "earliest_ai": "2026-08-11T17:08:23.000+0000",
    "gap": 14,
    "window": "inf",
    "revenue": 3600
@@ -636,8 +1201,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "iorad",
    "slug": "iorad",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-06-24",
    "contract_start": "2026-08-10",
-   "earliest_ai": "2026-06-24T16:08:19.000+0000",
    "gap": 47,
    "window": "ass",
    "revenue": 3600
@@ -646,8 +1211,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Thunders",
    "slug": "thunders",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-08-07",
    "contract_start": "2026-08-07",
-   "earliest_ai": "2026-08-07T09:00:47.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -656,8 +1221,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Flxpoint",
    "slug": "flxpoint",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-08-04",
    "contract_start": "2026-08-06",
-   "earliest_ai": "2026-08-04T13:21:32.000+0000",
    "gap": 2,
    "window": "inf",
    "revenue": 3600
@@ -666,8 +1231,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Sospes Safety Management Software",
    "slug": "sospes-safety-management-software",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-08-03",
    "contract_start": "2026-08-04",
-   "earliest_ai": "2026-08-03T17:00:37.000+0000",
    "gap": 1,
    "window": "inf",
    "revenue": 3600
@@ -676,8 +1241,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "TENDERD",
    "slug": "tenderd",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-07-25",
    "contract_start": "2026-07-31",
-   "earliest_ai": "2026-07-25T14:50:00.000+0000",
    "gap": 6,
    "window": "inf",
    "revenue": 3000
@@ -686,8 +1251,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "LeadsPlease",
    "slug": "leadsplease",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-13",
    "contract_start": "2026-07-22",
-   "earliest_ai": "2026-04-13T20:59:51.000+0000",
    "gap": 100,
    "window": "ass",
    "revenue": 3600
@@ -696,8 +1261,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Oases",
    "slug": "valsoft-oases",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-06-25",
    "contract_start": "2026-07-22",
-   "earliest_ai": "2026-06-25T15:43:10.000+0000",
    "gap": 27,
    "window": "inf",
    "revenue": 3600
@@ -706,8 +1271,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Trupeer",
    "slug": "trupeer",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-07-16",
    "contract_start": "2026-07-16",
-   "earliest_ai": "2026-07-16T14:36:12.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -716,8 +1281,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Gatling",
    "slug": "gatling",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-06-30",
    "contract_start": "2026-07-02",
-   "earliest_ai": "2026-06-30T22:03:02.000+0000",
    "gap": 2,
    "window": "inf",
    "revenue": 3600
@@ -726,8 +1291,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Jobma",
    "slug": "jobma",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-06-09",
    "contract_start": "2026-06-30",
-   "earliest_ai": "2026-06-09T20:19:54.000+0000",
    "gap": 21,
    "window": "inf",
    "revenue": 3600
@@ -736,8 +1301,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Simply Fleet",
    "slug": "simply-fleet-simply-fleet",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-05-27",
    "contract_start": "2026-06-30",
-   "earliest_ai": "2026-05-27T11:10:54.000+0000",
    "gap": 34,
    "window": "ass",
    "revenue": 3600
@@ -746,8 +1311,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Incentivate",
    "slug": "incentivate",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-05-28",
    "contract_start": "2026-06-16",
-   "earliest_ai": "2026-05-28T05:47:23.000+0000",
    "gap": 19,
    "window": "inf",
    "revenue": 3000
@@ -756,8 +1321,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Arka inventory",
    "slug": "arka-inventory",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-05-05",
    "contract_start": "2026-06-12",
-   "earliest_ai": "2026-05-05T06:53:29.000+0000",
    "gap": 38,
    "window": "ass",
    "revenue": 3000
@@ -766,8 +1331,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Vetano",
    "slug": "vetano",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-05-22",
    "contract_start": "2026-06-11",
-   "earliest_ai": "2026-05-22T13:30:54.000+0000",
    "gap": 20,
    "window": "inf",
    "revenue": 3600
@@ -776,8 +1341,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "ToucanTech",
    "slug": "toucantech-2024-11-15",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-05-27",
    "contract_start": "2026-06-08",
-   "earliest_ai": "2026-05-27T09:34:04.000+0000",
    "gap": 12,
    "window": "inf",
    "revenue": 3600
@@ -786,8 +1351,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "CoreHealth Corporate Wellness Platform",
    "slug": "corehealth-corporate-wellness-platform",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-05-25",
    "contract_start": "2026-06-01",
-   "earliest_ai": "2026-05-25T17:47:18.000+0000",
    "gap": 7,
    "window": "inf",
    "revenue": 3600
@@ -796,8 +1361,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Najar",
    "slug": "najar",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-05-21",
    "contract_start": "2026-06-01",
-   "earliest_ai": "2026-05-21T13:56:53.000+0000",
    "gap": 11,
    "window": "inf",
    "revenue": 3600
@@ -806,8 +1371,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Field Materials",
    "slug": "field-materials",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-02-09",
    "contract_start": "2026-05-27",
-   "earliest_ai": "2026-02-09T19:16:33.000+0000",
    "gap": 107,
    "window": "ass",
    "revenue": 3600
@@ -816,8 +1381,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Bracket",
    "slug": "mailprotector-bracket",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-04-08",
    "contract_start": "2026-05-22",
-   "earliest_ai": "2026-04-08T18:41:39.000+0000",
    "gap": 44,
    "window": "ass",
    "revenue": 3000
@@ -826,8 +1391,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Driversnote",
    "slug": "driversnote",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-23",
    "contract_start": "2026-05-20",
-   "earliest_ai": "2026-04-23T07:22:09.000+0000",
    "gap": 27,
    "window": "inf",
    "revenue": 3600
@@ -836,8 +1401,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Talent Pathway",
    "slug": "talent-pathway",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-10",
    "contract_start": "2026-05-13",
-   "earliest_ai": "2026-04-10T12:35:41.000+0000",
    "gap": 33,
    "window": "ass",
    "revenue": 3600
@@ -846,8 +1411,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Inboxkit",
    "slug": "inboxkit",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2025-12-30",
    "contract_start": "2026-05-08",
-   "earliest_ai": "2025-12-30T09:24:43.000+0000",
    "gap": 129,
    "window": "ass",
    "revenue": 3600
@@ -856,8 +1421,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Procedureflow",
    "slug": "procedureflow",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-01",
    "contract_start": "2026-05-04",
-   "earliest_ai": "2026-04-01T19:33:18.000+0000",
    "gap": 33,
    "window": "ass",
    "revenue": 3600
@@ -866,8 +1431,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Project Insight",
    "slug": "project-insight",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-23",
    "contract_start": "2026-04-29",
-   "earliest_ai": "2026-04-23T18:22:15.000+0000",
    "gap": 6,
    "window": "inf",
    "revenue": 3600
@@ -876,8 +1441,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Dexatel",
    "slug": "dexatel",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-03-24",
    "contract_start": "2026-04-28",
-   "earliest_ai": "2026-03-24T17:35:04.000+0000",
    "gap": 35,
    "window": "ass",
    "revenue": 3000
@@ -886,8 +1451,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Bart Proxies",
    "slug": "bart-proxies",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-23",
    "contract_start": "2026-04-23",
-   "earliest_ai": "2026-04-23T19:54:39.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -896,8 +1461,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "RefAssured",
    "slug": "refassured",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-22",
    "contract_start": "2026-04-22",
-   "earliest_ai": "2026-04-22T15:45:20.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -906,8 +1471,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Faros.ai",
    "slug": "faros-ai",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-04-15",
    "contract_start": "2026-04-17",
-   "earliest_ai": "2026-04-15T16:50:15.000+0000",
    "gap": 2,
    "window": "inf",
    "revenue": 3000
@@ -916,8 +1481,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "RunLoyal",
    "slug": "runloyal",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-04-14",
    "contract_start": "2026-04-15",
-   "earliest_ai": "2026-04-14T16:16:09.000+0000",
    "gap": 1,
    "window": "inf",
    "revenue": 3600
@@ -926,8 +1491,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Kadince",
    "slug": "kadince",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-03-25",
    "contract_start": "2026-04-09",
-   "earliest_ai": "2026-03-25T16:48:28.000+0000",
    "gap": 15,
    "window": "inf",
    "revenue": 3000
@@ -936,8 +1501,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Credo AI",
    "slug": "credo-ai",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-04-02",
    "contract_start": "2026-04-02",
-   "earliest_ai": "2026-04-02T18:15:19.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3000
@@ -946,8 +1511,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "OvationMR",
    "slug": "ovationmr",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-03-29",
    "contract_start": "2026-03-29",
-   "earliest_ai": "2026-03-29T02:08:21.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -956,8 +1521,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Octave",
    "slug": "octave",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-03-19",
    "contract_start": "2026-03-23",
-   "earliest_ai": "2026-03-19T20:05:50.000+0000",
    "gap": 4,
    "window": "inf",
    "revenue": 3600
@@ -966,8 +1531,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Desk365",
    "slug": "desk365",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-02-19",
    "contract_start": "2026-03-12",
-   "earliest_ai": "2026-02-19T08:06:06.000+0000",
    "gap": 21,
    "window": "inf",
    "revenue": 3000
@@ -976,8 +1541,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Flockjay",
    "slug": "flockjay-flockjay",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-02-24",
    "contract_start": "2026-02-24",
-   "earliest_ai": "2026-02-24T22:55:55.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -986,8 +1551,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Statseeker",
    "slug": "statseeker",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-02-13",
    "contract_start": "2026-02-13",
-   "earliest_ai": "2026-02-13T18:57:37.000+0000",
    "gap": 0,
    "window": "inf",
    "revenue": 3600
@@ -996,8 +1561,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Screenly",
    "slug": "screenly",
    "pkg": "Starter Monthly",
+   "earliest_ai": "2026-01-26",
    "contract_start": "2026-02-06",
-   "earliest_ai": "2026-01-26T13:32:22.000+0000",
    "gap": 11,
    "window": "inf",
    "revenue": 3600
@@ -1006,8 +1571,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "HeyMilo AI",
    "slug": "heymilo-ai",
    "pkg": "Starter Annual",
+   "earliest_ai": "2026-02-04",
    "contract_start": "2026-02-05",
-   "earliest_ai": "2026-02-04T05:13:19.000+0000",
    "gap": 1,
    "window": "inf",
    "revenue": 3000
@@ -1016,8 +1581,8 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Atlantic Employee Screening",
    "slug": "atlantic-employee-screening",
    "pkg": "Starter Annual",
+   "earliest_ai": "2025-12-24",
    "contract_start": "2025-12-29",
-   "earliest_ai": "2025-12-24T16:32:56.000+0000",
    "gap": 5,
    "window": "inf",
    "revenue": 3000
@@ -1028,7 +1593,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "product": "Showcase Workshop",
    "slug": "showcase-workshop",
    "first_spend": "2024-03-26",
-   "total_spend": 4524.91,
+   "total_spend": 4550.51,
    "source": "baked"
   },
   {
@@ -1055,745 +1620,352 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
  ],
  "docket_starter_table": [
   {
-   "product": "Turtl",
-   "account": "Turtl",
-   "slug": "turtl",
+   "product": "PitchMonster",
+   "slug": "pitchmonster",
+   "account": "PitchMonster",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-06"
+  },
+  {
+   "product": "Partner.io",
+   "slug": "partner-io",
+   "account": "Partner.io",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-06"
+  },
+  {
+   "product": "easync",
+   "slug": "easync",
+   "account": "easync",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-05"
+  },
+  {
+   "product": "EVA by New Black - Unified Commerce",
+   "slug": "eva-by-new-black-unified-commerce",
+   "account": "New Black",
    "pkg": "Starter Annual",
-   "contract_start": "2026-10-01",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "Voxel51",
-   "account": "Voxel51",
-   "slug": "voxel51",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-10-01",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "Estimating Link",
-   "account": "The Construction Link",
-   "slug": "estimating-link",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-10-01",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "True Tilt Personality Profile",
-   "account": "Tilt 365",
-   "slug": "true-tilt-personality-profile",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-10-01",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-10-05"
   },
   {
    "product": "Cogran",
-   "account": "Cogran Systems",
    "slug": "cogran",
+   "account": "Cogran Systems",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-10-01",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-10-01"
+  },
+  {
+   "product": "Voxel51",
+   "slug": "voxel51",
+   "account": "Voxel51",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01"
+  },
+  {
+   "product": "True Tilt Personality Profile",
+   "slug": "true-tilt-personality-profile",
+   "account": "Tilt 365",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01"
+  },
+  {
+   "product": "Turtl",
+   "slug": "turtl",
+   "account": "Turtl",
+   "pkg": "Starter Annual",
+   "contract_start": "2026-10-01"
+  },
+  {
+   "product": "Estimating Link",
+   "slug": "estimating-link",
+   "account": "The Construction Link",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-10-01"
   },
   {
    "product": "Floor Plan Builder",
-   "account": "Visrez",
    "slug": "floor-plan-builder",
+   "account": "Visrez",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-09-28",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-09-28"
   },
   {
    "product": "InsightFinder AI",
-   "account": "InsightFinder AI",
    "slug": "insightfinder-ai",
+   "account": "InsightFinder AI",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-09-24",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-09-24"
   },
   {
    "product": "Scispot",
-   "account": "Scispot.io",
    "slug": "scispot",
+   "account": "Scispot.io",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-09-18",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-09-18"
   },
   {
    "product": "Zip Security",
-   "account": "Zip Security",
    "slug": "zip-security",
+   "account": "Zip Security",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-09-16",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-09-16"
   },
   {
    "product": "Operant System",
-   "account": "Operant Systems",
    "slug": "operant-system",
+   "account": "Operant Systems",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-09-14",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-09-14"
   },
   {
    "product": "Agileday",
-   "account": "Agileday Oy",
    "slug": "agileday",
+   "account": "Agileday Oy",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-09-08",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-09-08"
   },
   {
    "product": "Sumtracker",
-   "account": "Sumtracker",
    "slug": "sumtracker",
+   "account": "Sumtracker",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-09-07",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-09-07"
   },
   {
    "product": "harmon.ie",
-   "account": "harmon.ie",
    "slug": "harmon-ie",
+   "account": "harmon.ie",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-08-31",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "MaxContact",
-   "account": "MaxContact",
-   "slug": "maxcontact",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-08-19",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-08-31"
   },
   {
    "product": "MediRoutes",
-   "account": "MediRoutes",
    "slug": "mediroutes-mediroutes",
+   "account": "MediRoutes",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-08-19",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-08-19"
+  },
+  {
+   "product": "MaxContact",
+   "slug": "maxcontact",
+   "account": "MaxContact",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-08-19"
   },
   {
    "product": "ChannelSight",
-   "account": "ChannelSight",
    "slug": "channelsight",
+   "account": "ChannelSight",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-08-17",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-08-17"
   },
   {
    "product": "SamSearch",
-   "account": "Samsearch",
    "slug": "samsearch",
+   "account": "Samsearch",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-08-12",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-08-12"
   },
   {
    "product": "Mosaiq",
-   "account": "Snapper Services",
    "slug": "snapper-services-ltd-mosaiq",
+   "account": "Snapper Services",
    "pkg": "Starter Annual",
-   "contract_start": "2026-08-11",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-08-11"
   },
   {
    "product": "Steer Health",
-   "account": "Steer Health",
    "slug": "steer-health",
+   "account": "Steer Health",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-08-10",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-08-10"
   },
   {
    "product": "Thunders",
-   "account": "Thunders",
    "slug": "thunders",
+   "account": "Thunders",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-08-07",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-08-07"
   },
   {
    "product": "CC4Teams",
-   "account": "ContactCenter4ALL",
    "slug": "cc4teams",
+   "account": "ContactCenter4ALL",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-07-29",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "LeadsPlease",
-   "account": "LeadsPlease",
-   "slug": "leadsplease",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-07-22",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-07-29"
   },
   {
    "product": "LitHub by DeepDyve",
-   "account": "DeepDyve",
    "slug": "lithub-by-deepdyve",
+   "account": "DeepDyve",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-07-22",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-07-22"
+  },
+  {
+   "product": "LeadsPlease",
+   "slug": "leadsplease",
+   "account": "LeadsPlease",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-07-22"
   },
   {
    "product": "PostGrid Print & Mail",
-   "account": "PostGrid",
    "slug": "postgrid-print-mail",
+   "account": "PostGrid",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-07-09",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-07-09"
   },
   {
    "product": "Maintenance Care",
-   "account": "Maintenance Care",
    "slug": "maintenance-care",
+   "account": "Maintenance Care",
    "pkg": "Starter Annual",
-   "contract_start": "2026-07-08",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-07-08"
   },
   {
    "product": "Fish Audio",
-   "account": "OpenAudio",
    "slug": "fish-audio",
+   "account": "OpenAudio",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-07-07",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-07-07"
   },
   {
    "product": "GoodBarber",
-   "account": "GoodBarber",
    "slug": "goodbarber",
+   "account": "GoodBarber",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-07-02",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "CloudFilter",
-   "account": "Mailprotector",
-   "slug": "cloudfilter",
-   "pkg": "Starter Annual",
-   "contract_start": "2026-06-30",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "Emvisage Field Workflow",
-   "account": "Emvisage",
-   "slug": "emvisage-field-workflow",
-   "pkg": "Starter Annual",
-   "contract_start": "2026-06-30",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-07-02"
   },
   {
    "product": "Simply Fleet",
-   "account": "Simply Fleet",
    "slug": "simply-fleet-simply-fleet",
+   "account": "Simply Fleet",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-06-30",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-06-30"
+  },
+  {
+   "product": "Emvisage Field Workflow",
+   "slug": "emvisage-field-workflow",
+   "account": "Emvisage",
+   "pkg": "Starter Annual",
+   "contract_start": "2026-06-30"
+  },
+  {
+   "product": "CloudFilter",
+   "slug": "cloudfilter",
+   "account": "Mailprotector",
+   "pkg": "Starter Annual",
+   "contract_start": "2026-06-30"
   },
   {
    "product": "neuroflash",
-   "account": "neuroflash",
    "slug": "neuroflash",
+   "account": "neuroflash",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-06-25",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "DevSpace",
-   "account": "signageOS",
-   "slug": "devspace",
-   "pkg": "Starter Annual",
-   "contract_start": "2026-06-18",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-06-25"
   },
   {
    "product": "CloudControl",
-   "account": "signageOS",
    "slug": "signageos-cloudcontrol",
+   "account": "signageOS",
    "pkg": "Starter Annual",
-   "contract_start": "2026-06-18",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-06-18"
+  },
+  {
+   "product": "DevSpace",
+   "slug": "devspace",
+   "account": "signageOS",
+   "pkg": "Starter Annual",
+   "contract_start": "2026-06-18"
   },
   {
    "product": "Shield",
-   "account": "Mailprotector",
    "slug": "mailprotector-shield",
+   "account": "Mailprotector",
    "pkg": "Starter Annual",
-   "contract_start": "2026-06-10",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
-  },
-  {
-   "product": "Anagram",
-   "account": "Anagram Security",
-   "slug": "anagram-security-anagram",
-   "pkg": "Starter Monthly",
-   "contract_start": "2026-06-09",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-06-10"
   },
   {
    "product": "JungleMail",
-   "account": "Enovapoint",
    "slug": "junglemail",
+   "account": "Enovapoint",
    "pkg": "Starter Annual",
-   "contract_start": "2026-06-09",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-06-09"
+  },
+  {
+   "product": "Anagram",
+   "slug": "anagram-security-anagram",
+   "account": "Anagram Security",
+   "pkg": "Starter Monthly",
+   "contract_start": "2026-06-09"
   },
   {
    "product": "Countly",
-   "account": "Countly",
    "slug": "countly",
+   "account": "Countly",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-06-02",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-06-02"
   },
   {
    "product": "Clientshare",
-   "account": "Clientshare",
    "slug": "clientshare",
+   "account": "Clientshare",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-05-29",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-05-29"
   },
   {
    "product": "MQL Magnet",
-   "account": "MQL Magnet",
    "slug": "mql-magnet",
+   "account": "MQL Magnet",
    "pkg": "Starter Annual",
-   "contract_start": "2026-05-24",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-05-24"
   },
   {
    "product": "Bracket",
-   "account": "Mailprotector",
    "slug": "mailprotector-bracket",
+   "account": "Mailprotector",
    "pkg": "Starter Annual",
-   "contract_start": "2026-05-22",
-   "revenue": 3000,
-   "package": "Starter Annual",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-05-22"
   },
   {
    "product": "Bindbee",
-   "account": "Bindbee",
    "slug": "bindbee",
+   "account": "Bindbee",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-05-18",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-05-18"
   },
   {
    "product": "Maptitude",
-   "account": "Caliper",
    "slug": "maptitude",
+   "account": "Caliper",
    "pkg": "Starter Monthly",
-   "contract_start": "2026-01-09",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2026-01-09"
   },
   {
    "product": "Assembly by Quantum Workplace",
-   "account": "Quantum Workplace",
    "slug": "assembly-by-quantum-workplace",
+   "account": "Quantum Workplace",
    "pkg": "Starter Monthly",
-   "contract_start": "2025-08-28",
-   "revenue": 3600,
-   "package": "Starter Monthly",
-   "tier": "possible",
-   "duration": 0,
-   "best_email": null,
-   "has_visitor_msg": false,
-   "last_interaction": null,
-   "signal": null
+   "contract_start": "2025-08-28"
   }
  ],
  "docket_clicks_table": [
   {
-   "product": "autoclass-ai",
-   "slug": "autoclass-ai",
-   "alert_date": "2026-09-18",
-   "page_url": "https://my.g2.com/autoclass-ai/external_clickthroughs",
-   "first_spend": "2026-09-18",
-   "gap": 0,
-   "total_spend": 637.66,
-   "source": "new",
-   "overlaps_1mind": false
-  },
-  {
-   "product": "hummingdeck",
-   "slug": "hummingdeck",
-   "alert_date": "2026-09-09",
-   "page_url": "https://my.g2.com/hummingdeck/external_clickthroughs",
-   "first_spend": "2026-09-09",
-   "gap": 0,
-   "total_spend": 108.32,
-   "source": "new",
-   "overlaps_1mind": false
-  },
-  {
-   "product": "nected",
-   "slug": "nected",
-   "alert_date": "2026-09-21",
-   "page_url": "https://my.g2.com/nected/external_clickthroughs",
-   "first_spend": "2026-09-21",
-   "gap": 0,
-   "total_spend": 202.4,
-   "source": "new",
-   "overlaps_1mind": false
-  },
-  {
-   "product": "olifant-digital",
-   "slug": "olifant-digital",
-   "alert_date": "2026-08-31",
-   "page_url": "https://my.g2.com/olifant-digital/external_clickthroughs",
-   "first_spend": "2026-09-17",
-   "gap": 17,
-   "total_spend": 39.54,
-   "source": "new",
-   "overlaps_1mind": false
-  },
-  {
-   "product": "suptask",
-   "slug": "suptask",
-   "alert_date": "2026-09-11",
-   "page_url": "https://my.g2.com/suptask/external_clickthroughs",
-   "first_spend": "2026-09-11",
-   "gap": 0,
-   "total_spend": 618.67,
-   "source": "new",
-   "overlaps_1mind": false
-  },
-  {
-   "product": "voicenotes",
-   "slug": "voicenotes",
-   "alert_date": "2026-09-12",
-   "page_url": "https://my.g2.com/voicenotes/external_clickthroughs",
-   "first_spend": "2026-09-12",
-   "gap": 0,
-   "total_spend": 176.37,
-   "source": "new",
-   "overlaps_1mind": false
-  },
-  {
-   "product": "genieai",
-   "slug": "genieai",
-   "alert_date": "2026-08-07",
-   "page_url": "https://my.g2.com/genieai/external_clickthroughs",
-   "first_spend": "2026-08-21",
-   "gap": 14,
-   "total_spend": 479.98,
-   "source": "new",
-   "overlaps_1mind": false
-  },
-  {
-   "product": "helpcenter-io",
+   "product": "HelpCenter.io",
    "slug": "helpcenter-io",
-   "alert_date": "2026-07-27",
-   "page_url": "https://my.g2.com/helpcenter-io/external_clickthroughs",
-   "first_spend": "2026-07-27",
+   "alert_date": "2026-07-28",
+   "page_url": "https://my.g2.com/helpcenter-io/external_clickthroughs/plans",
+   "first_spend": "2026-07-28",
    "gap": 0,
    "total_spend": 639.46,
    "source": "new",
    "overlaps_1mind": false
   },
   {
-   "product": "omnia-omnia",
+   "product": "Omnia",
    "slug": "omnia-omnia",
    "alert_date": "2026-07-22",
-   "page_url": "https://my.g2.com/omnia-omnia/external_clickthroughs",
+   "page_url": "https://my.g2.com/omnia-omnia/external_clickthroughs/plans",
    "first_spend": "2026-07-22",
    "gap": 0,
    "total_spend": 447.96,
@@ -1801,24 +1973,46 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
    "overlaps_1mind": false
   },
   {
-   "product": "residex",
+   "product": "ZEPIC",
+   "slug": "zepic",
+   "alert_date": "2026-08-05",
+   "page_url": "https://my.g2.com/zepic/external_clickthroughs/plans",
+   "first_spend": "2026-08-07",
+   "gap": 2,
+   "total_spend": 351.36,
+   "source": "new",
+   "overlaps_1mind": false
+  },
+  {
+   "product": "Genie AI",
+   "slug": "genieai",
+   "alert_date": "2026-08-07",
+   "page_url": "https://my.g2.com/genieai/external_clickthroughs/plans",
+   "first_spend": "2026-08-21",
+   "gap": 14,
+   "total_spend": 516.39,
+   "source": "new",
+   "overlaps_1mind": false
+  },
+  {
+   "product": "Residex",
    "slug": "residex",
    "alert_date": "2026-07-22",
-   "page_url": "https://my.g2.com/residex/external_clickthroughs",
-   "first_spend": "2026-07-22",
-   "gap": 0,
+   "page_url": "https://my.g2.com/residex/external_clickthroughs/plans",
+   "first_spend": "2026-07-23",
+   "gap": 1,
    "total_spend": 162.38,
    "source": "new",
    "overlaps_1mind": false
   },
   {
-   "product": "zepic",
-   "slug": "zepic",
-   "alert_date": "2026-08-05",
-   "page_url": "https://my.g2.com/zepic/external_clickthroughs",
-   "first_spend": "2026-08-07",
-   "gap": 2,
-   "total_spend": 351.36,
+   "product": "HummingDeck",
+   "slug": "hummingdeck",
+   "alert_date": "2026-09-10",
+   "page_url": "https://my.g2.com/hummingdeck/external_clickthroughs/plans",
+   "first_spend": "2026-09-10",
+   "gap": 0,
+   "total_spend": 108.32,
    "source": "new",
    "overlaps_1mind": false
   }
@@ -1838,14 +2032,6 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   function setText(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
   function fmtUsd(v) { if (v == null) return "—"; return "$" + Number(v).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
   function pkgIsAnnual(s)  { return /annual/i.test(String(s||"")); }
-  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
-  function hexToRgba(hex, alpha) {
-    hex = String(hex || "").trim().replace("#", "");
-    if (hex.length === 3) hex = hex.split("").map(c => c + c).join("");
-    const r = parseInt(hex.slice(0,2),16) || 0, g = parseInt(hex.slice(2,4),16) || 0, b = parseInt(hex.slice(4,6),16) || 0;
-    return `rgba(${r},${g},${b},${alpha})`;
-  }
-  const chartRepainters = [];
   function isoWeek(d) {
     if (!d) return ""; const t = new Date(d + "T12:00:00Z");
     const tmp = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()));
@@ -1915,7 +2101,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
     setText("ov-rate-docket", fmtPct(docketRate));
     setText("ov-rate-docket-detail", `(${docketStarter} Starter + ${docketClicks} Clicks) ÷ ${docketConv}`);
 
-    setText("ov-footer", `Snapshot ${SNAPSHOT.as_of || "—"} · Ask Claude to re-pull the source data and republish this page for an updated snapshot.`);
+    setText("ov-footer", `Snapshot ${SNAPSHOT.as_of || "—"} · Refreshed daily at 8:30 AM CDT via scheduled task.`);
   }
 
   // ---- Paint 1mind cohorts ------------------------------------------------
@@ -2036,7 +2222,6 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
       apply();
     });
     apply();
-    return apply;
   }
 
   // ---- Paint 1mind Starter ------------------------------------------------
@@ -2072,21 +2257,20 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
         const counts = weeks.map(w => byWeek.get(w));
         const cv = document.getElementById("starter-weekly-chart");
         if (cv._chart) cv._chart.destroy();
-        const tickColor = cssVar("--text-muted"), gridColor = cssVar("--chart-grid");
         cv._chart = new Chart(cv, {
           type: "bar",
-          data: { labels: weeks, datasets: [{ label: "Conversions billed", data: counts, backgroundColor: hexToRgba(cssVar("--accent"), 0.78), borderRadius: 3 }] },
-          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { precision: 0, color: tickColor }, grid: { color: gridColor } }, x: { ticks: { font: { size: 10 }, color: tickColor }, grid: { display: false } } }, plugins: { legend: { display: false } } },
+          data: { labels: weeks, datasets: [{ label: "Conversions billed", data: counts, backgroundColor: "rgba(79,70,229,0.75)", borderRadius: 3 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { ticks: { font: { size: 10 } } } }, plugins: { legend: { display: false } } },
         });
       }
     }
 
-    chartRepainters.push(setupTimeFilter({
+    setupTimeFilter({
       rows: allRows, dateField: "contract_start",
       monthSelectId: "om-month-filter", weekSelectId: "om-week-filter",
       resetBtnId: "om-filter-reset", summaryId: "om-filter-summary",
       render: renderOneMindStarter,
-    }));
+    });
   }
 
   // ---- Paint 1mind Clicks -------------------------------------------------
@@ -2170,21 +2354,20 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
         const counts = weeks.map(w => byWeek.get(w));
         const cv = document.getElementById("docket-weekly-chart");
         if (cv._chart) cv._chart.destroy();
-        const tickColor = cssVar("--text-muted"), gridColor = cssVar("--chart-grid");
         cv._chart = new Chart(cv, {
           type: "bar",
-          data: { labels: weeks, datasets: [{ label: "Docket conversions billed", data: counts, backgroundColor: hexToRgba(cssVar("--accent-2"), 0.78), borderRadius: 3 }] },
-          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { precision: 0, color: tickColor }, grid: { color: gridColor } }, x: { ticks: { font: { size: 10 }, color: tickColor }, grid: { display: false } } }, plugins: { legend: { display: false } } },
+          data: { labels: weeks, datasets: [{ label: "Docket conversions billed", data: counts, backgroundColor: "rgba(5,150,105,0.75)", borderRadius: 3 }] },
+          options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, x: { ticks: { font: { size: 10 } } } }, plugins: { legend: { display: false } } },
         });
       }
     }
 
-    chartRepainters.push(setupTimeFilter({
+    setupTimeFilter({
       rows: allDocketRows, dateField: "contract_start",
       monthSelectId: "dk-month-filter", weekSelectId: "dk-week-filter",
       resetBtnId: "dk-filter-reset", summaryId: "dk-filter-summary",
       render: renderDocketStarter,
-    }));
+    });
 
     setNum("dk-clicks-count",   bl.docket_clicks_attributed);
     setText("dk-clicks-revenue", fmtUsd(bl.docket_clicks_revenue));
@@ -2215,13 +2398,7 @@ code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; 
   paintOneMindStarter();
   paintOneMindClicks();
   paintDocket();
-
-  // ---- Repaint charts when the viewer's theme changes -----------------
-  function repaintCharts() { chartRepainters.forEach(fn => { try { fn(); } catch (e) {} }); }
-  if (window.matchMedia) {
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", repaintCharts);
-  }
-  new MutationObserver(repaintCharts).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 </script>
 
-</body></html>
+</body>
+</html>
